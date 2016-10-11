@@ -1,5 +1,7 @@
 ## Installing Scout iOS
 
+Xcode 8 and Swift 2.3
+
 Clone this repository
 ```
 $ git clone https://github.com/uw-it-aca/scout-ios
