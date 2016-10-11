@@ -38,6 +38,10 @@ class WebView: WKWebView {
         scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     func visitLocation(location: NSURL, withAction action: Action, restorationIdentifier: String?) {
         callJavaScriptFunction("webView.visitLocationWithActionAndRestorationIdentifier", withArguments: [location.absoluteString, action.rawValue, restorationIdentifier])
     }

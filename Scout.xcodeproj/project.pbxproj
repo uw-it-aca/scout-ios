@@ -273,15 +273,18 @@
 					8540344E1CB5AE5100C0C7FD = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = THEWY9596Q;
+						LastSwiftMigration = 0800;
 					};
 					854034641CB5AE5100C0C7FD = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = AC6929M8ED;
+						LastSwiftMigration = 0800;
 						TestTargetID = 8540344E1CB5AE5100C0C7FD;
 					};
 					8540346F1CB5AE5100C0C7FD = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = AC6929M8ED;
+						LastSwiftMigration = 0800;
 						TestTargetID = 8540344E1CB5AE5100C0C7FD;
 					};
 				};
@@ -605,6 +608,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UWIT-ACA.Scout";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -617,6 +621,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UWIT-ACA.Scout";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -628,6 +633,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UWIT-ACA.ScoutTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scout.app/Scout";
 			};
 			name = Debug;
@@ -640,6 +646,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UWIT-ACA.ScoutTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scout.app/Scout";
 			};
 			name = Release;
@@ -651,6 +658,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UWIT-ACA.ScoutUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = Scout;
 			};
 			name = Debug;
@@ -662,6 +670,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UWIT-ACA.ScoutUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = Scout;
 			};
 			name = Release;
