@@ -38,6 +38,7 @@ class ApplicationController: UINavigationController {
         presentVisitableForSession(session, URL: URL)
     }
     
+    // generic visit controller
     func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         let visitable = VisitableViewController(URL: URL)
         
@@ -51,6 +52,7 @@ class ApplicationController: UINavigationController {
         session.visit(visitable)
     }
     
+    // custom food filter controller
     private func presentFoodFilterViewController() {
 
         let authenticationController = FoodFilterViewController()
@@ -58,23 +60,34 @@ class ApplicationController: UINavigationController {
         authenticationController.URL = URL.URLByAppendingPathComponent("filter")
         authenticationController.title = "Filter Food"
         
+        // left button
+        authenticationController.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.dismiss))
+        
+        // create navigation controller
         let authNavigationController = UINavigationController(rootViewController: authenticationController)
+        
+        // show the food filter navigation controller
         presentViewController(authNavigationController, animated: true, completion: nil)
         
     }
     
+    func dismiss(){
+        // close the view controller
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+
 }
 
 extension ApplicationController: SessionDelegate {
     func session(session: Session, didProposeVisitToURL URL: NSURL, withAction action: Action) {
         
-        if URL.path == "/h/food/filterxxx" {
+        if URL.path == "/h/seattle/food/filter" {
             presentFoodFilterViewController()
         } else {
             presentVisitableForSession(session, URL: URL, action: action)
         }
         
-        //presentVisitableForSession(session, URL: URL, action: action)
     }
     
     func session(session: Session, didFailRequestForVisitable visitable: Visitable, withError error: NSError) {
