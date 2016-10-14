@@ -62,7 +62,7 @@ class ApplicationController: UINavigationController {
         
         // left button
         authenticationController.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.dismiss))
-        
+    
         // create navigation controller
         let authNavigationController = UINavigationController(rootViewController: authenticationController)
         
@@ -82,7 +82,9 @@ class ApplicationController: UINavigationController {
 extension ApplicationController: SessionDelegate {
     func session(session: Session, didProposeVisitToURL URL: NSURL, withAction action: Action) {
         
-        if URL.path == "/h/seattle/food/filter" {
+        // EXAMPPLE: intercept link clicks and do something custom
+        
+        if URL.path == "/h/seattle/food/filterxxx" {
             presentFoodFilterViewController()
         } else {
             presentVisitableForSession(session, URL: URL, action: action)
