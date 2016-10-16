@@ -17,6 +17,7 @@ class DiscoverViewController: ApplicationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /**
         let navigationBar = UINavigationBar(frame: CGRect(x: 270, y: 20, width: 70, height: 44)) // Offset by 20 pixels vertically to take the status bar into account
         
         // green navbar
@@ -41,7 +42,7 @@ class DiscoverViewController: ApplicationController {
         
         // Make the navigation bar a subview of the current view controller
         self.view.addSubview(navigationBar)
-        
+        **/
         
     }
     
