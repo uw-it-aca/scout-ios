@@ -17,16 +17,31 @@ class DiscoverViewController: ApplicationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // right button for discover view
-        let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: 320, height: 44))
-        self.view.addSubview(navBar);
-        let navItem = UINavigationItem();
+        let navigationBar = UINavigationBar(frame: CGRect(x: 270, y: 20, width: 70, height: 44)) // Offset by 20 pixels vertically to take the status bar into account
         
-        // right button
-        let rightBarButton = UIBarButtonItem(title: "Testing", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.dismiss))
-        navItem.rightBarButtonItem = rightBarButton
+        // green navbar
+        navigationBar.barTintColor = UIColor.greenColor()
         
-        navBar.setItems([navItem], animated: false)
+        // transparent navbar
+        //navigationBar.setBackgroundImage(UIImage(), forBarMetrics:UIBarMetrics.Default)
+        //navigationBar.translucent = true
+        //navigationBar.shadowImage = UIImage()
+        
+        // Create a navigation item with a title
+        let navigationItem = UINavigationItem()
+        
+        // Create left and right button for navigation item
+        let rightButton = UIBarButtonItem(title: "Right", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        
+        // Create a button for the navigation item
+        navigationItem.rightBarButtonItem = rightButton
+        
+        // Assign the navigation item to the navigation bar
+        navigationBar.items = [navigationItem]
+        
+        // Make the navigation bar a subview of the current view controller
+        self.view.addSubview(navigationBar)
+        
         
     }
     
