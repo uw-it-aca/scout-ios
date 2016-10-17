@@ -40,8 +40,9 @@ class ApplicationController: UINavigationController {
     
     // generic visit controller
     func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
-        let visitable = VisitableViewController(URL: URL)
         
+        let visitable = VisitableViewController(URL: URL)
+                
         if action == .Advance {
             pushViewController(visitable, animated: true)
         } else if action == .Replace {
