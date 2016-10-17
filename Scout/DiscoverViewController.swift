@@ -23,7 +23,7 @@ class DiscoverViewController: ApplicationController {
         let visitable = VisitableViewController(URL: URL)
         
         // YESSSSS! Adds a right button to the visitable controller
-        visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Campus", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Campus", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.chooseCampus(_:)))
         
         if action == .Advance {
             pushViewController(visitable, animated: true)
@@ -31,8 +31,50 @@ class DiscoverViewController: ApplicationController {
             popViewControllerAnimated(false)
             pushViewController(visitable, animated: false)
         }
-        
+
+ 
         session.visit(visitable)
+ 
+    }
+    
+    // custom controller for campus selection
+    func chooseCampus(sender: UIBarButtonItem) {
+        
+        // 1
+        let optionMenu = UIAlertController(title: nil, message: "Choose Campus", preferredStyle: .ActionSheet)
+        
+        // 2
+        let seattleAction = UIAlertAction(title: "Seattle", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("File Deleted")
+        })
+        let bothellAction = UIAlertAction(title: "Bothell", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("File Saved")
+        })
+        let tacomaAction = UIAlertAction(title: "Tacoma", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("File Saved")
+        })
+        
+        //
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("Cancelled")
+        })
+        
+        
+        // 4
+        optionMenu.addAction(seattleAction)
+        optionMenu.addAction(bothellAction)
+        optionMenu.addAction(tacomaAction)
+        
+        optionMenu.addAction(cancelAction)
+        
+        // 5
+        self.presentViewController(optionMenu, animated: true, completion: nil)
+        
+        
     }
         
 }
