@@ -53,31 +53,6 @@ class ApplicationController: UINavigationController {
         session.visit(visitable)
     }
     
-    // custom food filter controller
-    private func presentFoodFilterViewController() {
-
-        let authenticationController = FoodFilterViewController()
-        authenticationController.webViewConfiguration = webViewConfiguration
-        authenticationController.URL = URL.URLByAppendingPathComponent("filter")
-        authenticationController.title = "Filter Food"
-        
-        // left button
-        authenticationController.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.dismiss))
-    
-        // create navigation controller
-        let authNavigationController = UINavigationController(rootViewController: authenticationController)
-        
-        // show the food filter navigation controller
-        presentViewController(authNavigationController, animated: true, completion: nil)
-        
-    }
-    
-    func dismiss(){
-        // close the view controller
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-
 }
 
 extension ApplicationController: SessionDelegate {
@@ -86,7 +61,8 @@ extension ApplicationController: SessionDelegate {
         // EXAMPPLE: intercept link clicks and do something custom
         
         if URL.path == "/h/seattle/food/filterxxx" {
-            presentFoodFilterViewController()
+            // define some custom function
+            
         } else {
             presentVisitableForSession(session, URL: URL, action: action)
         }
