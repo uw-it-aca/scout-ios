@@ -26,7 +26,6 @@
 		8572A3401D3833E700D80248 /* fork-knife.png in Resources */ = {isa = PBXBuildFile; fileRef = 8572A33F1D3833E700D80248 /* fork-knife.png */; };
 		8572A3421D38352700D80248 /* graduation-cap.png in Resources */ = {isa = PBXBuildFile; fileRef = 8572A3411D38352700D80248 /* graduation-cap.png */; };
 		8572A3441D38354800D80248 /* monitor.png in Resources */ = {isa = PBXBuildFile; fileRef = 8572A3431D38354800D80248 /* monitor.png */; };
-		8573B5E31D4C655C00319CA0 /* FoodFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8573B5E21D4C655C00319CA0 /* FoodFilterViewController.swift */; };
 		85B415011D64F1DC0025E65C /* Turbolinks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B414FE1D64F1B10025E65C /* Turbolinks.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,7 +93,6 @@
 		8572A33F1D3833E700D80248 /* fork-knife.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fork-knife.png"; sourceTree = "<group>"; };
 		8572A3411D38352700D80248 /* graduation-cap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "graduation-cap.png"; sourceTree = "<group>"; };
 		8572A3431D38354800D80248 /* monitor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monitor.png; sourceTree = "<group>"; };
-		8573B5E21D4C655C00319CA0 /* FoodFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodFilterViewController.swift; sourceTree = "<group>"; };
 		85B414F81D64F1B10025E65C /* Turbolinks.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Turbolinks.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,7 +156,6 @@
 				851B190E1D5DA7AC0061B30D /* ApplicationController.swift */,
 				8572A33B1D382F0500D80248 /* DiscoverViewController.swift */,
 				854034541CB5AE5100C0C7FD /* FoodViewController.swift */,
-				8573B5E21D4C655C00319CA0 /* FoodFilterViewController.swift */,
 				854034561CB5AE5100C0C7FD /* StudyViewController.swift */,
 				8572A3391D38169300D80248 /* TechViewController.swift */,
 				854034581CB5AE5100C0C7FD /* Main.storyboard */,
@@ -455,7 +452,6 @@
 				854034881CB5B1A100C0C7FD /* ErrorView.swift in Sources */,
 				854034531CB5AE5100C0C7FD /* AppDelegate.swift in Sources */,
 				854034551CB5AE5100C0C7FD /* FoodViewController.swift in Sources */,
-				8573B5E31D4C655C00319CA0 /* FoodFilterViewController.swift in Sources */,
 				854034861CB5B17F00C0C7FD /* Error.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

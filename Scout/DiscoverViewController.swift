@@ -38,19 +38,18 @@ class DiscoverViewController: UINavigationController {
         presentVisitableForSession(session, URL: URL)
     }
     
-    // generic visit controller w/ discover
+    // visit controller for discover
     
     func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         
         let visitable = VisitableViewController(URL: URL)
         
-        print(visitable.visitableURL.absoluteString);
-        
         // only load the right button at the root discover URL
-        if visitable.visitableURL.absoluteString == "http://curry.aca.uw.edu:8001/h/seattle/" {
-            print("Hello world!");
+        if URL.path == "/h/seattle" {
+            print("on discover home");
+            
             // YESSSSS! Adds a right button to the visitable controller
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Seattle", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.chooseCampus(_:)))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Campus", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.chooseCampus(_:)))
         }
         
         if action == .Advance {
@@ -62,8 +61,9 @@ class DiscoverViewController: UINavigationController {
         
         // set navbar tint (button link) color
         self.navigationBar.tintColor = hexStringToUIColor("#6564A9")
-
+        
         session.visit(visitable)
+        
  
     }
     
