@@ -45,7 +45,7 @@ class FoodViewController: UINavigationController {
         
         let visitable = VisitableViewController(URL: URL)
     
-        if URL.path == "/h/seattle/food" {
+        if URL.path == "/h/\(campus)/food" {
             // YESSSSS! Adds a right button to the visitable controller
             visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.presentFoodFilter(_:)))
         }
@@ -64,12 +64,16 @@ class FoodViewController: UINavigationController {
 
     func presentFoodFilter(sender: UIBarButtonItem){
         
+        var URL: NSURL {
+            return NSURL(string: "\(host)/\(campus)/food/filter/")!
+        }
+        
         let visitable = VisitableViewController(URL: URL)
-        visitable.visitableURL = NSURL(string: "http://curry.aca.uw.edu:8001/h/seattle/food/filter")
         
         visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.submit(_:)))
         
         pushViewController(visitable, animated: true)
+        
         session.visit(visitable)
     }
     

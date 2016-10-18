@@ -48,7 +48,7 @@ class DiscoverViewController: UINavigationController {
         let visitable = VisitableViewController(URL: URL)
         
         // only load the right button at the root discover URL
-        if URL.path == "/h/seattle" {
+        if URL.path == "/h/\(campus)" {
             print("on discover home");
             
             // YESSSSS! Adds a right button to the visitable controller
