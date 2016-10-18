@@ -10,15 +10,37 @@ import UIKit
 import WebKit
 import Turbolinks
 
-class DiscoverViewController: ApplicationController {
+class DiscoverViewController: UINavigationController {
     
-    override var URL: NSURL {
+    var URL: NSURL {
         return NSURL(string: "\(host)/")!
     }
+    private let webViewProcessPool = WKProcessPool()
     
-    // override generic visit controller w/ discover
+    private var application: UIApplication {
+        return UIApplication.sharedApplication()
+    }
     
-    override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
+    private lazy var webViewConfiguration: WKWebViewConfiguration = {
+        let configuration = WKWebViewConfiguration()
+        configuration.processPool = self.webViewProcessPool
+        return configuration
+    }()
+    
+    private lazy var session: Session = {
+        let session = Session(webViewConfiguration: self.webViewConfiguration)
+        session.delegate = self
+        return session
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        presentVisitableForSession(session, URL: URL)
+    }
+    
+    // generic visit controller w/ discover
+    
+    func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         
         let visitable = VisitableViewController(URL: URL)
         
@@ -27,8 +49,8 @@ class DiscoverViewController: ApplicationController {
         // only load the right button at the root discover URL
         if visitable.visitableURL.absoluteString == "http://curry.aca.uw.edu:8001/h/seattle/" {
             print("Hello world!");
-            // YESSSSS! Adds a left button to the visitable controller
-            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Campus", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.chooseCampus(_:)))
+            // YESSSSS! Adds a right button to the visitable controller
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Seattle", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.chooseCampus(_:)))
         }
         
         if action == .Advance {
@@ -83,3 +105,33 @@ class DiscoverViewController: ApplicationController {
     }
         
 }
+
+extension DiscoverViewController: SessionDelegate {
+    func session(session: Session, didProposeVisitToURL URL: NSURL, withAction action: Action) {
+        
+        // EXAMPPLE: intercept link clicks and do something custom
+        
+        if URL.path == "/h/seattle/food/filterxxx" {
+            // define some custom function
+            
+        } else {
+            presentVisitableForSession(session, URL: URL, action: action)
+        }
+        
+    }
+    
+    func session(session: Session, didFailRequestForVisitable visitable: Visitable, withError error: NSError) {
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func sessionDidStartRequest(session: Session) {
+        application.networkActivityIndicatorVisible = true
+    }
+    
+    func sessionDidFinishRequest(session: Session) {
+        application.networkActivityIndicatorVisible = false
+    }
+}
+
