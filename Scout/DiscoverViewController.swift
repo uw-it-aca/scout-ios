@@ -22,8 +22,14 @@ class DiscoverViewController: ApplicationController {
         
         let visitable = VisitableViewController(URL: URL)
         
-        // YESSSSS! Adds a right button to the visitable controller
-        visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Campus", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.chooseCampus(_:)))
+        print(visitable.visitableURL.absoluteString);
+        
+        // only load the right button at the root discover URL
+        if visitable.visitableURL.absoluteString == "http://curry.aca.uw.edu:8001/h/seattle/" {
+            print("Hello world!");
+            // YESSSSS! Adds a right button to the visitable controller
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Campus", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.chooseCampus(_:)))
+        }
         
         if action == .Advance {
             pushViewController(visitable, animated: true)
@@ -32,7 +38,6 @@ class DiscoverViewController: ApplicationController {
             pushViewController(visitable, animated: false)
         }
 
- 
         session.visit(visitable)
  
     }
@@ -46,15 +51,15 @@ class DiscoverViewController: ApplicationController {
         // 2
         let seattleAction = UIAlertAction(title: "Seattle", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            print("File Deleted")
+            print("Seattle was selected")
         })
         let bothellAction = UIAlertAction(title: "Bothell", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            print("File Saved")
+            print("Bothell was selected")
         })
         let tacomaAction = UIAlertAction(title: "Tacoma", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            print("File Saved")
+            print("Tacoma was selected")
         })
         
         //

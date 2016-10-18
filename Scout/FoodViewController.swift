@@ -22,8 +22,10 @@ class FoodViewController: ApplicationController {
         
         let visitable = VisitableViewController(URL: URL)
         
-        // YESSSSS! Adds a right button to the visitable controller
-        visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.presentFoodFilter(_:)))
+        if visitable.visitableURL.absoluteString == "http://curry.aca.uw.edu:8001/h/seattle/food/" {
+            // YESSSSS! Adds a right button to the visitable controller
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.presentFoodFilter(_:)))
+        }
         
         if action == .Advance {
             pushViewController(visitable, animated: true)
