@@ -24,7 +24,9 @@ class FoodViewController: UINavigationController {
     
     private lazy var webViewConfiguration: WKWebViewConfiguration = {
         let configuration = WKWebViewConfiguration()
+        configuration.userContentController.addScriptMessageHandler(self, name: "ScoutMessageBridge")
         configuration.processPool = self.webViewProcessPool
+        configuration.applicationNameForUserAgent = "Scout"
         return configuration
     }()
     
@@ -44,12 +46,16 @@ class FoodViewController: UINavigationController {
     func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         
         let visitable = VisitableViewController(URL: URL)
-    
+        
+        // handle location state
         if URL.path == "/h/\(campus)/food" {
             // YESSSSS! Adds a right button to the visitable controller
             visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.presentFoodFilter(_:)))
+        } else if URL.path == "/h/\(campus)/food/filter" {
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.submit(_:)))
         }
         
+        // handle actions
         if action == .Advance {
             pushViewController(visitable, animated: true)
         } else if action == .Replace {
@@ -64,25 +70,17 @@ class FoodViewController: UINavigationController {
 
     func presentFoodFilter(sender: UIBarButtonItem){
         
-        var URL: NSURL {
-            return NSURL(string: "\(host)/\(campus)/food/filter/")!
-        }
-        
-        let visitable = VisitableViewController(URL: URL)
-        
-        visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.submit(_:)))
-        
-        pushViewController(visitable, animated: true)
-        
-        session.visit(visitable)
+        // go to food filter URL
+        let URL = NSURL(string: "\(host)/\(campus)/food/filter/")!
+        presentVisitableForSession(session, URL: URL)
     }
     
     // TODO: submit form via JS Bridge
     
     func submit(sender: UIBarButtonItem){
-        // pop the view controller
-        popViewControllerAnimated(true)
         
+        // pop the view controller
+        // popViewControllerAnimated(true)
         // TODO: reload foodcontroller with new filtered URL ????
         
     }
@@ -115,5 +113,18 @@ extension FoodViewController: SessionDelegate {
     
     func sessionDidFinishRequest(session: Session) {
         application.networkActivityIndicatorVisible = false
+    }
+}
+
+extension FoodViewController: WKScriptMessageHandler {
+    func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
+        
+        // EXAMPPLE: handling of message from ios.js hybrid app
+        if let message = message.body as? String {
+            let alertController = UIAlertController(title: "From ios.js file", message: message, preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(alertController, animated: true, completion: nil)
+        }
+        
     }
 }
