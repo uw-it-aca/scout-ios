@@ -11,7 +11,7 @@ import UIKit
 class StudyViewController: ApplicationController {
     
     override var URL: NSURL {
-        return NSURL(string: "\(host)/study/")!
+        return NSURL(string: "\(host)/\(campus)/study/")!
     }
     
 }

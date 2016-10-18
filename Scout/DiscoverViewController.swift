@@ -13,7 +13,7 @@ import Turbolinks
 class DiscoverViewController: UINavigationController {
     
     var URL: NSURL {
-        return NSURL(string: "\(host)/")!
+        return NSURL(string: "\(host)/\(campus)/")!
     }
     private let webViewProcessPool = WKProcessPool()
     
@@ -34,6 +34,9 @@ class DiscoverViewController: UINavigationController {
     }()
     
     override func viewDidLoad() {
+        
+        print(URL);
+        
         super.viewDidLoad()
         presentVisitableForSession(session, URL: URL)
     }

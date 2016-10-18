@@ -13,7 +13,7 @@ import Turbolinks
 class FoodViewController: UINavigationController {
     
     var URL: NSURL {
-        return NSURL(string: "\(host)/food/")!
+        return NSURL(string: "\(host)/\(campus)/food/")!
     }
     
     private let webViewProcessPool = WKProcessPool()
