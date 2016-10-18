@@ -27,8 +27,8 @@ class DiscoverViewController: ApplicationController {
         // only load the right button at the root discover URL
         if visitable.visitableURL.absoluteString == "http://curry.aca.uw.edu:8001/h/seattle/" {
             print("Hello world!");
-            // YESSSSS! Adds a right button to the visitable controller
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Campus", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.chooseCampus(_:)))
+            // YESSSSS! Adds a left button to the visitable controller
+            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Campus", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.chooseCampus(_:)))
         }
         
         if action == .Advance {
