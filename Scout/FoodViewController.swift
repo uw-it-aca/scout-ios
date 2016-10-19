@@ -24,7 +24,7 @@ class FoodViewController: UINavigationController {
     
     private lazy var webViewConfiguration: WKWebViewConfiguration = {
         let configuration = WKWebViewConfiguration()
-        configuration.userContentController.addScriptMessageHandler(self, name: "ScoutMessageBridge")
+        configuration.userContentController.addScriptMessageHandler(self, name: "foodJsBridge")
         configuration.processPool = self.webViewProcessPool
         configuration.applicationNameForUserAgent = "Scout"
         return configuration
@@ -50,9 +50,9 @@ class FoodViewController: UINavigationController {
         // handle location state
         if URL.path == "/h/\(campus)/food" {
             // YESSSSS! Adds a right button to the visitable controller
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.presentFoodFilter(_:)))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.presentFoodFilter))
         } else if URL.path == "/h/\(campus)/food/filter" {
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.submit(_:)))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.submit))
         }
         
         // handle actions
@@ -68,7 +68,7 @@ class FoodViewController: UINavigationController {
     
     // visit food filter
 
-    func presentFoodFilter(sender: UIBarButtonItem){
+    func presentFoodFilter(){
         
         // go to food filter URL
         let URL = NSURL(string: "\(host)/\(campus)/food/filter/")!
@@ -77,11 +77,14 @@ class FoodViewController: UINavigationController {
     
     // TODO: submit form via JS Bridge
     
-    func submit(sender: UIBarButtonItem){
+    func submit(){
         
         // pop the view controller
         // popViewControllerAnimated(true)
         // TODO: reload foodcontroller with new filtered URL ????
+        
+        
+        //evaluateJavaScript("document.getElementById('food_filter_submit').click()", completionHandler: nil)
         
     }
     
@@ -127,4 +130,5 @@ extension FoodViewController: WKScriptMessageHandler {
         }
         
     }
+    
 }
