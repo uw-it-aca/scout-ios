@@ -83,8 +83,7 @@ class FoodViewController: UINavigationController {
         // popViewControllerAnimated(true)
         // TODO: reload foodcontroller with new filtered URL ????
         
-        
-        //evaluateJavaScript("document.getElementById('food_filter_submit').click()", completionHandler: nil)
+        session.webView.evaluateJavaScript("document.getElementById('food_filter_submit').click()", completionHandler: nil)
         
     }
     
