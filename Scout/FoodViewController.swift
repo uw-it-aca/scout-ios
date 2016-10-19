@@ -81,9 +81,14 @@ class FoodViewController: UINavigationController {
         
         // pop the view controller
         // popViewControllerAnimated(true)
-        // TODO: reload foodcontroller with new filtered URL ????
         
         session.webView.evaluateJavaScript("document.getElementById('food_filter_submit').click()", completionHandler: nil)
+        
+        let URL = NSURL(string: "\(host)/\(campus)/food/?open_now=true")!
+        popViewControllerAnimated(false)
+        //presentVisitableForSession(session, URL: URL)
+        
+        // TODO: reload foodcontroller with new filtered URL ????
         
     }
     
