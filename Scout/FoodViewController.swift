@@ -24,7 +24,10 @@ class FoodViewController: UINavigationController {
     
     private lazy var webViewConfiguration: WKWebViewConfiguration = {
         let configuration = WKWebViewConfiguration()
+        
+        // name of js script handler that this controller with be communicating with
         configuration.userContentController.addScriptMessageHandler(self, name: "foodJsBridge")
+        
         configuration.processPool = self.webViewProcessPool
         configuration.applicationNameForUserAgent = "Scout"
         return configuration
@@ -85,12 +88,9 @@ class FoodViewController: UINavigationController {
         // evaluate js by submitting click event
         session.webView.evaluateJavaScript("document.getElementById('food_filter_submit').click()", completionHandler: nil)
         
-        // TODO: build "filtered URL" string by getting the message from the WKScriptMessageHandler below
-        let URL = NSURL(string: "\(host)/\(campus)/food/?period0=late_night")!
-
-        // present the visitable URL with specific replace action (line 61 above)
-        presentVisitableForSession(session, URL: URL, action: .Replace)
-
+        // got to the WKScriptMessageHandler below to see what happens when a message
+        // is received
+        
     }
     
 }
@@ -127,13 +127,17 @@ extension FoodViewController: SessionDelegate {
 extension FoodViewController: WKScriptMessageHandler {
     func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
         
-        // EXAMPPLE: handling of message from ios.js hybrid app
+        // TODO: not sure if this is a proper selector.
         if let message = message.body as? String {
-            let alertController = UIAlertController(title: "From ios.js file", message: message, preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(alertController, animated: true, completion: nil)
+            
+            // update the URL to visit with the message (query param)
+            let URL = NSURL(string: "\(host)/\(campus)/food/\(message)")!
+            
+            // present the visitable URL with specific replace action (line 61 above)
+            presentVisitableForSession(session, URL: URL, action: .Replace)
+            
         }
-        
+
     }
     
 }
