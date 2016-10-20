@@ -54,11 +54,14 @@ class FoodViewController: UINavigationController {
         } else if URL.path == "/h/\(campus)/food/filter" {
             visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.submit))
         }
+        // TODO: else if... if the URL.path has query params included (filtered URL)... then add a "Reset" button to clear the params
         
         // handle actions
         if action == .Advance {
             pushViewController(visitable, animated: true)
         } else if action == .Replace {
+            
+            // replaced old action with the following that seems to look better
             popViewControllerAnimated(true)
             setViewControllers([visitable], animated: false)
         }
@@ -75,15 +78,17 @@ class FoodViewController: UINavigationController {
         presentVisitableForSession(session, URL: URL)
     }
     
-    // TODO: submit form via JS Bridge
+    // submit form via javascript event
     
     func submit(){
         
+        // evaluate js by submitting click event
         session.webView.evaluateJavaScript("document.getElementById('food_filter_submit').click()", completionHandler: nil)
         
-        let URL = NSURL(string: "\(host)/\(campus)/food/?open_now=true")!
+        // TODO: build "filtered URL" string by getting the message from the WKScriptMessageHandler below
+        let URL = NSURL(string: "\(host)/\(campus)/food/?period0=late_night")!
 
-        print(URL);
+        // present the visitable URL with specific replace action (line 61 above)
         presentVisitableForSession(session, URL: URL, action: .Replace)
 
     }
