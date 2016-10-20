@@ -59,8 +59,8 @@ class FoodViewController: UINavigationController {
         if action == .Advance {
             pushViewController(visitable, animated: true)
         } else if action == .Replace {
-            popViewControllerAnimated(false)
-            pushViewController(visitable, animated: false)
+            popViewControllerAnimated(true)
+            setViewControllers([visitable], animated: false)
         }
         
         session.visit(visitable)
@@ -79,17 +79,13 @@ class FoodViewController: UINavigationController {
     
     func submit(){
         
-        // pop the view controller
-        // popViewControllerAnimated(true)
-        
         session.webView.evaluateJavaScript("document.getElementById('food_filter_submit').click()", completionHandler: nil)
         
         let URL = NSURL(string: "\(host)/\(campus)/food/?open_now=true")!
-        popViewControllerAnimated(false)
-        //presentVisitableForSession(session, URL: URL)
-        
-        // TODO: reload foodcontroller with new filtered URL ????
-        
+
+        print(URL);
+        presentVisitableForSession(session, URL: URL, action: .Replace)
+
     }
     
 }
