@@ -56,7 +56,7 @@ class FoodViewController: UINavigationController {
             visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.presentFoodFilter))
             
             // TODO: add "reset" button ONLY if filtered URL
-            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.resetFoodList))
             
         } else if URL.path == "/h/\(campus)/food/filter" {
             visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.submit))
@@ -83,6 +83,13 @@ class FoodViewController: UINavigationController {
         // go to food filter URL
         let URL = NSURL(string: "\(host)/\(campus)/food/filter/")!
         presentVisitableForSession(session, URL: URL)
+    }
+    
+    func resetFoodList(){
+        
+        // go to food filter URL
+        let URL = NSURL(string: "\(host)/\(campus)/food/")!
+        presentVisitableForSession(session, URL: URL, action: .Replace)
     }
     
     // submit form via javascript event
