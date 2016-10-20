@@ -55,11 +55,17 @@ class FoodViewController: UINavigationController {
             // YESSSSS! Adds a right button to the visitable controller
             visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.presentFoodFilter))
             
-            // TODO: add "reset" button ONLY if filtered URL
-            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.resetFoodList))
-            
         } else if URL.path == "/h/\(campus)/food/filter" {
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.submit))
+            
+            let submitButton : UIBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.submit))
+            
+            let resetButton : UIBarButtonItem = UIBarButtonItem(title: "Reset", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.resetFoodList))
+            
+            visitable.navigationItem.rightBarButtonItem = submitButton
+            visitable.navigationItem.rightBarButtonItem = resetButton
+            
+            visitable.navigationItem.setRightBarButtonItems([submitButton,resetButton], animated: true)
+            
         }
         // TODO: else if... if the URL.path has query params included (filtered URL)... then add a "Reset" button to clear the params
         
