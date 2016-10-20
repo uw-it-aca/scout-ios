@@ -54,6 +54,10 @@ class FoodViewController: UINavigationController {
         if URL.path == "/h/\(campus)/food" {
             // YESSSSS! Adds a right button to the visitable controller
             visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.presentFoodFilter))
+            
+            // TODO: add "reset" button ONLY if filtered URL
+            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+            
         } else if URL.path == "/h/\(campus)/food/filter" {
             visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.submit))
         }
