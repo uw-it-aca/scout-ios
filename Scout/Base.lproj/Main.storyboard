@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Food" image="ic_restaurant.png" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Food" image="ic_restaurant" id="acW-dT-cKf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
@@ -38,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Discover" image="ic_home.png" id="vB9-D9-Nh2"/>
+                    <tabBarItem key="tabBarItem" title="Discover" image="ic_home" id="vB9-D9-Nh2"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYo-Xj-393" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -57,7 +57,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Study" image="ic_local_library.png" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Study" image="ic_local_library" id="cPa-gy-q4n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -76,7 +76,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Tech" image="ic_computer.png" id="eqj-At-Khf"/>
+                    <tabBarItem key="tabBarItem" title="Tech" image="ic_computer" id="eqj-At-Khf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M1S-GY-RWD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -106,9 +106,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_computer.png" width="24" height="24"/>
-        <image name="ic_home.png" width="24" height="24"/>
-        <image name="ic_local_library.png" width="24" height="24"/>
-        <image name="ic_restaurant.png" width="24" height="24"/>
+        <image name="ic_computer" width="24" height="24"/>
+        <image name="ic_home" width="24" height="24"/>
+        <image name="ic_local_library" width="24" height="24"/>
+        <image name="ic_restaurant" width="24" height="24"/>
     </resources>
 </document>
