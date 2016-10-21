@@ -18,14 +18,12 @@
 		854034751CB5AE5100C0C7FD /* ScoutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034741CB5AE5100C0C7FD /* ScoutUITests.swift */; };
 		854034861CB5B17F00C0C7FD /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034851CB5B17F00C0C7FD /* Error.swift */; };
 		854034881CB5B1A100C0C7FD /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034871CB5B1A100C0C7FD /* ErrorView.swift */; };
-		854034931CB5BCE400C0C7FD /* pizza.png in Resources */ = {isa = PBXBuildFile; fileRef = 854034911CB5BCE400C0C7FD /* pizza.png */; };
-		854034941CB5BCE400C0C7FD /* rooster.png in Resources */ = {isa = PBXBuildFile; fileRef = 854034921CB5BCE400C0C7FD /* rooster.png */; };
+		854ED3D11DBA953100FEE8DA /* ic_home.imageset in Resources */ = {isa = PBXBuildFile; fileRef = 854ED3D01DBA953100FEE8DA /* ic_home.imageset */; };
+		854ED3D31DBA956C00FEE8DA /* ic_restaurant.imageset in Resources */ = {isa = PBXBuildFile; fileRef = 854ED3D21DBA956C00FEE8DA /* ic_restaurant.imageset */; };
+		854ED3D51DBA959500FEE8DA /* ic_local_library.imageset in Resources */ = {isa = PBXBuildFile; fileRef = 854ED3D41DBA959500FEE8DA /* ic_local_library.imageset */; };
+		854ED3D91DBA95D600FEE8DA /* ic_computer.imageset in Resources */ = {isa = PBXBuildFile; fileRef = 854ED3D81DBA95D600FEE8DA /* ic_computer.imageset */; };
 		8572A33A1D38169300D80248 /* TechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A3391D38169300D80248 /* TechViewController.swift */; };
 		8572A33C1D382F0500D80248 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A33B1D382F0500D80248 /* DiscoverViewController.swift */; };
-		8572A33E1D38335300D80248 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 8572A33D1D38335300D80248 /* home.png */; };
-		8572A3401D3833E700D80248 /* fork-knife.png in Resources */ = {isa = PBXBuildFile; fileRef = 8572A33F1D3833E700D80248 /* fork-knife.png */; };
-		8572A3421D38352700D80248 /* graduation-cap.png in Resources */ = {isa = PBXBuildFile; fileRef = 8572A3411D38352700D80248 /* graduation-cap.png */; };
-		8572A3441D38354800D80248 /* monitor.png in Resources */ = {isa = PBXBuildFile; fileRef = 8572A3431D38354800D80248 /* monitor.png */; };
 		85B415011D64F1DC0025E65C /* Turbolinks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B414FE1D64F1B10025E65C /* Turbolinks.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,14 +83,12 @@
 		854034761CB5AE5100C0C7FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		854034851CB5B17F00C0C7FD /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		854034871CB5B1A100C0C7FD /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		854034911CB5BCE400C0C7FD /* pizza.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pizza.png; sourceTree = "<group>"; };
-		854034921CB5BCE400C0C7FD /* rooster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rooster.png; sourceTree = "<group>"; };
+		854ED3D01DBA953100FEE8DA /* ic_home.imageset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ic_home.imageset; path = ../../../Downloads/NativeHybridIcons/ic_home_black_24dp/ios/ic_home.imageset; sourceTree = "<group>"; };
+		854ED3D21DBA956C00FEE8DA /* ic_restaurant.imageset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ic_restaurant.imageset; path = ../../../Downloads/NativeHybridIcons/ic_restaurant_black_24dp/ios/ic_restaurant.imageset; sourceTree = "<group>"; };
+		854ED3D41DBA959500FEE8DA /* ic_local_library.imageset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ic_local_library.imageset; path = ../../../Downloads/NativeHybridIcons/ic_local_library_black_24dp/ios/ic_local_library.imageset; sourceTree = "<group>"; };
+		854ED3D81DBA95D600FEE8DA /* ic_computer.imageset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ic_computer.imageset; path = ../../../Downloads/NativeHybridIcons/ic_computer_black_24dp/ios/ic_computer.imageset; sourceTree = "<group>"; };
 		8572A3391D38169300D80248 /* TechViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TechViewController.swift; sourceTree = "<group>"; };
 		8572A33B1D382F0500D80248 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
-		8572A33D1D38335300D80248 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
-		8572A33F1D3833E700D80248 /* fork-knife.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fork-knife.png"; sourceTree = "<group>"; };
-		8572A3411D38352700D80248 /* graduation-cap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "graduation-cap.png"; sourceTree = "<group>"; };
-		8572A3431D38354800D80248 /* monitor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monitor.png; sourceTree = "<group>"; };
 		85B414F81D64F1B10025E65C /* Turbolinks.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Turbolinks.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,12 +142,10 @@
 		854034511CB5AE5100C0C7FD /* Scout */ = {
 			isa = PBXGroup;
 			children = (
-				8572A3431D38354800D80248 /* monitor.png */,
-				8572A3411D38352700D80248 /* graduation-cap.png */,
-				8572A33F1D3833E700D80248 /* fork-knife.png */,
-				8572A33D1D38335300D80248 /* home.png */,
-				854034911CB5BCE400C0C7FD /* pizza.png */,
-				854034921CB5BCE400C0C7FD /* rooster.png */,
+				854ED3D81DBA95D600FEE8DA /* ic_computer.imageset */,
+				854ED3D41DBA959500FEE8DA /* ic_local_library.imageset */,
+				854ED3D01DBA953100FEE8DA /* ic_home.imageset */,
+				854ED3D21DBA956C00FEE8DA /* ic_restaurant.imageset */,
 				854034521CB5AE5100C0C7FD /* AppDelegate.swift */,
 				851B190E1D5DA7AC0061B30D /* ApplicationController.swift */,
 				8572A33B1D382F0500D80248 /* DiscoverViewController.swift */,
@@ -335,13 +329,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8540345F1CB5AE5100C0C7FD /* LaunchScreen.storyboard in Resources */,
+				854ED3D91DBA95D600FEE8DA /* ic_computer.imageset in Resources */,
 				8540345C1CB5AE5100C0C7FD /* Assets.xcassets in Resources */,
-				8572A3401D3833E700D80248 /* fork-knife.png in Resources */,
-				8572A3441D38354800D80248 /* monitor.png in Resources */,
-				8572A33E1D38335300D80248 /* home.png in Resources */,
-				8572A3421D38352700D80248 /* graduation-cap.png in Resources */,
-				854034941CB5BCE400C0C7FD /* rooster.png in Resources */,
-				854034931CB5BCE400C0C7FD /* pizza.png in Resources */,
+				854ED3D11DBA953100FEE8DA /* ic_home.imageset in Resources */,
+				854ED3D51DBA959500FEE8DA /* ic_local_library.imageset in Resources */,
+				854ED3D31DBA956C00FEE8DA /* ic_restaurant.imageset in Resources */,
 				8540345A1CB5AE5100C0C7FD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
