@@ -52,7 +52,7 @@ class DiscoverViewController: UINavigationController {
             print("on discover home");
             
             // YESSSSS! Adds a right button to the visitable controller
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Campus", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.chooseCampus))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: (campus).capitalizedString, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.chooseCampus))
         }
         
         if action == .Advance {
