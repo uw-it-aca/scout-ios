@@ -59,7 +59,8 @@ class DiscoverViewController: UINavigationController {
             pushViewController(visitable, animated: true)
         } else if action == .Replace {
             popViewControllerAnimated(false)
-            pushViewController(visitable, animated: false)
+            //pushViewController(visitable, animated: false)
+            setViewControllers([visitable], animated: false)
         }
         
         session.visit(visitable)
