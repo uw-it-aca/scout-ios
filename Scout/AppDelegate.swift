@@ -11,7 +11,7 @@ import WebKit
 import Turbolinks
 
 let host = "http://localhost:8001/h"
-let campus = "seattle"
+var campus = "seattle"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

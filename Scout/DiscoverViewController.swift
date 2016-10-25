@@ -76,14 +76,20 @@ class DiscoverViewController: UINavigationController {
         let seattleAction = UIAlertAction(title: "Seattle", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             print("Seattle was selected")
+            campus = "seattle"
+            self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
         let bothellAction = UIAlertAction(title: "Bothell", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             print("Bothell was selected")
+            campus = "bothell"
+            self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
         let tacomaAction = UIAlertAction(title: "Tacoma", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             print("Tacoma was selected")
+            campus = "tacoma"
+            self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
         
         //
@@ -102,7 +108,6 @@ class DiscoverViewController: UINavigationController {
         
         // 5
         self.presentViewController(optionMenu, animated: true, completion: nil)
-        
         
     }
     
