@@ -55,7 +55,7 @@ class DiscoverViewController: UINavigationController {
             
             let campusButton : UIBarButtonItem = UIBarButtonItem(title: (campus).capitalizedString, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.chooseCampus))
             
-            let settingsButton : UIBarButtonItem = UIBarButtonItem(title: " ", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+            let settingsButton : UIBarButtonItem = UIBarButtonItem(title: " ", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.openSettings))
             let buttonIcon = UIImage(named: "ic_settings")
             settingsButton.image = buttonIcon
             
@@ -122,6 +122,17 @@ class DiscoverViewController: UINavigationController {
         
         // 5
         self.presentViewController(optionMenu, animated: true, completion: nil)
+        
+    }
+    
+    func openSettings() {
+        
+        /***
+        let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+        if let url = settingsUrl {
+            UIApplication.sharedApplication().openURL(url)
+        }
+        ***/
         
     }
     
