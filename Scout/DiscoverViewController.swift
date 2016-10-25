@@ -52,8 +52,21 @@ class DiscoverViewController: UINavigationController {
             print("on discover home");
             
             // YESSSSS! Adds a right button to the visitable controller
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: (campus).capitalizedString, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.chooseCampus))
+            
+            let campusButton : UIBarButtonItem = UIBarButtonItem(title: (campus).capitalizedString, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiscoverViewController.chooseCampus))
+            
+            let settingsButton : UIBarButtonItem = UIBarButtonItem(title: " ", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+            let buttonIcon = UIImage(named: "ic_settings")
+            settingsButton.image = buttonIcon
+            
+            visitable.navigationItem.rightBarButtonItem = campusButton
+            visitable.navigationItem.rightBarButtonItem = settingsButton
+            
+            visitable.navigationItem.setRightBarButtonItems([settingsButton, campusButton], animated: true)
+            
         }
+        
+        
         
         if action == .Advance {
             pushViewController(visitable, animated: true)
