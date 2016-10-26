@@ -21,6 +21,7 @@
 		8572A33A1D38169300D80248 /* TechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A3391D38169300D80248 /* TechViewController.swift */; };
 		8572A33C1D382F0500D80248 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A33B1D382F0500D80248 /* DiscoverViewController.swift */; };
 		85B415011D64F1DC0025E65C /* Turbolinks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B414FE1D64F1B10025E65C /* Turbolinks.framework */; };
+		89A082151DC171E100C25FE6 /* scoutConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89A082141DC171E100C25FE6 /* scoutConfig.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		8572A3391D38169300D80248 /* TechViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TechViewController.swift; sourceTree = "<group>"; };
 		8572A33B1D382F0500D80248 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		85B414F81D64F1B10025E65C /* Turbolinks.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Turbolinks.xcodeproj; sourceTree = "<group>"; };
+		89A082141DC171E100C25FE6 /* scoutConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = scoutConfig.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				854034601CB5AE5100C0C7FD /* Info.plist */,
 				854034851CB5B17F00C0C7FD /* Error.swift */,
 				854034871CB5B1A100C0C7FD /* ErrorView.swift */,
+				89A082141DC171E100C25FE6 /* scoutConfig.plist */,
 			);
 			path = Scout;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				8540345F1CB5AE5100C0C7FD /* LaunchScreen.storyboard in Resources */,
 				8540345C1CB5AE5100C0C7FD /* Assets.xcassets in Resources */,
 				8540345A1CB5AE5100C0C7FD /* Main.storyboard in Resources */,
+				89A082151DC171E100C25FE6 /* scoutConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,8 +10,8 @@ import UIKit
 import WebKit
 import Turbolinks
 
-let host = "http://localhost:8001/h"
-var campus = "seattle"
+var host = ""
+var campus = ""
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // read in config
+        if let path = NSBundle.mainBundle().pathForResource("scoutConfig", ofType: "plist"), config = NSDictionary(contentsOfFile: path) as? [String: AnyObject] {
+            host = config["scout_host"] as! String
+            campus = config["default_campus"] as! String
+        }
         
         // globally set tint color
         self.window!.tintColor = hexStringToUIColor("#6564A9")
