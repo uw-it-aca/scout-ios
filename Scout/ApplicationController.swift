@@ -82,18 +82,16 @@ class ApplicationController: UINavigationController {
             visitable.navigationItem.setRightBarButtonItems([submitButton,resetButton], animated: true)
             ***/
             
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "ClearForm", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.resetFoodList))
-            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "BackSubmit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.resetFoodList))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.clearFoodFilter))
+            //visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< BackSubmit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFoodFilter))
             
         }
-
-    
         
         // handle actions
         if action == .Advance {
             pushViewController(visitable, animated: true)
         } else if action == .Replace {
-            popViewControllerAnimated(false)
+            popViewControllerAnimated(true)
             //pushViewController(visitable, animated: false)
             setViewControllers([visitable], animated: false)
         }
@@ -104,26 +102,21 @@ class ApplicationController: UINavigationController {
     // visit food filter
     
     func presentFoodFilter(){
-        
         // go to food filter URL
         let URL = NSURL(string: "\(host)/\(campus)/food/filter/")!
         presentVisitableForSession(session, URL: URL)
     }
     
-    func resetFoodList(){
-        
-        // go to food filter URL
-        let URL = NSURL(string: "\(host)/\(campus)/food/")!
-        presentVisitableForSession(session, URL: URL, action: .Replace)
-    }
-    
-    // submit form via javascript event
+    // execute javascript
     
     func submitFoodFilter(){
-        
         // evaluate js by submitting click event
         session.webView.evaluateJavaScript("document.getElementById('food_filter_submit').click()", completionHandler: nil)
-        
+    }
+    
+    func clearFoodFilter(){
+        // evaluate js by submitting click event
+        session.webView.evaluateJavaScript("document.getElementById('food_filter_clear').click()", completionHandler: nil)
     }
     
     // custom controller for campus selection
