@@ -42,6 +42,11 @@ class ApplicationController: UINavigationController {
         presentVisitableForSession(session, URL: URL)
     }
     
+    override func viewDidAppear(animated:Bool) {
+        super.viewDidAppear(animated)
+        presentVisitableForSession(session, URL: URL, action: .Replace)
+    }
+
     // generic visit controller
     func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         
