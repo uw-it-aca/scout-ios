@@ -71,14 +71,19 @@ class ApplicationController: UINavigationController {
             visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.presentFoodFilter))
             
         } else if URL.path == "/h/\(campus)/food/filter" {
-            
+        
+            /***
             let submitButton : UIBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFoodFilter))
-            let resetButton : UIBarButtonItem = UIBarButtonItem(title: "Reset", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.resetFoodList))
-            
+            let resetButton : UIBarButtonItem = UIBarButtonItem(title: "ClearForm", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.resetFoodList))
+        
             visitable.navigationItem.rightBarButtonItem = submitButton
             visitable.navigationItem.rightBarButtonItem = resetButton
             
             visitable.navigationItem.setRightBarButtonItems([submitButton,resetButton], animated: true)
+            ***/
+            
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "ClearForm", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.resetFoodList))
+            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "BackSubmit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.resetFoodList))
             
         }
 
@@ -118,9 +123,6 @@ class ApplicationController: UINavigationController {
         
         // evaluate js by submitting click event
         session.webView.evaluateJavaScript("document.getElementById('food_filter_submit').click()", completionHandler: nil)
-        
-        // got to the WKScriptMessageHandler below to see what happens when a message
-        // is received
         
     }
     
