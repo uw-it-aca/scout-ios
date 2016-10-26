@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import Turbolinks
 
-let host = "http://curry.aca.uw.edu:8001/h"
+let host = "http://localhost:8001/h"
 var campus = "seattle"
 
 @UIApplicationMain
