@@ -10,9 +10,9 @@ import UIKit
 import WebKit
 import Turbolinks
 
-class DiscoverViewController: UINavigationController {
+class DiscoverViewController: ApplicationController {
     
-    var URL: NSURL {
+    override var URL: NSURL {
         return NSURL(string: "\(host)/\(campus)/")!
     }
     private let webViewProcessPool = WKProcessPool()
@@ -43,7 +43,7 @@ class DiscoverViewController: UINavigationController {
     
     // visit controller for discover
     
-    func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
+    override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         
         let visitable = VisitableViewController(URL: URL)
         
@@ -137,33 +137,3 @@ class DiscoverViewController: UINavigationController {
     }
     
 }
-
-extension DiscoverViewController: SessionDelegate {
-    func session(session: Session, didProposeVisitToURL URL: NSURL, withAction action: Action) {
-        
-        // EXAMPPLE: intercept link clicks and do something custom
-        
-        if URL.path == "/h/seattle/food/filterxxx" {
-            // define some custom function
-            
-        } else {
-            presentVisitableForSession(session, URL: URL, action: action)
-        }
-        
-    }
-    
-    func session(session: Session, didFailRequestForVisitable visitable: Visitable, withError error: NSError) {
-        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        presentViewController(alert, animated: true, completion: nil)
-    }
-    
-    func sessionDidStartRequest(session: Session) {
-        application.networkActivityIndicatorVisible = true
-    }
-    
-    func sessionDidFinishRequest(session: Session) {
-        application.networkActivityIndicatorVisible = false
-    }
-}
-
