@@ -24,7 +24,7 @@ class FoodViewController: ApplicationController {
         // food home
         if URL.path == "/h/\(campus)/food" {
             
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.presentFoodFilter))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.presentFilter(_:)))
             
         } else if URL.path == "/h/\(campus)/food/filter" {
             

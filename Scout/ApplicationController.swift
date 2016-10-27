@@ -66,10 +66,12 @@ class ApplicationController: UINavigationController {
     
     // visit food filter
     
-    func presentFoodFilter(){
+    func presentFilter(app_type: String) {
+        
         // go to food filter URL
-        let URL = NSURL(string: "\(host)/\(campus)/food/filter/")!
+        let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/filter/")!
         presentVisitableForSession(session, URL: URL)
+
     }
     
     // execute javascript
