@@ -7,11 +7,41 @@
 //
 
 import UIKit
+import WebKit
+import Turbolinks
 
 class StudyViewController: ApplicationController {
     
     override var URL: NSURL {
         return NSURL(string: "\(host)/\(campus)/study/")!
+    }
+    
+    // study view controller
+    override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
+        
+        let visitable = VisitableViewController(URL: URL)
+        
+        // study home
+        if URL.path == "/h/\(campus)/study" {
+            
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+            
+        } else if URL.path == "/h/\(campus)/study/filter" {
+            
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+            
+        }
+        
+        // handle actions
+        if action == .Advance {
+            pushViewController(visitable, animated: true)
+        } else if action == .Replace {
+            popViewControllerAnimated(true)
+            //pushViewController(visitable, animated: false)
+            setViewControllers([visitable], animated: false)
+        }
+        
+        session.visit(visitable)
     }
     
 }

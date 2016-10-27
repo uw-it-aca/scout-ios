@@ -7,11 +7,48 @@
 //
 
 import UIKit
+import WebKit
+import Turbolinks
 
 class DiscoverViewController: ApplicationController {
     
     override var URL: NSURL {
         return NSURL(string: "\(host)/\(campus)/")!
     }
+    
+    // discover visit controller
+    override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
+        
+        let visitable = VisitableViewController(URL: URL)
+        
+        // discover home
+        if URL.path == "/h/\(campus)" {
+            
+            let campusButton : UIBarButtonItem = UIBarButtonItem(title: (campus).capitalizedString, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.chooseCampus))
+            let settingsButton : UIBarButtonItem = UIBarButtonItem(title: " ", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.openSettings))
+            
+            let buttonIcon = UIImage(named: "ic_settings")
+            settingsButton.image = buttonIcon
+            
+            visitable.navigationItem.rightBarButtonItem = campusButton
+            visitable.navigationItem.rightBarButtonItem = settingsButton
+            
+            visitable.navigationItem.setRightBarButtonItems([settingsButton, campusButton], animated: true)
+            
+        }
+        
+        // handle actions
+        if action == .Advance {
+            pushViewController(visitable, animated: true)
+        } else if action == .Replace {
+            popViewControllerAnimated(true)
+            //pushViewController(visitable, animated: false)
+            setViewControllers([visitable], animated: false)
+        }
+        
+        session.visit(visitable)
+        
+    }
+    
     
 }

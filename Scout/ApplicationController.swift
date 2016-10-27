@@ -51,42 +51,7 @@ class ApplicationController: UINavigationController {
     func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         
         let visitable = VisitableViewController(URL: URL)
-        
-        // add native buttons based on URL
-        if URL.path == "/h/\(campus)" {
-            
-            let campusButton : UIBarButtonItem = UIBarButtonItem(title: (campus).capitalizedString, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.chooseCampus))
-            let settingsButton : UIBarButtonItem = UIBarButtonItem(title: " ", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.openSettings))
-            
-            let buttonIcon = UIImage(named: "ic_settings")
-            settingsButton.image = buttonIcon
-            
-            visitable.navigationItem.rightBarButtonItem = campusButton
-            visitable.navigationItem.rightBarButtonItem = settingsButton
-            
-            visitable.navigationItem.setRightBarButtonItems([settingsButton, campusButton], animated: true)
-            
-        } else if URL.path == "/h/\(campus)/food" {
-            
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.presentFoodFilter))
-            
-        } else if URL.path == "/h/\(campus)/food/filter" {
-        
-            /***
-            let submitButton : UIBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFoodFilter))
-            let resetButton : UIBarButtonItem = UIBarButtonItem(title: "ClearForm", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.resetFoodList))
-        
-            visitable.navigationItem.rightBarButtonItem = submitButton
-            visitable.navigationItem.rightBarButtonItem = resetButton
-            
-            visitable.navigationItem.setRightBarButtonItems([submitButton,resetButton], animated: true)
-            ***/
-            
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.clearFoodFilter))
-            //visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< BackSubmit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFoodFilter))
-            
-        }
-        
+                
         // handle actions
         if action == .Advance {
             pushViewController(visitable, animated: true)
@@ -136,7 +101,6 @@ class ApplicationController: UINavigationController {
             (alert: UIAlertAction!) -> Void in
             print("Bothell was selected")
             campus = "bothell"
-            self.session.reload()
             self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
         let tacomaAction = UIAlertAction(title: "Tacoma", style: .Default, handler: {
