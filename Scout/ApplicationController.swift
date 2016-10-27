@@ -178,10 +178,11 @@ extension ApplicationController: WKScriptMessageHandler {
         if let message = message.body as? String {
             
             // update the URL to visit with the message (query param)
-            let URL = NSURL(string: "\(host)/\(campus)/food/\(message)")!
+            // let URL = NSURL(string: "\(host)/\(campus)/food/\(message)")!
             
             // present the visitable URL with specific replace action (line 61 above)
-            presentVisitableForSession(session, URL: URL, action: .Replace)
+            // presentVisitableForSession(session, URL: URL, action: .Replace)
+            print(message)
             
         }
         
