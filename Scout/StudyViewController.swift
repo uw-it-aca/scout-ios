@@ -19,12 +19,15 @@ class StudyViewController: ApplicationController {
     // study view controller
     override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         
+        // set app_type to study
+        (app_type) = "study"
+        
         let visitable = VisitableViewController(URL: URL)
         
         // study home
         if URL.path == "/h/\(campus)/study" {
             
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.presentFilter))
             
         } else if URL.path == "/h/\(campus)/study/filter" {
             

@@ -15,6 +15,7 @@ class ApplicationController: UINavigationController {
     var URL: NSURL {
         return NSURL(string: "\(host)/\(campus)/")!
     }
+        
     private let webViewProcessPool = WKProcessPool()
     
     private var application: UIApplication {
@@ -40,6 +41,7 @@ class ApplicationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presentVisitableForSession(session, URL: URL)
+
     }
     
     override func viewDidAppear(animated:Bool) {
@@ -62,17 +64,16 @@ class ApplicationController: UINavigationController {
         }
         
         session.visit(visitable)
+        
     }
     
-    // visit food filter
-    
-    func presentFilter(app_type: String) {
-        
-        // go to food filter URL
+    // show app_type filter
+    func presentFilter() {
         let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/filter/")!
         presentVisitableForSession(session, URL: URL)
-
     }
+    
+    
     
     // execute javascript
     

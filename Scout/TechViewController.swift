@@ -19,12 +19,15 @@ class TechViewController: ApplicationController {
     // tech view controller
     override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         
+        // set app_type to tech
+        (app_type) = "tech"
+        
         let visitable = VisitableViewController(URL: URL)
         
         // study home
         if URL.path == "/h/\(campus)/tech" {
             
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.presentFilter))
             
         } else if URL.path == "/h/\(campus)/tech/filter" {
             

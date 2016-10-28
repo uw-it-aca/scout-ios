@@ -19,12 +19,15 @@ class FoodViewController: ApplicationController {
     // food view controller
     override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         
+        // set app_type to food
+        (app_type) = "food"
+        
         let visitable = VisitableViewController(URL: URL)
         
         // food home
         if URL.path == "/h/\(campus)/food" {
             
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.presentFilter(_:)))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.presentFilter))
             
         } else if URL.path == "/h/\(campus)/food/filter" {
             
