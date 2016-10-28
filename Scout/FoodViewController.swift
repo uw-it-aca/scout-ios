@@ -27,6 +27,10 @@ class FoodViewController: ApplicationController {
         // food home
         if URL.path == "/h/\(campus)/food" {
             
+            // NOTE TO CRAIG: Functions called via #selectors CANNOT pass arguments. Every StackOverflow comment says how dumb and what is the point of this? LOL.
+            // In any case... I made presentFilter pretty generic at the ApplicationController level and just accepting the global "app_type" variable. Each
+            // context view controller (FoodViewController, StudyViewController, etc.) just overrides the value. Feel free to refactor!
+            
             visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.presentFilter))
             
         } else if URL.path == "/h/\(campus)/food/filter" {
