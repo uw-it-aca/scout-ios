@@ -26,7 +26,7 @@ class ApplicationController: UINavigationController {
         let configuration = WKWebViewConfiguration()
         
         // name of js script handler that this controller with be communicating with
-        configuration.userContentController.addScriptMessageHandler(self, name: "foodJsBridge")
+        configuration.userContentController.addScriptMessageHandler(self, name: "scoutBridge")
         
         configuration.processPool = self.webViewProcessPool
         return configuration
@@ -79,12 +79,12 @@ class ApplicationController: UINavigationController {
     
     func submitFoodFilter(){
         // evaluate js by submitting click event
-        session.webView.evaluateJavaScript("document.getElementById('food_filter_submit').click()", completionHandler: nil)
+        session.webView.evaluateJavaScript("document.getElementById('\(app_type)_filter_submit').click()", completionHandler: nil)
     }
     
     func clearFoodFilter(){
         // evaluate js by submitting click event
-        session.webView.evaluateJavaScript("document.getElementById('food_filter_clear').click()", completionHandler: nil)
+        session.webView.evaluateJavaScript("document.getElementById('\(app_type)_filter_clear').click()", completionHandler: nil)
     }
     
     // custom controller for campus selection
