@@ -31,7 +31,7 @@ class StudyViewController: ApplicationController {
             
         } else if URL.path == "/h/\(campus)/study/filter" {
             
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.clearFilter))
             
         }
         

@@ -67,24 +67,21 @@ class ApplicationController: UINavigationController {
         
     }
     
-    // show app_type filter
+    // show filter
     func presentFilter() {
         let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/filter/")!
         presentVisitableForSession(session, URL: URL)
     }
     
-    
-    
     // execute javascript
-    
-    func submitFoodFilter(){
+    func submitFilter(){
         // evaluate js by submitting click event
-        session.webView.evaluateJavaScript("document.getElementById('\(app_type)_filter_submit').click()", completionHandler: nil)
+        session.webView.evaluateJavaScript("document.getElementById('filter_submit').click()", completionHandler: nil)
     }
     
-    func clearFoodFilter(){
+    func clearFilter(){
         // evaluate js by submitting click event
-        session.webView.evaluateJavaScript("document.getElementById('\(app_type)_filter_clear').click()", completionHandler: nil)
+        session.webView.evaluateJavaScript("document.getElementById('filter_clear').click()", completionHandler: nil)
     }
     
     // custom controller for campus selection
