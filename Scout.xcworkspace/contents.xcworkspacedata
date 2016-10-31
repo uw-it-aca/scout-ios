@@ -5,6 +5,6 @@
       location = "group:Scout.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../../Downloads/turbolinks-ios-master/Turbolinks.xcodeproj">
+      location = "group:Turbolinks.xcodeproj">
    </FileRef>
 </Workspace>
