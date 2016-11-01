@@ -44,7 +44,7 @@ class ApplicationController: UINavigationController {
 
     }
     
-    override func viewDidAppear(animated:Bool) {
+    override func viewWillAppear(animated:Bool) {
         super.viewDidAppear(animated)
         presentVisitableForSession(session, URL: URL, action: .Replace)
     }
@@ -69,7 +69,8 @@ class ApplicationController: UINavigationController {
     
     // show filter
     func presentFilter() {
-        let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/filter/")!
+        let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/filter/\(params)")!
+        print(URL)
         presentVisitableForSession(session, URL: URL)
     }
     
@@ -77,7 +78,7 @@ class ApplicationController: UINavigationController {
     func submitFilter(){
         
         // set a new visitable that includes
-        let URL = NSURL(string: "\(host)/\(campus)/food/?\(params)")!
+        let URL = NSURL(string: "\(host)/\(campus)/food/\(params)")!
         print(URL)
         presentVisitableForSession(session, URL: URL, action: .Replace)
     }
@@ -172,7 +173,7 @@ extension ApplicationController: WKScriptMessageHandler {
         if let message = message.body as? String {
             
             print(message)
-            (params) = message
+            (params) = "?" + message
             
         }
         
