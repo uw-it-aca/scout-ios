@@ -5,6 +5,6 @@
 	<key>default_campus</key>
 	<string>seattle</string>
 	<key>scout_host</key>
-	<string>http://curry.aca.uw.edu:8001/h</string>
+	<string>http://localhost:8001/h</string>
 </dict>
 </plist>
