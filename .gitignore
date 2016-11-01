@@ -66,3 +66,6 @@ Carthage/Build
 
 fastlane/report.xml
 fastlane/screenshots
+
+# Scout
+scoutConfig.plist
