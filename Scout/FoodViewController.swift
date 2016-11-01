@@ -46,7 +46,7 @@ class FoodViewController: ApplicationController {
              ***/
             
             visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.clearFilter))
-            //visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< BackSubmit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
+            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< BackSubmit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
             
         }
         

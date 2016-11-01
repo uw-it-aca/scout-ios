@@ -13,6 +13,7 @@ import Turbolinks
 var host = ""
 var campus = ""
 var app_type = ""
+var params = ""
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

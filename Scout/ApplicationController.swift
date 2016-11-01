@@ -75,8 +75,11 @@ class ApplicationController: UINavigationController {
     
     // execute javascript
     func submitFilter(){
-        // evaluate js by submitting click event
-        session.webView.evaluateJavaScript("document.getElementById('filter_submit').click()", completionHandler: nil)
+        
+        // set a new visitable that includes
+        let URL = NSURL(string: "\(host)/\(campus)/food/?\(params)")!
+        print(URL)
+        presentVisitableForSession(session, URL: URL, action: .Replace)
     }
     
     func clearFilter(){
@@ -144,16 +147,7 @@ class ApplicationController: UINavigationController {
 
 extension ApplicationController: SessionDelegate {
     func session(session: Session, didProposeVisitToURL URL: NSURL, withAction action: Action) {
-        
-        // EXAMPPLE: intercept link clicks and do something custom
-        
-        if URL.path == "/h/seattle/food/filterxxx" {
-            // define some custom function
-            
-        } else {
-            presentVisitableForSession(session, URL: URL, action: action)
-        }
-        
+        presentVisitableForSession(session, URL: URL, action: action)
     }
     
     func session(session: Session, didFailRequestForVisitable visitable: Visitable, withError error: NSError) {
@@ -177,12 +171,8 @@ extension ApplicationController: WKScriptMessageHandler {
         // TODO: not sure if this is a proper selector.
         if let message = message.body as? String {
             
-            // update the URL to visit with the message (query param)
-            // let URL = NSURL(string: "\(host)/\(campus)/food/\(message)")!
-            
-            // present the visitable URL with specific replace action (line 61 above)
-            // presentVisitableForSession(session, URL: URL, action: .Replace)
             print(message)
+            (params) = message
             
         }
         
