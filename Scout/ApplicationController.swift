@@ -138,23 +138,17 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     }
     
     func openSettings() {
-        
-        /***
-         let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
-         if let url = settingsUrl {
-         UIApplication.sharedApplication().openURL(url)
-         }
-         ***/
-        
+        // no longer supported in ios10.. sucks!
+        // UIApplication.sharedApplication().openURL(NSURL(string:"prefs:root=Scout")!)
     }
     
     
     func getUserLocation() {
         
-        // Ask for Authorization from the User.
+        // ask for Authorization from the User.
         self.locationManager.requestAlwaysAuthorization()
         
-        // For use in foreground
+        // for use in foreground
         self.locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
@@ -203,10 +197,8 @@ extension ApplicationController: WKScriptMessageHandler {
         
         // TODO: not sure if this is a proper selector.
         if let message = message.body as? String {
-            
             print(message)
-            (params) = "?" + message
-            
+            params = "?" + message
         }
         
     }
