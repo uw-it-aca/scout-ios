@@ -51,7 +51,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         super.viewDidAppear(animated)
         presentVisitableForSession(session, URL: URL, action: .Replace)
     }
-
+    
     // generic visit controller
     func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         
@@ -163,8 +163,17 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             print("location disabled")
             
             // send the default campus lat/lng because sharing is turned off (drumheller fountain) NOT WORKING!!!!
-            self.session.webView.evaluateJavaScript("Geolocation.update_location(47.653811,-122.307815)", completionHandler: nil)
-        
+            //session.webView.evaluateJavaScript("Geolocation.update_location(47.653811,-122.307815)", completionHandler: nil)
+            
+            session.webView.evaluateJavaScript("Geolocation.update_location(47.653811,-122.307815)") { (result, error) in
+                if error != nil {
+                    print(error)
+                }
+                else {
+                    print(result)
+                }
+            }
+            
         }
         
     }
@@ -177,10 +186,12 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // send the lat/lng to the geolocation function on web
         session.webView.evaluateJavaScript("Geolocation.update_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
+        
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("Error while updating location " + error.localizedDescription)
+        print("Error while updating location: " + error.localizedDescription)
+        session.webView.evaluateJavaScript("Geolocation.update_location(47.653811,-122.307815)", completionHandler: nil)
     }
     
 }
@@ -203,6 +214,7 @@ extension ApplicationController: SessionDelegate {
     func sessionDidFinishRequest(session: Session) {
         application.networkActivityIndicatorVisible = false
     }
+
 }
 
 extension ApplicationController: WKScriptMessageHandler {
