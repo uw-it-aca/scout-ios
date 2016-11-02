@@ -20,7 +20,7 @@ class StudyViewController: ApplicationController {
     override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         
         // set app_type to study
-        (app_type) = "study"
+        app_type = "study"
         
         let visitable = VisitableViewController(URL: URL)
         

@@ -20,7 +20,7 @@ class FoodViewController: ApplicationController {
     override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         
         // set app_type to food
-        (app_type) = "food"
+        app_type = "food"
         
         let visitable = VisitableViewController(URL: URL)
         
