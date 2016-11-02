@@ -9,8 +9,11 @@
 import UIKit
 import WebKit
 import Turbolinks
+import CoreLocation
 
-class ApplicationController: UINavigationController {
+class ApplicationController: UINavigationController,  CLLocationManagerDelegate {
+    
+    let locationManager = CLLocationManager()
     
     var URL: NSURL {
         return NSURL(string: "\(host)/\(campus)/")!
@@ -41,6 +44,7 @@ class ApplicationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presentVisitableForSession(session, URL: URL)
+        getUserLocation()
 
     }
     
@@ -134,14 +138,36 @@ class ApplicationController: UINavigationController {
     }
     
     func openSettings() {
+        // no longer supported in ios10.. sucks!
+        // UIApplication.sharedApplication().openURL(NSURL(string:"prefs:root=Scout")!)
+    }
+    
+    
+    func getUserLocation() {
         
-        /***
-         let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
-         if let url = settingsUrl {
-         UIApplication.sharedApplication().openURL(url)
-         }
-         ***/
+        // ask for Authorization from the User.
+        self.locationManager.requestAlwaysAuthorization()
         
+        // for use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+        
+    }
+    
+    // locationManager delegate functions
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Error while updating location " + error.localizedDescription)
     }
     
 }
@@ -171,10 +197,8 @@ extension ApplicationController: WKScriptMessageHandler {
         
         // TODO: not sure if this is a proper selector.
         if let message = message.body as? String {
-            
             print(message)
-            (params) = "?" + message
-            
+            params = "?" + message
         }
         
     }
