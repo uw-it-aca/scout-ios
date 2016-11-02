@@ -45,9 +45,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         super.viewDidLoad()
         presentVisitableForSession(session, URL: URL)
         getUserLocation()
-
     }
-    
+ 
     override func viewWillAppear(animated:Bool) {
         super.viewDidAppear(animated)
         presentVisitableForSession(session, URL: URL, action: .Replace)
@@ -152,9 +151,20 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         self.locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
+            
+            print("location enabled")
+
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
+        }
+        else {
+            
+            print("location disabled")
+            
+            // send the default campus lat/lng because sharing is turned off (drumheller fountain) NOT WORKING!!!!
+            self.session.webView.evaluateJavaScript("Geolocation.update_location(47.653811,-122.307815)", completionHandler: nil)
+        
         }
         
     }
