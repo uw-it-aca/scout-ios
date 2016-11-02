@@ -164,6 +164,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         print("locations = \(locValue.latitude) \(locValue.longitude)")
+        
+        // send the lat/lng to the geolocation function on web
+        session.webView.evaluateJavaScript("Geolocation.update_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
