@@ -18,7 +18,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     var URL: NSURL {
         return NSURL(string: "\(host)/\(campus)/")!
     }
-        
+            
     private let webViewProcessPool = WKProcessPool()
     
     private var application: UIApplication {
@@ -44,12 +44,24 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         presentVisitableForSession(session, URL: URL)
-        setUserLocation()
+        //setUserLocation()
     }
  
     override func viewDidAppear(animated:Bool) {
         super.viewDidAppear(animated)
-        presentVisitableForSession(session, URL: URL, action: .Replace)
+        
+        // print the 2 urls the app has for comparison
+        print(URL)
+        print(session.webView.URL!)
+        
+        // TODO: this is not very clean.. we should just be comparing the campus block instead of the entire URL
+        if (URL != session.webView.URL!) {
+
+            print("campus has changed")
+            
+            // this line of code forces a reload of the app... we should only reload if campus has changed
+            //presentVisitableForSession(session, URL: URL, action: .Replace)
+        }
         
     }
     
@@ -109,6 +121,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             (alert: UIAlertAction!) -> Void in
             print("Bothell was selected")
             campus = "bothell"
+            print(self.URL)
             self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
         let tacomaAction = UIAlertAction(title: "Tacoma", style: .Default, handler: {

@@ -16,12 +16,14 @@ class StudyViewController: ApplicationController {
         return NSURL(string: "\(host)/\(campus)/study/")!
     }
     
+    
+    
     // study view controller
     override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         
         // set app_type to study
         app_type = "study"
-        
+
         let visitable = VisitableViewController(URL: URL)
         
         // study home
