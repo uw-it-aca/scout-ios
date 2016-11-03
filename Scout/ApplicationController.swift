@@ -47,7 +47,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         getUserLocation()
     }
  
-    override func viewWillAppear(animated:Bool) {
+    override func viewDidAppear(animated:Bool) {
         super.viewDidAppear(animated)
         presentVisitableForSession(session, URL: URL, action: .Replace)
     }
