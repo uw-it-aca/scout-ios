@@ -44,12 +44,13 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         presentVisitableForSession(session, URL: URL)
-        getUserLocation()
+        setUserLocation()
     }
  
     override func viewDidAppear(animated:Bool) {
         super.viewDidAppear(animated)
         presentVisitableForSession(session, URL: URL, action: .Replace)
+        
     }
     
     // generic visit controller
@@ -142,7 +143,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     }
     
     
-    func getUserLocation() {
+    func setUserLocation() {
         
         // ask authorization for always using
         //self.locationManager.requestAlwaysAuthorization()
@@ -160,19 +161,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         }
         else {
             
-            print("location disabled")
-            
-            // send the default campus lat/lng because sharing is turned off (drumheller fountain) NOT WORKING!!!!
-            //session.webView.evaluateJavaScript("Geolocation.update_location(47.653811,-122.307815)", completionHandler: nil)
-            
-            session.webView.evaluateJavaScript("Geolocation.update_location(47.653811,-122.307815)") { (result, error) in
-                if error != nil {
-                    print(error)
-                }
-                else {
-                    print(result)
-                }
-            }
+            print("location disabled.. will use default locations instead")
             
         }
         
@@ -185,13 +174,15 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         print("locations = \(locValue.latitude) \(locValue.longitude)")
         
         // send the lat/lng to the geolocation function on web
-        session.webView.evaluateJavaScript("Geolocation.update_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
+        // session.webView.evaluateJavaScript("Geolocation.set_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
+        
+        // TODO: send the lat/lng back to the hybrid webview and possible store it somewhere to be used
         
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Error while updating location: " + error.localizedDescription)
-        session.webView.evaluateJavaScript("Geolocation.update_location(47.653811,-122.307815)", completionHandler: nil)
+        //session.webView.evaluateJavaScript("Geolocation.update_location(47.653811,-122.307815)", completionHandler: nil)
     }
     
 }
@@ -214,7 +205,6 @@ extension ApplicationController: SessionDelegate {
     func sessionDidFinishRequest(session: Session) {
         application.networkActivityIndicatorVisible = false
     }
-
 }
 
 extension ApplicationController: WKScriptMessageHandler {
