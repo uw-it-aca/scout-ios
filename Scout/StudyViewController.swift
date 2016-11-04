@@ -17,13 +17,9 @@ class StudyViewController: ApplicationController {
     }
     
     
-    
     // study view controller
     override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
         
-        // set app_type to study
-        app_type = "study"
-
         let visitable = VisitableViewController(URL: URL)
         
         // study home
@@ -47,6 +43,14 @@ class StudyViewController: ApplicationController {
         }
         
         session.visit(visitable)
+    }
+    
+    override func viewDidAppear(animated:Bool) {
+        super.viewDidAppear(animated)
+        
+        // set app_type to study
+        app_type = "study"
+        
     }
     
 }

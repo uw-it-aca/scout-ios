@@ -18,10 +18,7 @@ class TechViewController: ApplicationController {
     
     // tech view controller
     override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
-        
-        // set app_type to tech
-        app_type = "tech"
-        
+                
         let visitable = VisitableViewController(URL: URL)
         
         // study home
@@ -45,6 +42,14 @@ class TechViewController: ApplicationController {
         }
         
         session.visit(visitable)
+    }
+    
+    override func viewDidAppear(animated:Bool) {
+        super.viewDidAppear(animated)
+        
+        // set app_type to tech
+        app_type = "tech"
+        
     }
     
 }

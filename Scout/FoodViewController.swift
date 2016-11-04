@@ -18,10 +18,7 @@ class FoodViewController: ApplicationController {
     
     // food view controller
     override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
-        
-        // set app_type to food
-        app_type = "food"
-        
+                
         let visitable = VisitableViewController(URL: URL)
         
         // food home
@@ -31,7 +28,7 @@ class FoodViewController: ApplicationController {
             // In any case... I made presentFilter pretty generic at the ApplicationController level and just accepting the global "app_type" variable. Each
             // context view controller (FoodViewController, StudyViewController, etc.) just overrides the value. Feel free to refactor!
             
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.presentFilter))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.presentFilter))
             
         } else if URL.path == "/h/\(campus)/food/filter" {
             
@@ -61,5 +58,14 @@ class FoodViewController: ApplicationController {
         
         session.visit(visitable)
     }
+    
+    override func viewDidAppear(animated:Bool) {
+        super.viewDidAppear(animated)
+        
+        // set app_type to food
+        app_type = "food"
+        
+    }
+    
     
 }

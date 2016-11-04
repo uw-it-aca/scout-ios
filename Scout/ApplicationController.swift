@@ -57,7 +57,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // TODO: this is not very clean.. we should just be comparing the campus block instead of the entire URL
         if (URL != session.webView.URL!) {
 
-            print("campus has changed")
+            print("campus has changed.. not really yet!")
             
             // this line of code forces a reload of the app... we should only reload if campus has changed
             //presentVisitableForSession(session, URL: URL, action: .Replace)
