@@ -28,11 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // UINavigationBar.appearance().barTintColor = hexStringToUIColor("#4B2E84")
-        // UINavigationBar.appearance().tintColor = hexStringToUIColor("#eeeeee")
+        // UINavigationBar.appearance().tintColor = hexStringToUIColor("#ffffff")
         // UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : hexStringToUIColor("#ffffff")]
         
         // globally set tint color
-        self.window!.tintColor = hexStringToUIColor("#6564A9")
+        self.window!.tintColor = hexStringToUIColor("#4B2E84")
         
         // Override point for customization after application launch.
         return true
