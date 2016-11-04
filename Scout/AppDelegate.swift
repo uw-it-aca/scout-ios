@@ -27,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             campus = config["default_campus"] as! String
         }
         
+        // UINavigationBar.appearance().barTintColor = hexStringToUIColor("#4B2E84")
+        // UINavigationBar.appearance().tintColor = hexStringToUIColor("#eeeeee")
+        // UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : hexStringToUIColor("#ffffff")]
+        
         // globally set tint color
         self.window!.tintColor = hexStringToUIColor("#6564A9")
         
