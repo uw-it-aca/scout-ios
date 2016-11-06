@@ -32,20 +32,15 @@ class FoodViewController: ApplicationController {
             
         } else if URL.path == "/h/\(campus)/food/filter" {
             
-            /***
-             let submitButton : UIBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFoodFilter))
-             let resetButton : UIBarButtonItem = UIBarButtonItem(title: "ClearForm", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.resetFoodList))
+            let backButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
+            let backButtonText : UIBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
              
-             visitable.navigationItem.rightBarButtonItem = submitButton
-             visitable.navigationItem.rightBarButtonItem = resetButton
+            visitable.navigationItem.leftBarButtonItem = backButton
+            visitable.navigationItem.leftBarButtonItem = backButtonText
              
-             visitable.navigationItem.setRightBarButtonItems([submitButton,resetButton], animated: true)
-             ***/
-            
-      
+            visitable.navigationItem.setLeftBarButtonItems([backButton,backButtonText], animated: true)
+
             visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.clearFilter))
-            //visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< BackSubmit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
-            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
             
         }
         
