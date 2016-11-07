@@ -28,12 +28,12 @@ class FoodViewController: ApplicationController {
             // In any case... I made presentFilter pretty generic at the ApplicationController level and just accepting the global "app_type" variable. Each
             // context view controller (FoodViewController, StudyViewController, etc.) just overrides the value. Feel free to refactor!
             
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(FoodViewController.presentFilter))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.presentFilter))
             
         } else if URL.path == "/h/\(campus)/food/filter" {
             
             let backButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
-            let backButtonText : UIBarButtonItem = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
+            let backButtonText : UIBarButtonItem = UIBarButtonItem(title: "Food", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
              
             visitable.navigationItem.leftBarButtonItem = backButton
             visitable.navigationItem.leftBarButtonItem = backButtonText

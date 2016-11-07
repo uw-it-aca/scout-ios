@@ -94,7 +94,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     func submitFilter(){
         
         // set a new visitable that includes
-        let URL = NSURL(string: "\(host)/\(campus)/food/\(params)")!
+        let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/\(params)")!
         print(URL)
         presentVisitableForSession(session, URL: URL, action: .Replace)
     }

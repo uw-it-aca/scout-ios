@@ -29,6 +29,14 @@ class StudyViewController: ApplicationController {
             
         } else if URL.path == "/h/\(campus)/study/filter" {
             
+            let backButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
+            let backButtonText : UIBarButtonItem = UIBarButtonItem(title: "Study", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
+            
+            visitable.navigationItem.leftBarButtonItem = backButton
+            visitable.navigationItem.leftBarButtonItem = backButtonText
+            
+            visitable.navigationItem.setLeftBarButtonItems([backButton,backButtonText], animated: true)
+            
             visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.clearFilter))
             
         }
