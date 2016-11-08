@@ -21,23 +21,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
         // read in config
         if let path = NSBundle.mainBundle().pathForResource("scoutConfig", ofType: "plist"), config = NSDictionary(contentsOfFile: path) as? [String: AnyObject] {
             host = config["scout_host"] as! String
             campus = config["default_campus"] as! String
         }
-        
-        // UINavigationBar.appearance().barTintColor = hexStringToUIColor("#4B2E84")
-        // UINavigationBar.appearance().tintColor = hexStringToUIColor("#ffffff")
-        // UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : hexStringToUIColor("#ffffff")]
+
+        UINavigationBar.appearance().barTintColor = hexStringToUIColor("#4b2e83")
+        UINavigationBar.appearance().translucent = false
+        UINavigationBar.appearance().tintColor = hexStringToUIColor("#ffffff")
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : hexStringToUIColor("#ffffff")]
         
         // globally set tint color
-        self.window!.tintColor = hexStringToUIColor("#4B2E84")
+        self.window!.tintColor = hexStringToUIColor("#4b2e83")
         
         // Override point for customization after application launch.
         return true
     }
-
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -62,27 +64,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // custom hex color function
     func hexStringToUIColor (hex:String) -> UIColor {
-        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercaseString
+        
+        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString
         
         if (cString.hasPrefix("#")) {
-            cString = cString.substringFromIndex(cString.startIndex.advancedBy(1))
+            cString = (cString as NSString).substringFromIndex(1)
         }
         
-        if ((cString.characters.count) != 6) {
+        if (cString.characters.count != 6) {
             return UIColor.grayColor()
         }
         
-        var rgbValue:UInt32 = 0
-        NSScanner(string: cString).scanHexInt(&rgbValue)
+        let rString = (cString as NSString).substringToIndex(2)
+        let gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
+        let bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
         
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
+        var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0;
+        NSScanner(string: rString).scanHexInt(&r)
+        NSScanner(string: gString).scanHexInt(&g)
+        NSScanner(string: bString).scanHexInt(&b)
+        
+        
+        return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
     }
-
 
 }
 

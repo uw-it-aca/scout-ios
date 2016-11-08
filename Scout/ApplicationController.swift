@@ -41,6 +41,10 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         return session
     }()
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presentVisitableForSession(session, URL: URL)
