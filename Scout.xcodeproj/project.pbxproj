@@ -18,6 +18,7 @@
 		854034751CB5AE5100C0C7FD /* ScoutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034741CB5AE5100C0C7FD /* ScoutUITests.swift */; };
 		854034861CB5B17F00C0C7FD /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034851CB5B17F00C0C7FD /* Error.swift */; };
 		854034881CB5B1A100C0C7FD /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034871CB5B1A100C0C7FD /* ErrorView.swift */; };
+		855251701DD14CC60089ED4D /* Turbolinks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8552516F1DD14CC60089ED4D /* Turbolinks.framework */; };
 		8572A33A1D38169300D80248 /* TechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A3391D38169300D80248 /* TechViewController.swift */; };
 		8572A33C1D382F0500D80248 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A33B1D382F0500D80248 /* DiscoverViewController.swift */; };
 		8989FE211DCA5707006D02E9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8989FE201DCA5707006D02E9 /* CoreLocation.framework */; };
@@ -59,6 +60,7 @@
 		854034761CB5AE5100C0C7FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		854034851CB5B17F00C0C7FD /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		854034871CB5B1A100C0C7FD /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		8552516F1DD14CC60089ED4D /* Turbolinks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Turbolinks.framework; path = "../../Library/Developer/Xcode/DerivedData/Scout-bhzpasyhjqotrvgyoukjjnstdgzd/Build/Products/Debug-iphonesimulator/Turbolinks.framework"; sourceTree = "<group>"; };
 		8572A3391D38169300D80248 /* TechViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TechViewController.swift; sourceTree = "<group>"; };
 		8572A33B1D382F0500D80248 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		8989FE201DCA5707006D02E9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -70,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				855251701DD14CC60089ED4D /* Turbolinks.framework in Frameworks */,
 				8989FE211DCA5707006D02E9 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +156,7 @@
 		8989FE1F1DCA5706006D02E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8552516F1DD14CC60089ED4D /* Turbolinks.framework */,
 				8989FE201DCA5707006D02E9 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
