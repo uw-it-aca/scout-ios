@@ -33,7 +33,7 @@ class StudyViewController: ApplicationController {
             let backButtonText : UIBarButtonItem = UIBarButtonItem(title: "Study", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
             
             // fix spacing between back arrow and text
-            backButton.imageInsets = UIEdgeInsetsMake(0, -7.0, 0, -25.0)
+            backButton.imageInsets = UIEdgeInsetsMake(0, -7.0, 0, -30.0)
             
             visitable.navigationItem.leftBarButtonItem = backButton
             visitable.navigationItem.leftBarButtonItem = backButtonText
