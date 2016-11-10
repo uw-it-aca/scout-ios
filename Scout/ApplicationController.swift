@@ -48,7 +48,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         presentVisitableForSession(session, URL: URL)
-        //setUserLocation()
+        setUserLocation()
     }
  
     override func viewDidAppear(animated:Bool) {
@@ -170,7 +170,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         if CLLocationManager.locationServicesEnabled() {
             
-            print("location enabled")
+            print("location enabled.. tell hybrid via js to user user location")
 
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -187,19 +187,22 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     // locationManager delegate functions
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         print("locations = \(locValue.latitude) \(locValue.longitude)")
         
         // send the lat/lng to the geolocation function on web
-        // session.webView.evaluateJavaScript("Geolocation.set_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
+        session.webView.evaluateJavaScript("Geolocation.set_user_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
         
         // TODO: send the lat/lng back to the hybrid webview and possible store it somewhere to be used
         
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        
         print("Error while updating location: " + error.localizedDescription)
         //session.webView.evaluateJavaScript("Geolocation.update_location(47.653811,-122.307815)", completionHandler: nil)
+        
     }
     
 }
