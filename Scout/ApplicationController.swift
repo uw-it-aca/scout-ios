@@ -192,17 +192,14 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         print("locations = \(locValue.latitude) \(locValue.longitude)")
         
         // send the lat/lng to the geolocation function on web
-        session.webView.evaluateJavaScript("Geolocation.set_user_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
-        
-        // TODO: send the lat/lng back to the hybrid webview and possible store it somewhere to be used
+        session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
+        session.webView.evaluateJavaScript("Geolocation.handle_native_position(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
         
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        
         print("Error while updating location: " + error.localizedDescription)
-        //session.webView.evaluateJavaScript("Geolocation.update_location(47.653811,-122.307815)", completionHandler: nil)
-        
+        session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
     }
     
 }
