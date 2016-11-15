@@ -48,7 +48,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         presentVisitableForSession(session, URL: URL)
-        setUserLocation()
     }
  
     override func viewDidAppear(animated:Bool) {
@@ -66,6 +65,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             // this line of code forces a reload of the app... we should only reload if campus has changed
             //presentVisitableForSession(session, URL: URL, action: .Replace)
         }
+        
+        // handle user location on every controller load
+        setUserLocation()
         
     }
     
@@ -162,9 +164,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     func setUserLocation() {
         
-        // ask authorization for always using
-        //self.locationManager.requestAlwaysAuthorization()
-        
         // ask authorization only when in use by user
         self.locationManager.requestWhenInUseAuthorization()
         
@@ -175,8 +174,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             locationManager.delegate = self
             locationManager.distanceFilter = 50 // meters
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            //locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-            
             locationManager.startUpdatingLocation()
             
         }
@@ -200,7 +197,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // TODO: get the initial location... only call the js function if user has moved
         
         // send the lat/lng to the geolocation function on web
-        session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
+        // session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
         session.webView.evaluateJavaScript("Geolocation.query_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
         
     }
