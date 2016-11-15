@@ -60,16 +60,14 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // TODO: this is not very clean.. we should just be comparing the campus block instead of the entire URL
         if (URL != session.webView.URL!) {
 
-            print("campus has changed.. not really yet!")
+            print("campus OR filter params.. have changed.. not really yet!")
             
             // this line of code forces a reload of the app... we should only reload if campus has changed
-            //presentVisitableForSession(session, URL: URL, action: .Replace)
+            // presentVisitableForSession(session, URL: URL, action: .Replace)
         }
         
-        // handle user location on every controller load
-        setUserLocation()
-        
     }
+    
     
     // generic visit controller
     func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
@@ -169,18 +167,16 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         if CLLocationManager.locationServicesEnabled() {
             
-            print("location enabled.. tell hybrid via js to user user location")
+            print("location enabled.. send user lat/lng")
 
             locationManager.delegate = self
-            locationManager.distanceFilter = 50 // meters
+            locationManager.distanceFilter = 30 // meters
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
             
         }
         else {
-            
             print("location disabled.. will use default locations instead")
-            
         }
         
     }
@@ -191,14 +187,12 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         
-        print("position = \(locValue.latitude) \(locValue.longitude)")
-        
-        
-        // TODO: get the initial location... only call the js function if user has moved
+        print("position to send = \(locValue.latitude) \(locValue.longitude)")
         
         // send the lat/lng to the geolocation function on web
-        // session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
-        session.webView.evaluateJavaScript("Geolocation.query_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
+        // session.webView.evaluateJavaScript("$.event.trigger(Geolocation.location_updating)", completionHandler: nil)
+        session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
+        session.webView.evaluateJavaScript("Geolocation.send_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
         
     }
     
@@ -226,6 +220,11 @@ extension ApplicationController: SessionDelegate {
     
     func sessionDidFinishRequest(session: Session) {
         application.networkActivityIndicatorVisible = false
+    }
+    
+    func sessionDidLoadWebView(session: Session) {
+        // handle user location on every controller load
+        setUserLocation()
     }
 }
 
