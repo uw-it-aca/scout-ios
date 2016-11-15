@@ -216,16 +216,17 @@ extension ApplicationController: SessionDelegate {
     
     func sessionDidStartRequest(session: Session) {
         application.networkActivityIndicatorVisible = true
+        
+       
     }
     
     func sessionDidFinishRequest(session: Session) {
         application.networkActivityIndicatorVisible = false
-    }
-    
-    func sessionDidLoadWebView(session: Session) {
-        // handle user location on every controller load
+        
+        // send user's location once webview has finished loading
         setUserLocation()
     }
+    
 }
 
 extension ApplicationController: WKScriptMessageHandler {
