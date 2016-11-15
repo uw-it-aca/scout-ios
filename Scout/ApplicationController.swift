@@ -200,14 +200,14 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // TODO: get the initial location... only call the js function if user has moved
         
         // send the lat/lng to the geolocation function on web
-        // session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
-        // session.webView.evaluateJavaScript("Geolocation.query_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
+        session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
+        session.webView.evaluateJavaScript("Geolocation.query_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
         
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Error while updating location: " + error.localizedDescription)
-        // session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
+        session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
     }
     
 }
