@@ -173,8 +173,12 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             print("location enabled.. tell hybrid via js to user user location")
 
             locationManager.delegate = self
+            locationManager.distanceFilter = 50 // meters
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            //locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+            
             locationManager.startUpdatingLocation()
+            
         }
         else {
             
@@ -189,17 +193,21 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        
+        print("position = \(locValue.latitude) \(locValue.longitude)")
+        
+        
+        // TODO: get the initial location... only call the js function if user has moved
         
         // send the lat/lng to the geolocation function on web
-        session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
-        session.webView.evaluateJavaScript("Geolocation.handle_native_position(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
+        // session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
+        // session.webView.evaluateJavaScript("Geolocation.query_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
         
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Error while updating location: " + error.localizedDescription)
-        session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
+        // session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
     }
     
 }
