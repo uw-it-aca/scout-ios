@@ -210,7 +210,11 @@ extension ApplicationController: SessionDelegate {
     
     func session(session: Session, didFailRequestForVisitable visitable: Visitable, withError error: NSError) {
         let alert = UIAlertController(title: "Error Requesting Data", message: "This data is temporarily unavailable. Please try again later.", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        //alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
+            self.popToRootViewControllerAnimated(true)
+        }))
         presentViewController(alert, animated: true, completion: nil)
     }
     
