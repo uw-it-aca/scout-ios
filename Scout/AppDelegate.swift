@@ -28,13 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             campus = config["default_campus"] as! String
         }
 
-        UINavigationBar.appearance().barTintColor = hexStringToUIColor("#4b2e83")
+        UINavigationBar.appearance().barTintColor = hexStringToUIColor("#514DA3")
         UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().tintColor = hexStringToUIColor("#ffffff")
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : hexStringToUIColor("#ffffff")]
         
         // globally set tint color
-        self.window!.tintColor = hexStringToUIColor("#4b2e83")
+        self.window!.tintColor = hexStringToUIColor("#514DA3")
         
         // Override point for customization after application launch.
         return true
