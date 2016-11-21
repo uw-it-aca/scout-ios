@@ -17,7 +17,8 @@
 		854034751CB5AE5100C0C7FD /* ScoutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034741CB5AE5100C0C7FD /* ScoutUITests.swift */; };
 		854034861CB5B17F00C0C7FD /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034851CB5B17F00C0C7FD /* Error.swift */; };
 		854034881CB5B1A100C0C7FD /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034871CB5B1A100C0C7FD /* ErrorView.swift */; };
-		855251701DD14CC60089ED4D /* Turbolinks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8552516F1DD14CC60089ED4D /* Turbolinks.framework */; };
+		855251791DE3AD1F0089ED4D /* Turbolinks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 855251751DE3ACF50089ED4D /* Turbolinks.framework */; };
+		8552517A1DE3AD1F0089ED4D /* Turbolinks.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 855251751DE3ACF50089ED4D /* Turbolinks.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8572A33A1D38169300D80248 /* TechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A3391D38169300D80248 /* TechViewController.swift */; };
 		8572A33C1D382F0500D80248 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A33B1D382F0500D80248 /* DiscoverViewController.swift */; };
 		85929A8A1DDC1EAF0020F311 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85929A891DDC1EAF0020F311 /* Launch Screen.storyboard */; };
@@ -42,6 +43,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8552517B1DE3AD1F0089ED4D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8552517A1DE3AD1F0089ED4D /* Turbolinks.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		851B190E1D5DA7AC0061B30D /* ApplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationController.swift; sourceTree = "<group>"; };
 		8540344F1CB5AE5100C0C7FD /* Scout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scout.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +75,7 @@
 		854034851CB5B17F00C0C7FD /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		854034871CB5B1A100C0C7FD /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		8552516F1DD14CC60089ED4D /* Turbolinks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Turbolinks.framework; path = "../../Library/Developer/Xcode/DerivedData/Scout-bhzpasyhjqotrvgyoukjjnstdgzd/Build/Products/Debug-iphonesimulator/Turbolinks.framework"; sourceTree = "<group>"; };
+		855251751DE3ACF50089ED4D /* Turbolinks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Turbolinks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8572A3391D38169300D80248 /* TechViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TechViewController.swift; sourceTree = "<group>"; };
 		8572A33B1D382F0500D80248 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		85929A891DDC1EAF0020F311 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -72,8 +88,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				855251701DD14CC60089ED4D /* Turbolinks.framework in Frameworks */,
 				8989FE211DCA5707006D02E9 /* CoreLocation.framework in Frameworks */,
+				855251791DE3AD1F0089ED4D /* Turbolinks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +113,7 @@
 		854034461CB5AE5100C0C7FD = {
 			isa = PBXGroup;
 			children = (
+				855251751DE3ACF50089ED4D /* Turbolinks.framework */,
 				854034511CB5AE5100C0C7FD /* Scout */,
 				854034681CB5AE5100C0C7FD /* ScoutTests */,
 				854034731CB5AE5100C0C7FD /* ScoutUITests */,
@@ -172,6 +189,7 @@
 				8540344B1CB5AE5100C0C7FD /* Sources */,
 				8540344C1CB5AE5100C0C7FD /* Frameworks */,
 				8540344D1CB5AE5100C0C7FD /* Resources */,
+				8552517B1DE3AD1F0089ED4D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -235,7 +253,7 @@
 				TargetAttributes = {
 					8540344E1CB5AE5100C0C7FD = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = THEWY9596Q;
+						DevelopmentTeam = AC6929M8ED;
 						LastSwiftMigration = 0800;
 					};
 					854034641CB5AE5100C0C7FD = {
@@ -531,6 +549,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = AC6929M8ED;
 				INFOPLIST_FILE = Scout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UWIT-ACA.Scout";
@@ -545,6 +564,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = AC6929M8ED;
 				INFOPLIST_FILE = Scout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UWIT-ACA.Scout";
