@@ -53,17 +53,16 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     override func viewDidAppear(animated:Bool) {
         super.viewDidAppear(animated)
         
-        // print the 2 urls the app has for comparison
-        print(URL)
-        print(session.webView.URL!)
+        let sessionURL = session.webView.URL?.absoluteString
         
-        // TODO: this is not very clean.. we should just be comparing the campus block instead of the entire URL
-        if (URL != session.webView.URL!) {
-
-            print("campus OR filter params.. have changed.. not really yet!")
-            
-            // this line of code forces a reload of the app... we should only reload if campus has changed
-            // presentVisitableForSession(session, URL: URL, action: .Replace)
+        // print the 2 urls the app has for comparison
+        print("requested url \(URL)")
+        print("session url \(sessionURL!)")
+        
+        // check to see if the campus has changed from what was previously set in session
+        if sessionURL!.lowercaseString.rangeOfString(campus) == nil {
+            print("campus changed")
+            presentVisitableForSession(session, URL: URL, action: .Replace)
         }
         
     }
@@ -99,8 +98,17 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // set a new visitable that includes
         let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/\(params)")!
-        print(URL)
-        presentVisitableForSession(session, URL: URL, action: .Replace)
+        let sessionURL = session.webView.URL?.absoluteString
+        
+        // check to see if params have changed during the session.. reload if they have
+        if sessionURL!.lowercaseString.rangeOfString(params) == nil {
+            print("params changed")
+            presentVisitableForSession(session, URL: URL, action: .Replace)
+        } else {
+            print("params not changed")
+            popViewControllerAnimated(true);
+        }
+        
     }
     
     func clearFilter(){
