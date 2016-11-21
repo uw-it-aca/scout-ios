@@ -114,6 +114,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     func clearFilter(){
         // evaluate js by submitting click event
         session.webView.evaluateJavaScript("document.getElementById('filter_clear').click()", completionHandler: nil)
+        presentVisitableForSession(session, URL: URL, action: .Replace)
     }
     
     // custom controller for campus selection
