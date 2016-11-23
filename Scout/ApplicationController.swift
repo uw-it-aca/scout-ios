@@ -56,12 +56,12 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         let sessionURL = session.webView.URL?.absoluteString
         
         // print the 2 urls the app has for comparison
-        print("requested url \(URL)")
-        print("session url \(sessionURL!)")
+        //print("requested url \(URL)")
+        //print("session url \(sessionURL!)")
         
         // check to see if the campus has changed from what was previously set in session
         if sessionURL!.lowercaseString.rangeOfString(campus) == nil {
-            print("campus changed")
+            //print("campus changed")
             presentVisitableForSession(session, URL: URL, action: .Replace)
         }
         
@@ -88,8 +88,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     // show filter
     func presentFilter() {
-        let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/filter/\(params)")!
-        print(URL)
+        let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/filter/?\(params)")!
+        //print(URL)
         presentVisitableForSession(session, URL: URL)
     }
     
@@ -97,15 +97,19 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     func submitFilter(){
         
         // set a new visitable that includes
-        let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/\(params)")!
+        let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/?\(params)")!
         let sessionURL = session.webView.URL?.absoluteString
         
-        // check to see if params have changed during the session.. reload if they have
+        // force reload (replace) of viewcontroller if params have changed or cleared
         if sessionURL!.lowercaseString.rangeOfString(params) == nil {
-            print("params changed")
+            //print(sessionURL!)
+            //print(params)
+            //print("params changed")
             presentVisitableForSession(session, URL: URL, action: .Replace)
         } else {
-            print("params not changed")
+            //print(sessionURL!)
+            //print(params)
+            //print("params not changed")
             popViewControllerAnimated(true);
         }
         
@@ -114,7 +118,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     func clearFilter(){
         // evaluate js by submitting click event
         session.webView.evaluateJavaScript("document.getElementById('filter_clear').click()", completionHandler: nil)
-        presentVisitableForSession(session, URL: URL, action: .Replace)
     }
     
     // custom controller for campus selection
@@ -126,20 +129,20 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // 2
         let seattleAction = UIAlertAction(title: "Seattle", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            print("Seattle was selected")
+            //print("Seattle was selected")
             campus = "seattle"
             self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
         let bothellAction = UIAlertAction(title: "Bothell", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            print("Bothell was selected")
+            //print("Bothell was selected")
             campus = "bothell"
             print(self.URL)
             self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
         let tacomaAction = UIAlertAction(title: "Tacoma", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            print("Tacoma was selected")
+            //print("Tacoma was selected")
             campus = "tacoma"
             self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
@@ -147,7 +150,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         //
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
             (alert: UIAlertAction!) -> Void in
-            print("Cancelled")
+            //print("Cancelled")
         })
         
         
@@ -176,7 +179,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         if CLLocationManager.locationServicesEnabled() {
             
-            print("location enabled.. send user lat/lng")
+            //print("location enabled.. send user lat/lng")
 
             locationManager.delegate = self
             locationManager.distanceFilter = 30 // meters
@@ -196,7 +199,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         
-        print("position to send = \(locValue.latitude) \(locValue.longitude)")
+        //print("position to send = \(locValue.latitude) \(locValue.longitude)")
         
         // send the lat/lng to the geolocation function on web
         // session.webView.evaluateJavaScript("$.event.trigger(Geolocation.location_updating)", completionHandler: nil)
@@ -206,7 +209,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("Error while updating location: " + error.localizedDescription)
+        //print("Error while updating location: " + error.localizedDescription)
         session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
     }
     
@@ -245,10 +248,10 @@ extension ApplicationController: SessionDelegate {
 extension ApplicationController: WKScriptMessageHandler {
     func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
         
-        // TODO: not sure if this is a proper selector.
+        // set the params from the js bridge message
         if let message = message.body as? String {
-            print(message)
-            params = "?" + message
+            //print(message)
+            params = message
         }
         
     }
