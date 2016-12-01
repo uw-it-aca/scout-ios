@@ -102,14 +102,14 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // force reload (replace) of viewcontroller if params have changed or cleared
         if sessionURL!.lowercaseString.rangeOfString(params) == nil {
-            //print(sessionURL!)
-            //print(params)
-            //print("params changed")
+            print(sessionURL!)
+            print(params)
+            print("params changed")
             presentVisitableForSession(session, URL: URL, action: .Replace)
         } else {
-            //print(sessionURL!)
-            //print(params)
-            //print("params not changed")
+            print(sessionURL!)
+            print(params)
+            print("params not changed")
             popViewControllerAnimated(true);
         }
         
