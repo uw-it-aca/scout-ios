@@ -100,18 +100,29 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/?\(params)")!
         let sessionURL = session.webView.URL?.absoluteString
         
-        // force reload (replace) of viewcontroller if params have changed or cleared
-        if sessionURL!.lowercaseString.rangeOfString(params) == nil {
-            print(sessionURL!)
-            print(params)
-            print("params changed")
-            presentVisitableForSession(session, URL: URL, action: .Replace)
-        } else {
-            print(sessionURL!)
-            print(params)
-            print("params not changed")
+        let newString = sessionURL?.stringByReplacingOccurrencesOfString("filter/", withString: "")
+        
+        print(newString!)
+        print(URL.absoluteString!)
+        
+        if (URL.absoluteString! == newString!) {
+            print("same")
             popViewControllerAnimated(true);
+        } else {
+            print("reload")
+            presentVisitableForSession(session, URL: URL, action: .Replace)
         }
+        
+        // force reload (replace) of viewcontroller if params have changed or cleared
+        /**
+        if sessionURL!.lowercaseString.containsString(params) {
+            print("params found")
+            popViewControllerAnimated(true);
+        } else {
+            print("params not found")
+            presentVisitableForSession(session, URL: URL, action: .Replace)
+        }
+        **/
         
     }
     
