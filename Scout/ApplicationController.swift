@@ -89,40 +89,33 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     // show filter
     func presentFilter() {
         let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/filter/?\(params)")!
-        //print(URL)
         presentVisitableForSession(session, URL: URL)
     }
     
-    // execute javascript
+    // submit filter function when user clickes on the filter back button
     func submitFilter(){
         
-        // set a new visitable that includes
-        let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/?\(params)")!
+        // set a new visitable URL that includes params
+        let visitURL = NSURL(string: "\(host)/\(campus)/\(app_type)/?\(params)")!
+        
+        // get the previous URL and params from the session URL (presentFilter function)
         let sessionURL = session.webView.URL?.absoluteString
+        // remove the filter/ string from the URL
+        let previousURL = sessionURL?.stringByReplacingOccurrencesOfString("filter/", withString: "")
         
-        let newString = sessionURL?.stringByReplacingOccurrencesOfString("filter/", withString: "")
+        print(previousURL!)
+        print(visitURL.absoluteString!)
         
-        print(newString!)
-        print(URL.absoluteString!)
-        
-        if (URL.absoluteString! == newString!) {
-            print("same")
+        // check to see if the new visit URL matches what the user previously visited
+        if (visitURL.absoluteString! == previousURL!) {
+            // if URLs match... no need to reload, just pop
+            print("params are same")
             popViewControllerAnimated(true);
         } else {
-            print("reload")
-            presentVisitableForSession(session, URL: URL, action: .Replace)
+            // if they are different, force a reload by using the Replace action
+            print("params are different")
+            presentVisitableForSession(session, URL: visitURL, action: .Replace)
         }
-        
-        // force reload (replace) of viewcontroller if params have changed or cleared
-        /**
-        if sessionURL!.lowercaseString.containsString(params) {
-            print("params found")
-            popViewControllerAnimated(true);
-        } else {
-            print("params not found")
-            presentVisitableForSession(session, URL: URL, action: .Replace)
-        }
-        **/
         
     }
     
