@@ -13,7 +13,7 @@ import Turbolinks
 class StudyViewController: ApplicationController {
     
     override var URL: NSURL {
-        return NSURL(string: "\(host)/\(campus)/study/?h_lat=47.6303558&h_lng=-122.3505745")!
+        return NSURL(string: "\(host)/\(campus)/study/")!
     }
     
     
