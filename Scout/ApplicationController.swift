@@ -89,7 +89,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     // show filter
     func presentFilter() {
-        let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/filter/?h_lat=47.6303558&h_lng=-122.3505745&\(params)")!
+        let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
         presentVisitableForSession(session, URL: URL)
     }
     
@@ -97,7 +97,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     func submitFilter(){
         
         // set a new visitable URL that includes params
-        let visitURL = NSURL(string: "\(host)/\(campus)/\(app_type)/?h_lat=47.6303558&h_lng=-122.3505745&\(params)")!
+        let visitURL = NSURL(string: "\(host)/\(campus)/\(app_type)/?\(location)&\(params)")!
         
         // get the previous URL and params from the session URL (presentFilter function)
         let sessionURL = session.webView.URL?.absoluteString
