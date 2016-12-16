@@ -9,11 +9,19 @@
 import UIKit
 import WebKit
 import Turbolinks
+import CoreLocation
 
 class FoodViewController: ApplicationController {
     
     override var URL: NSURL {
-        return NSURL(string: "\(host)/\(campus)/food/?h_lat=47.6303558&h_lng=-122.3505745")!
+        
+        if CLLocationManager.locationServicesEnabled() {
+            return NSURL(string: "\(host)/\(campus)/food/?\(location)")!
+            
+        } else {
+            return NSURL(string: "\(host)/\(campus)/food/")!
+        }
+        
     }
     
     // food view controller

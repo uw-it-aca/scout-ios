@@ -16,7 +16,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     let locationManager = CLLocationManager()
     
     var URL: NSURL {
-        return NSURL(string: "\(host)/\(campus)/?h_lat=47.6303558&h_lng=-122.3505745")!
+        return NSURL(string: "\(host)/\(campus)/\(location)")!
     }
             
     private let webViewProcessPool = WKProcessPool()
@@ -47,9 +47,11 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("app controller call...")
+        setUserLocation()
         presentVisitableForSession(session, URL: URL)
     }
- 
+     
     override func viewDidAppear(animated:Bool) {
         super.viewDidAppear(animated)
         
@@ -66,7 +68,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         }
         
     }
-    
     
     // generic visit controller
     func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
@@ -194,6 +195,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         }
         else {
             print("location disabled.. will use default locations instead")
+            // locationManager.stopMonitoringSignificantLocationChanges()
         }
         
     }
@@ -204,18 +206,26 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         
-        print("user position = \(locValue.latitude) \(locValue.longitude)")
+        //print("user position = \(locValue.latitude) \(locValue.longitude)")
         
         // send the lat/lng to the geolocation function on web
         // session.webView.evaluateJavaScript("$.event.trigger(Geolocation.location_updating)", completionHandler: nil)
         // session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
         // session.webView.evaluateJavaScript("Geolocation.send_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
         
+        // update user location variable and reload the URL
+        
+        location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
+        print("user location.. \(location)")
+        self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Error while updating location: " + error.localizedDescription)
         // session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
+        
+        // TODO: clear the user location so that hybrid app will default to campus center
     }
     
 }
@@ -238,6 +248,8 @@ extension ApplicationController: SessionDelegate {
     func sessionDidStartRequest(session: Session) {
         application.networkActivityIndicatorVisible = true
         
+        // send user's location once webview has finished loading
+        // setUserLocation()
        
     }
     
@@ -245,7 +257,7 @@ extension ApplicationController: SessionDelegate {
         application.networkActivityIndicatorVisible = false
         
         // send user's location once webview has finished loading
-        setUserLocation()
+        // setUserLocation()
     }
     
 }

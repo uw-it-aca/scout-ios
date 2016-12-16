@@ -9,11 +9,19 @@
 import UIKit
 import WebKit
 import Turbolinks
+import CoreLocation
 
 class StudyViewController: ApplicationController {
     
     override var URL: NSURL {
-        return NSURL(string: "\(host)/\(campus)/study/?h_lat=47.6303558&h_lng=-122.3505745")!
+        
+        if CLLocationManager.locationServicesEnabled() {
+            return NSURL(string: "\(host)/\(campus)/study/?\(location)")!
+            
+        } else {
+            return NSURL(string: "\(host)/\(campus)/study/")!
+        }
+        
     }
     
     
