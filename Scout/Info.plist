@@ -30,7 +30,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>""</string>
+	<string>&quot;We use your location to help you discover nearby spaces and resources on campus.&quot;</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
