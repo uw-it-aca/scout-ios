@@ -51,5 +51,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSMotionUsageDescription</key>
+	<string>&quot;We use motion to detect if you are traveling in an automobile.&quot;</string>
 </dict>
 </plist>

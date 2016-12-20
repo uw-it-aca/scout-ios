@@ -187,13 +187,30 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         if CLLocationManager.locationServicesEnabled() {
             
-            //print("location enabled.. send user lat/lng")
-
-            locationManager.delegate = self
-            // set distanceFilter to only send location update if position changed
-            locationManager.distanceFilter = 46 // 46 meters.. or 50.3 yards (half football field)
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
+            if CMMotionActivityManager.isActivityAvailable() {
+                print("YES!")
+                self.activityManager.startActivityUpdatesToQueue(NSOperationQueue.mainQueue()) { data in
+                    if let data = data {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if (data.walking == true){
+                                
+                                print("user is walking")
+                                
+                                //print("location enabled.. send user lat/lng")
+                                
+                                self.locationManager.delegate = self
+                                // set distanceFilter to only send location update if position changed
+                                self.locationManager.distanceFilter = 46 // 46 meters.. or 50.3 yards (half football field)
+                                self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                                self.locationManager.startUpdatingLocation()
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
             
         }
         else {
@@ -218,25 +235,11 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // update user location variable and reload the URL
         
-        if CMMotionActivityManager.isActivityAvailable() {
-            print("YES!")
-            self.activityManager.startActivityUpdatesToQueue(NSOperationQueue.mainQueue()) { data in
-                if let data = data {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        if !(data.automotive == true){
-                            
-                            print("user not in a car")
-                            self.chooseCampus()
-                            
-                        }
-                    }
-                }
-            }
-        }
-        
         location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
         print("user location.. \(location)")
         self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        
+        
         
     }
     
