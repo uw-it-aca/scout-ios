@@ -188,7 +188,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         if CLLocationManager.locationServicesEnabled() {
             
             if CMMotionActivityManager.isActivityAvailable() {
-                print("YES!")
+                
                 self.activityManager.startActivityUpdatesToQueue(NSOperationQueue.mainQueue()) { data in
                     if let data = data {
                         dispatch_async(dispatch_get_main_queue()) {
@@ -208,6 +208,16 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
                         }
                     }
                 }
+            } else {
+                
+                //print("location enabled.. send user lat/lng")
+                
+                self.locationManager.delegate = self
+                // set distanceFilter to only send location update if position changed
+                self.locationManager.distanceFilter = 1000 // 1000 meeters
+                self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                self.locationManager.startUpdatingLocation()
+                
             }
             
             
