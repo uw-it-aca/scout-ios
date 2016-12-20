@@ -10,10 +10,12 @@ import UIKit
 import WebKit
 import Turbolinks
 import CoreLocation
+import CoreMotion
 
 class ApplicationController: UINavigationController,  CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
+    let activityManager = CMMotionActivityManager()
     
     var URL: NSURL {
         return NSURL(string: "\(host)/\(campus)/\(location)")!
@@ -182,6 +184,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // ask authorization only when in use by user
         self.locationManager.requestWhenInUseAuthorization()
         
+        
         if CLLocationManager.locationServicesEnabled() {
             
             //print("location enabled.. send user lat/lng")
@@ -214,6 +217,22 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // session.webView.evaluateJavaScript("Geolocation.send_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
         
         // update user location variable and reload the URL
+        
+        if CMMotionActivityManager.isActivityAvailable() {
+            print("YES!")
+            self.activityManager.startActivityUpdatesToQueue(NSOperationQueue.mainQueue()) { data in
+                if let data = data {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if !(data.automotive == true){
+                            
+                            print("user not in a car")
+                            self.chooseCampus()
+                            
+                        }
+                    }
+                }
+            }
+        }
         
         location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
         print("user location.. \(location)")
