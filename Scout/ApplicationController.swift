@@ -187,16 +187,19 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         if CLLocationManager.locationServicesEnabled() {
             
+            print("location enabled... send user location")
+            
             if CMMotionActivityManager.isActivityAvailable() {
+                
+                print("motion enabled..")
                 
                 self.activityManager.startActivityUpdatesToQueue(NSOperationQueue.mainQueue()) { data in
                     if let data = data {
                         dispatch_async(dispatch_get_main_queue()) {
-                            if (data.walking == true){
+                            
+                            if (data.walking == true) {
                                 
                                 print("user is walking")
-                                
-                                //print("location enabled.. send user lat/lng")
                                 
                                 self.locationManager.delegate = self
                                 // set distanceFilter to only send location update if position changed
@@ -204,27 +207,29 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
                                 self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
                                 self.locationManager.startUpdatingLocation()
                                 
+                            } else {
+                                
+                                print("user not walking")
+                                self.locationManager.stopUpdatingLocation()
+                                
                             }
                         }
                     }
                 }
             } else {
                 
-                //print("location enabled.. send user lat/lng")
-                
+                print("motion disabled... ")
                 self.locationManager.delegate = self
                 // set distanceFilter to only send location update if position changed
-                self.locationManager.distanceFilter = 1000 // 1000 meeters
+                self.locationManager.distanceFilter = 46 // 46 meters.. or 50.3 yards (half football field)
                 self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
                 self.locationManager.startUpdatingLocation()
                 
             }
             
-            
-            
         }
         else {
-            print("location disabled.. will use default locations instead")
+            print("location disabled.. will use campus default locations instead")
             // locationManager.stopMonitoringSignificantLocationChanges()
         }
         
