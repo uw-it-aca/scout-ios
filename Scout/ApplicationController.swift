@@ -188,6 +188,11 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         if CLLocationManager.locationServicesEnabled() {
             
             print("location enabled... send user location")
+            self.locationManager.delegate = self
+            // set distanceFilter to only send location update if position changed
+            self.locationManager.distanceFilter = 46 // 46 meters.. or 50.3 yards (half football field)
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            self.locationManager.startUpdatingLocation()
             
             if CMMotionActivityManager.isActivityAvailable() {
                 
@@ -197,34 +202,15 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
                     if let data = data {
                         dispatch_async(dispatch_get_main_queue()) {
                             
-                            if (data.walking == true) {
+                            if (data.automotive == true) {
                                 
-                                print("user is walking")
-                                
-                                self.locationManager.delegate = self
-                                // set distanceFilter to only send location update if position changed
-                                self.locationManager.distanceFilter = 46 // 46 meters.. or 50.3 yards (half football field)
-                                self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-                                self.locationManager.startUpdatingLocation()
-                                
-                            } else {
-                                
-                                print("user not walking")
+                                print("user traveling in automobile")
                                 self.locationManager.stopUpdatingLocation()
                                 
                             }
                         }
                     }
                 }
-            } else {
-                
-                print("motion disabled... ")
-                self.locationManager.delegate = self
-                // set distanceFilter to only send location update if position changed
-                self.locationManager.distanceFilter = 46 // 46 meters.. or 50.3 yards (half football field)
-                self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-                self.locationManager.startUpdatingLocation()
-                
             }
             
         }
