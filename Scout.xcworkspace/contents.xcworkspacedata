@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/charlon/Xcode/scout-ios/UW Scout.xcodeproj">
+      location = "group:UW Scout.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Turbolinks.xcodeproj">

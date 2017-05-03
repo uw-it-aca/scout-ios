@@ -17,34 +17,34 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     let locationManager = CLLocationManager()
     let activityManager = CMMotionActivityManager()
     
-    var URL: NSURL {
-        return NSURL(string: "\(host)/\(campus)/\(location)")!
+    var URL: Foundation.URL {
+        return Foundation.URL(string: "\(host)/\(campus)/\(location)")!
     }
             
-    private let webViewProcessPool = WKProcessPool()
+    fileprivate let webViewProcessPool = WKProcessPool()
     
-    private var application: UIApplication {
-        return UIApplication.sharedApplication()
+    fileprivate var application: UIApplication {
+        return UIApplication.shared
     }
     
-    private lazy var webViewConfiguration: WKWebViewConfiguration = {
+    fileprivate lazy var webViewConfiguration: WKWebViewConfiguration = {
         let configuration = WKWebViewConfiguration()
         
         // name of js script handler that this controller with be communicating with
-        configuration.userContentController.addScriptMessageHandler(self, name: "scoutBridge")
+        configuration.userContentController.add(self, name: "scoutBridge")
         
         configuration.processPool = self.webViewProcessPool
         return configuration
     }()
     
-    private lazy var session: Session = {
+    fileprivate lazy var session: Session = {
         let session = Session(webViewConfiguration: self.webViewConfiguration)
         session.delegate = self
         return session
     }()
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
     
     override func viewDidLoad() {
@@ -53,35 +53,34 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         setUserLocation()
         presentVisitableForSession(session, URL: URL)
     }
-     
-    override func viewDidAppear(animated:Bool) {
+
+    override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
         
-        let sessionURL = session.webView.URL?.absoluteString
+        let sessionURL = session.webView.url?.absoluteString
         
         // print the 2 urls the app has for comparison
         // print("requested url \(URL)")
         // print("session url \(sessionURL!)")
         
         // check to see if the campus has changed from what was previously set in session
-        if sessionURL!.lowercaseString.rangeOfString(campus) == nil {
-            // print("campus changed")
+
+        if sessionURL!.lowercased().range(of: campus) == nil {
             presentVisitableForSession(session, URL: URL, action: .Replace)
         }
         
     }
     
     // generic visit controller
-    func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
+    func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
-        let visitable = VisitableViewController(URL: URL)
+        let visitable = VisitableViewController(url: URL)
                 
         // handle actions
         if action == .Advance {
             pushViewController(visitable, animated: true)
         } else if action == .Replace {
-            popViewControllerAnimated(true)
-            // pushViewController(visitable, animated: false)
+            popViewController(animated: true)
             setViewControllers([visitable], animated: false)
         }
         
@@ -91,7 +90,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     // show filter
     func presentFilter() {
-        let URL = NSURL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
+
+        let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
         presentVisitableForSession(session, URL: URL)
     }
     
@@ -99,21 +99,21 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     func submitFilter(){
         
         // set a new visitable URL that includes params
-        let visitURL = NSURL(string: "\(host)/\(campus)/\(app_type)/?\(location)&\(params)")!
+        let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(location)&\(params)")!
         
         // get the previous URL and params from the session URL (presentFilter function)
-        let sessionURL = session.webView.URL?.absoluteString
+        let sessionURL = session.webView.url?.absoluteString
         // remove the filter/ string from the URL
-        let previousURL = sessionURL?.stringByReplacingOccurrencesOfString("filter/", withString: "")
+        let previousURL = sessionURL?.replacingOccurrences(of: "filter/", with: "")
         
         print(previousURL!)
-        print(visitURL.absoluteString!)
+        print(visitURL.absoluteString)
         
         // check to see if the new visit URL matches what the user previously visited
-        if (visitURL.absoluteString! == previousURL!) {
+        if (visitURL.absoluteString == previousURL!) {
             // if URLs match... no need to reload, just pop
             print("params are same")
-            popViewControllerAnimated(true);
+            popViewController(animated: true);
         } else {
             // if they are different, force a reload by using the Replace action
             print("params are different")
@@ -131,23 +131,23 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     func chooseCampus() {
         
         // 1
-        let optionMenu = UIAlertController(title: nil, message: "Choose Campus", preferredStyle: .ActionSheet)
+        let optionMenu = UIAlertController(title: nil, message: "Choose Campus", preferredStyle: .actionSheet)
         
         // 2
-        let seattleAction = UIAlertAction(title: "Seattle", style: .Default, handler: {
+        let seattleAction = UIAlertAction(title: "Seattle", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             //print("Seattle was selected")
             campus = "seattle"
             self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
-        let bothellAction = UIAlertAction(title: "Bothell", style: .Default, handler: {
+        let bothellAction = UIAlertAction(title: "Bothell", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             //print("Bothell was selected")
             campus = "bothell"
             print(self.URL)
             self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
-        let tacomaAction = UIAlertAction(title: "Tacoma", style: .Default, handler: {
+        let tacomaAction = UIAlertAction(title: "Tacoma", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             //print("Tacoma was selected")
             campus = "tacoma"
@@ -155,7 +155,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         })
         
         //
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
             //print("Cancelled")
         })
@@ -169,7 +169,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         optionMenu.addAction(cancelAction)
         
         // 5
-        self.presentViewController(optionMenu, animated: true, completion: nil)
+        self.present(optionMenu, animated: true, completion: nil)
         
     }
     
@@ -198,9 +198,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
                 
                 print("motion enabled..")
                 
-                self.activityManager.startActivityUpdatesToQueue(NSOperationQueue.mainQueue()) { data in
+                self.activityManager.startActivityUpdates(to: OperationQueue.main) { data in
                     if let data = data {
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async() {
                             
                             if (data.automotive == true) {
                                 
@@ -223,7 +223,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     // locationManager delegate functions
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         
@@ -244,40 +244,39 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("Error while updating location: " + error.localizedDescription)
-        // session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
-        
-        // TODO: clear the user location so that hybrid app will default to campus center
+
+    private func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        //print("Error while updating location: " + error.localizedDescription)
+        session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
     }
     
 }
 
 extension ApplicationController: SessionDelegate {
-    func session(session: Session, didProposeVisitToURL URL: NSURL, withAction action: Action) {
+    func session(_ session: Session, didProposeVisitToURL URL: Foundation.URL, withAction action: Action) {
         presentVisitableForSession(session, URL: URL, action: action)
     }
     
-    func session(session: Session, didFailRequestForVisitable visitable: Visitable, withError error: NSError) {
-        let alert = UIAlertController(title: "Error Requesting Data", message: "This data is temporarily unavailable. Please try again later.", preferredStyle: .Alert)
+    func session(_ session: Session, didFailRequestForVisitable visitable: Visitable, withError error: NSError) {
+        let alert = UIAlertController(title: "Error Requesting Data", message: "This data is temporarily unavailable. Please try again later.", preferredStyle: .alert)
         //alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
-            self.popToRootViewControllerAnimated(true)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+            self.popToRootViewController(animated: true)
         }))
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
-    func sessionDidStartRequest(session: Session) {
-        application.networkActivityIndicatorVisible = true
+    func sessionDidStartRequest(_ session: Session) {
+        application.isNetworkActivityIndicatorVisible = true
         
         // send user's location once webview has finished loading
         // setUserLocation()
        
     }
     
-    func sessionDidFinishRequest(session: Session) {
-        application.networkActivityIndicatorVisible = false
+    func sessionDidFinishRequest(_ session: Session) {
+        application.isNetworkActivityIndicatorVisible = false
         
         // send user's location once webview has finished loading
         // setUserLocation()
@@ -286,7 +285,7 @@ extension ApplicationController: SessionDelegate {
 }
 
 extension ApplicationController: WKScriptMessageHandler {
-    func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         
         // set the params from the js bridge message
         if let message = message.body as? String {
