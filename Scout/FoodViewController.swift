@@ -12,14 +12,14 @@ import Turbolinks
 
 class FoodViewController: ApplicationController {
     
-    override var URL: NSURL {
-        return NSURL(string: "\(host)/\(campus)/food/")!
+    override var URL: Foundation.URL {
+        return Foundation.URL(string: "\(host)/\(campus)/food/")!
     }
     
     // food view controller
-    override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
+    override func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
                 
-        let visitable = VisitableViewController(URL: URL)
+        let visitable = VisitableViewController(url: URL)
         
         // food home
         if URL.path == "/h/\(campus)/food" {
@@ -28,12 +28,12 @@ class FoodViewController: ApplicationController {
             // In any case... I made presentFilter pretty generic at the ApplicationController level and just accepting the global "app_type" variable. Each
             // context view controller (FoodViewController, StudyViewController, etc.) just overrides the value. Feel free to refactor!
             
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.presentFilter))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.presentFilter))
             
         } else if URL.path == "/h/\(campus)/food/filter" {
             
-            let backButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
-            let backButtonText : UIBarButtonItem = UIBarButtonItem(title: "Food", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
+            let backButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.submitFilter))
+            let backButtonText : UIBarButtonItem = UIBarButtonItem(title: "Food", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.submitFilter))
             
             // fix spacing between back arrow and text
             backButton.imageInsets = UIEdgeInsetsMake(0, -7.0, 0, -30.0)
@@ -43,7 +43,7 @@ class FoodViewController: ApplicationController {
             
             visitable.navigationItem.setLeftBarButtonItems([backButton, backButtonText], animated: true)
 
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.clearFilter))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.clearFilter))
             
         }
         
@@ -51,7 +51,7 @@ class FoodViewController: ApplicationController {
         if action == .Advance {
             pushViewController(visitable, animated: true)
         } else if action == .Replace {
-            popViewControllerAnimated(true)
+            popViewController(animated: true)
             //pushViewController(visitable, animated: false)
             setViewControllers([visitable], animated: false)
         }
@@ -59,7 +59,7 @@ class FoodViewController: ApplicationController {
         session.visit(visitable)
     }
     
-    override func viewDidAppear(animated:Bool) {
+    override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
         
         // set app_type to food

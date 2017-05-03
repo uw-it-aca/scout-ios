@@ -12,25 +12,25 @@ import Turbolinks
 
 class StudyViewController: ApplicationController {
     
-    override var URL: NSURL {
-        return NSURL(string: "\(host)/\(campus)/study/")!
+    override var URL: Foundation.URL {
+        return Foundation.URL(string: "\(host)/\(campus)/study/")!
     }
     
     
     // study view controller
-    override func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
+    override func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
-        let visitable = VisitableViewController(URL: URL)
+        let visitable = VisitableViewController(url: URL)
         
         // study home
         if URL.path == "/h/\(campus)/study" {
             
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.presentFilter))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.presentFilter))
             
         } else if URL.path == "/h/\(campus)/study/filter" {
             
-            let backButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
-            let backButtonText : UIBarButtonItem = UIBarButtonItem(title: "Study", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.submitFilter))
+            let backButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.submitFilter))
+            let backButtonText : UIBarButtonItem = UIBarButtonItem(title: "Study", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.submitFilter))
             
             // fix spacing between back arrow and text
             backButton.imageInsets = UIEdgeInsetsMake(0, -7.0, 0, -30.0)
@@ -40,7 +40,7 @@ class StudyViewController: ApplicationController {
             
             visitable.navigationItem.setLeftBarButtonItems([backButton,backButtonText], animated: true)
             
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.clearFilter))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.clearFilter))
             
         }
         
@@ -48,7 +48,7 @@ class StudyViewController: ApplicationController {
         if action == .Advance {
             pushViewController(visitable, animated: true)
         } else if action == .Replace {
-            popViewControllerAnimated(true)
+            popViewController(animated: true)
             //pushViewController(visitable, animated: false)
             setViewControllers([visitable], animated: false)
         }
@@ -56,7 +56,7 @@ class StudyViewController: ApplicationController {
         session.visit(visitable)
     }
     
-    override func viewDidAppear(animated:Bool) {
+    override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
         
         // set app_type to study

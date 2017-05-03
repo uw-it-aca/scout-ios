@@ -5,6 +5,9 @@
       location = "group:/Users/charlon/Xcode/scout-ios/UW Scout.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:UW Scout.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Turbolinks.xcodeproj">
    </FileRef>
 </Workspace>
