@@ -20,6 +20,8 @@
 		8572A33A1D38169300D80248 /* TechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A3391D38169300D80248 /* TechViewController.swift */; };
 		8572A33C1D382F0500D80248 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A33B1D382F0500D80248 /* DiscoverViewController.swift */; };
 		85929A8A1DDC1EAF0020F311 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85929A891DDC1EAF0020F311 /* Launch Screen.storyboard */; };
+		85D4743E1EC0EF1A00BFFB42 /* Turbolinks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D4743D1EC0EF1A00BFFB42 /* Turbolinks.framework */; };
+		85D4743F1EC0EF1A00BFFB42 /* Turbolinks.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 85D4743D1EC0EF1A00BFFB42 /* Turbolinks.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8989FE211DCA5707006D02E9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8989FE201DCA5707006D02E9 /* CoreLocation.framework */; };
 		89A082151DC171E100C25FE6 /* scoutConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89A082141DC171E100C25FE6 /* scoutConfig.plist */; };
 /* End PBXBuildFile section */
@@ -48,6 +50,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				85D4743F1EC0EF1A00BFFB42 /* Turbolinks.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,10 +74,10 @@
 		854034761CB5AE5100C0C7FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		854034851CB5B17F00C0C7FD /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		854034871CB5B1A100C0C7FD /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		8552516F1DD14CC60089ED4D /* Turbolinks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Turbolinks.framework; path = "../../Library/Developer/Xcode/DerivedData/Scout-bhzpasyhjqotrvgyoukjjnstdgzd/Build/Products/Debug-iphonesimulator/Turbolinks.framework"; sourceTree = "<group>"; };
 		8572A3391D38169300D80248 /* TechViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TechViewController.swift; sourceTree = "<group>"; };
 		8572A33B1D382F0500D80248 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		85929A891DDC1EAF0020F311 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		85D4743D1EC0EF1A00BFFB42 /* Turbolinks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Turbolinks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8989FE201DCA5707006D02E9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		89A082141DC171E100C25FE6 /* scoutConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = scoutConfig.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8989FE211DCA5707006D02E9 /* CoreLocation.framework in Frameworks */,
+				85D4743E1EC0EF1A00BFFB42 /* Turbolinks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +112,7 @@
 		854034461CB5AE5100C0C7FD = {
 			isa = PBXGroup;
 			children = (
+				85D4743D1EC0EF1A00BFFB42 /* Turbolinks.framework */,
 				854034511CB5AE5100C0C7FD /* Scout */,
 				854034681CB5AE5100C0C7FD /* ScoutTests */,
 				854034731CB5AE5100C0C7FD /* ScoutUITests */,
@@ -167,7 +172,6 @@
 		8989FE1F1DCA5706006D02E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8552516F1DD14CC60089ED4D /* Turbolinks.framework */,
 				8989FE201DCA5707006D02E9 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
