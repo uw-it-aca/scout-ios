@@ -13,6 +13,6 @@ $ cd Scout
 $ cp sample.scoutConfig.plist scoutConfig.plist
 ```
 
-Change the scout_host to: http://scout-test.s.uw.edu/h
+Change the scout_host based on the URL of your test build.
 
 Open the __**.xcodeproj**__ that was created. This should be the file you use everyday to work within Xcode.
