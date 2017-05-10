@@ -20,6 +20,8 @@
 		8572A33A1D38169300D80248 /* TechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A3391D38169300D80248 /* TechViewController.swift */; };
 		8572A33C1D382F0500D80248 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A33B1D382F0500D80248 /* DiscoverViewController.swift */; };
 		85929A8A1DDC1EAF0020F311 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85929A891DDC1EAF0020F311 /* Launch Screen.storyboard */; };
+		85BD326C1EC0FBDE00494001 /* Turbolinks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BD326B1EC0FBDE00494001 /* Turbolinks.framework */; };
+		85BD326E1EC0FC0E00494001 /* Turbolinks.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 85BD326B1EC0FBDE00494001 /* Turbolinks.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8989FE211DCA5707006D02E9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8989FE201DCA5707006D02E9 /* CoreLocation.framework */; };
 		89A082151DC171E100C25FE6 /* scoutConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89A082141DC171E100C25FE6 /* scoutConfig.plist */; };
 /* End PBXBuildFile section */
@@ -48,6 +50,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				85BD326E1EC0FC0E00494001 /* Turbolinks.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,25 +59,25 @@
 
 /* Begin PBXFileReference section */
 		851B190E1D5DA7AC0061B30D /* ApplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationController.swift; sourceTree = "<group>"; };
-		8540344F1CB5AE5100C0C7FD /* UW Scout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UW Scout.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8540344F1CB5AE5100C0C7FD /* Scout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		854034521CB5AE5100C0C7FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		854034541CB5AE5100C0C7FD /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
 		854034561CB5AE5100C0C7FD /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
 		854034591CB5AE5100C0C7FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8540345B1CB5AE5100C0C7FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		854034601CB5AE5100C0C7FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		854034651CB5AE5100C0C7FD /* UW ScoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UW ScoutTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		854034651CB5AE5100C0C7FD /* ScoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		854034691CB5AE5100C0C7FD /* ScoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutTests.swift; sourceTree = "<group>"; };
 		8540346B1CB5AE5100C0C7FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		854034701CB5AE5100C0C7FD /* UW ScoutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UW ScoutUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		854034701CB5AE5100C0C7FD /* ScoutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScoutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		854034741CB5AE5100C0C7FD /* ScoutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutUITests.swift; sourceTree = "<group>"; };
 		854034761CB5AE5100C0C7FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		854034851CB5B17F00C0C7FD /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		854034871CB5B1A100C0C7FD /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		8552516F1DD14CC60089ED4D /* Turbolinks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Turbolinks.framework; path = "../../Library/Developer/Xcode/DerivedData/Scout-bhzpasyhjqotrvgyoukjjnstdgzd/Build/Products/Debug-iphonesimulator/Turbolinks.framework"; sourceTree = "<group>"; };
 		8572A3391D38169300D80248 /* TechViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TechViewController.swift; sourceTree = "<group>"; };
 		8572A33B1D382F0500D80248 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		85929A891DDC1EAF0020F311 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		85BD326B1EC0FBDE00494001 /* Turbolinks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Turbolinks.framework; sourceTree = "<group>"; };
 		8989FE201DCA5707006D02E9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		89A082141DC171E100C25FE6 /* scoutConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = scoutConfig.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8989FE211DCA5707006D02E9 /* CoreLocation.framework in Frameworks */,
+				85BD326C1EC0FBDE00494001 /* Turbolinks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +112,7 @@
 		854034461CB5AE5100C0C7FD = {
 			isa = PBXGroup;
 			children = (
+				85BD326B1EC0FBDE00494001 /* Turbolinks.framework */,
 				854034511CB5AE5100C0C7FD /* Scout */,
 				854034681CB5AE5100C0C7FD /* ScoutTests */,
 				854034731CB5AE5100C0C7FD /* ScoutUITests */,
@@ -119,9 +124,9 @@
 		854034501CB5AE5100C0C7FD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8540344F1CB5AE5100C0C7FD /* UW Scout.app */,
-				854034651CB5AE5100C0C7FD /* UW ScoutTests.xctest */,
-				854034701CB5AE5100C0C7FD /* UW ScoutUITests.xctest */,
+				8540344F1CB5AE5100C0C7FD /* Scout.app */,
+				854034651CB5AE5100C0C7FD /* ScoutTests.xctest */,
+				854034701CB5AE5100C0C7FD /* ScoutUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,7 +172,6 @@
 		8989FE1F1DCA5706006D02E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8552516F1DD14CC60089ED4D /* Turbolinks.framework */,
 				8989FE201DCA5707006D02E9 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
@@ -176,9 +180,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8540344E1CB5AE5100C0C7FD /* UW Scout */ = {
+		8540344E1CB5AE5100C0C7FD /* Scout */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 854034791CB5AE5100C0C7FD /* Build configuration list for PBXNativeTarget "UW Scout" */;
+			buildConfigurationList = 854034791CB5AE5100C0C7FD /* Build configuration list for PBXNativeTarget "Scout" */;
 			buildPhases = (
 				8540344B1CB5AE5100C0C7FD /* Sources */,
 				8540344C1CB5AE5100C0C7FD /* Frameworks */,
@@ -189,14 +193,14 @@
 			);
 			dependencies = (
 			);
-			name = "UW Scout";
+			name = Scout;
 			productName = Scout;
-			productReference = 8540344F1CB5AE5100C0C7FD /* UW Scout.app */;
+			productReference = 8540344F1CB5AE5100C0C7FD /* Scout.app */;
 			productType = "com.apple.product-type.application";
 		};
-		854034641CB5AE5100C0C7FD /* UW ScoutTests */ = {
+		854034641CB5AE5100C0C7FD /* ScoutTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8540347C1CB5AE5100C0C7FD /* Build configuration list for PBXNativeTarget "UW ScoutTests" */;
+			buildConfigurationList = 8540347C1CB5AE5100C0C7FD /* Build configuration list for PBXNativeTarget "ScoutTests" */;
 			buildPhases = (
 				8E0ED794F12359030A667A28 /* [CP] Check Pods Manifest.lock */,
 				854034611CB5AE5100C0C7FD /* Sources */,
@@ -210,14 +214,14 @@
 			dependencies = (
 				854034671CB5AE5100C0C7FD /* PBXTargetDependency */,
 			);
-			name = "UW ScoutTests";
+			name = ScoutTests;
 			productName = ScoutTests;
-			productReference = 854034651CB5AE5100C0C7FD /* UW ScoutTests.xctest */;
+			productReference = 854034651CB5AE5100C0C7FD /* ScoutTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8540346F1CB5AE5100C0C7FD /* UW ScoutUITests */ = {
+		8540346F1CB5AE5100C0C7FD /* ScoutUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8540347F1CB5AE5100C0C7FD /* Build configuration list for PBXNativeTarget "UW ScoutUITests" */;
+			buildConfigurationList = 8540347F1CB5AE5100C0C7FD /* Build configuration list for PBXNativeTarget "ScoutUITests" */;
 			buildPhases = (
 				E47AE78E8EA4EBDC34A9428E /* [CP] Check Pods Manifest.lock */,
 				8540346C1CB5AE5100C0C7FD /* Sources */,
@@ -230,9 +234,9 @@
 			dependencies = (
 				854034721CB5AE5100C0C7FD /* PBXTargetDependency */,
 			);
-			name = "UW ScoutUITests";
+			name = ScoutUITests;
 			productName = ScoutUITests;
-			productReference = 854034701CB5AE5100C0C7FD /* UW ScoutUITests.xctest */;
+			productReference = 854034701CB5AE5100C0C7FD /* ScoutUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -262,7 +266,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8540344A1CB5AE5100C0C7FD /* Build configuration list for PBXProject "UW Scout" */;
+			buildConfigurationList = 8540344A1CB5AE5100C0C7FD /* Build configuration list for PBXProject "Scout" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -275,9 +279,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8540344E1CB5AE5100C0C7FD /* UW Scout */,
-				854034641CB5AE5100C0C7FD /* UW ScoutTests */,
-				8540346F1CB5AE5100C0C7FD /* UW ScoutUITests */,
+				8540344E1CB5AE5100C0C7FD /* Scout */,
+				854034641CB5AE5100C0C7FD /* ScoutTests */,
+				8540346F1CB5AE5100C0C7FD /* ScoutUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -425,12 +429,12 @@
 /* Begin PBXTargetDependency section */
 		854034671CB5AE5100C0C7FD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8540344E1CB5AE5100C0C7FD /* UW Scout */;
+			target = 8540344E1CB5AE5100C0C7FD /* Scout */;
 			targetProxy = 854034661CB5AE5100C0C7FD /* PBXContainerItemProxy */;
 		};
 		854034721CB5AE5100C0C7FD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8540344E1CB5AE5100C0C7FD /* UW Scout */;
+			target = 8540344E1CB5AE5100C0C7FD /* Scout */;
 			targetProxy = 854034711CB5AE5100C0C7FD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -543,6 +547,10 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Scout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.SpaceScout;
@@ -561,6 +569,10 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Scout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.SpaceScout;
@@ -581,7 +593,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "UWIT-ACA.ScoutTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UW Scout.app/UW Scout";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scout.app/Scout";
 			};
 			name = Debug;
 		};
@@ -595,7 +607,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "UWIT-ACA.ScoutTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UW Scout.app/UW Scout";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scout.app/Scout";
 			};
 			name = Release;
 		};
@@ -628,7 +640,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8540344A1CB5AE5100C0C7FD /* Build configuration list for PBXProject "UW Scout" */ = {
+		8540344A1CB5AE5100C0C7FD /* Build configuration list for PBXProject "Scout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				854034771CB5AE5100C0C7FD /* Debug */,
@@ -637,7 +649,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		854034791CB5AE5100C0C7FD /* Build configuration list for PBXNativeTarget "UW Scout" */ = {
+		854034791CB5AE5100C0C7FD /* Build configuration list for PBXNativeTarget "Scout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8540347A1CB5AE5100C0C7FD /* Debug */,
@@ -646,7 +658,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8540347C1CB5AE5100C0C7FD /* Build configuration list for PBXNativeTarget "UW ScoutTests" */ = {
+		8540347C1CB5AE5100C0C7FD /* Build configuration list for PBXNativeTarget "ScoutTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8540347D1CB5AE5100C0C7FD /* Debug */,
@@ -655,7 +667,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8540347F1CB5AE5100C0C7FD /* Build configuration list for PBXNativeTarget "UW ScoutUITests" */ = {
+		8540347F1CB5AE5100C0C7FD /* Build configuration list for PBXNativeTarget "ScoutUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				854034801CB5AE5100C0C7FD /* Debug */,

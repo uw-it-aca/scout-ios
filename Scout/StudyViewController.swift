@@ -9,13 +9,19 @@
 import UIKit
 import WebKit
 import Turbolinks
+import CoreLocation
 
 class StudyViewController: ApplicationController {
     
     override var URL: Foundation.URL {
-        return Foundation.URL(string: "\(host)/\(campus)/study/")!
+        
+        if CLLocationManager.locationServicesEnabled() {
+            return Foundation.URL(string: "\(host)/\(campus)/study/?\(location)")!
+            
+        } else {
+            return Foundation.URL(string: "\(host)/\(campus)/study/")!
+        }
     }
-    
     
     // study view controller
     override func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
