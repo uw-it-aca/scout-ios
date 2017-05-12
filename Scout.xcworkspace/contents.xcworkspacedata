@@ -4,7 +4,4 @@
    <FileRef
       location = "group:UW Scout.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:Turbolinks.xcodeproj">
-   </FileRef>
 </Workspace>
