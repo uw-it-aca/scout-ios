@@ -68,4 +68,5 @@ fastlane/report.xml
 fastlane/screenshots
 
 # Scout
+Carthage
 scoutConfig.plist
