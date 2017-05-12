@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:UW Scout.xcodeproj">
+      location = "self:/Users/cstimmel/Documents/code/scout-ios/Scout.xcodeproj">
    </FileRef>
 </Workspace>
