@@ -16,7 +16,7 @@ $ git clone https://github.com/uw-it-aca/scout-ios
 Boostrap Carthage
 ```
 $ cd scout-ios
-$ carthage boostrap
+$ carthage bootstrap
 ```
 
 Open the 'Scout.xcodeproj' in Xcode.
