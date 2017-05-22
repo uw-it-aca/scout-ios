@@ -9,16 +9,28 @@
 import UIKit
 import WebKit
 import Turbolinks
+import CoreLocation
 
 class DiscoverViewController: ApplicationController {
     
     override var URL: Foundation.URL {
-        return Foundation.URL(string: "\(host)/\(campus)/")!
+
+        if CLLocationManager.locationServicesEnabled() {
+            return Foundation.URL(string: "\(host)/\(campus)/?\(location)")!
+            
+        } else {
+            return Foundation.URL(string: "\(host)/\(campus)/")!
+        }
+        
+
     }
     
     // discover visit controller
     override func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
+        print("discover call...")
+        print(URL)
+
         let visitable = VisitableViewController(url: URL)
         
         // discover home

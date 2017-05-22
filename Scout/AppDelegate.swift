@@ -14,6 +14,7 @@ var host = ""
 var campus = ""
 var app_type = ""
 var params = ""
+var location = ""
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -35,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // globally set tint color
         self.window!.tintColor = hexStringToUIColor("#514DA3")
-        
+                
         // Override point for customization after application launch.
         return true
     }

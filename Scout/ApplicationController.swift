@@ -10,13 +10,15 @@ import UIKit
 import WebKit
 import Turbolinks
 import CoreLocation
+import CoreMotion
 
 class ApplicationController: UINavigationController,  CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
+    let activityManager = CMMotionActivityManager()
     
     var URL: Foundation.URL {
-        return Foundation.URL(string: "\(host)/\(campus)/")!
+        return Foundation.URL(string: "\(host)/\(campus)/\(location)")!
     }
             
     fileprivate let webViewProcessPool = WKProcessPool()
@@ -47,26 +49,27 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("app controller call...")
+        setUserLocation()
         presentVisitableForSession(session, URL: URL)
     }
- 
+
     override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
         
         let sessionURL = session.webView.url?.absoluteString
         
         // print the 2 urls the app has for comparison
-        //print("requested url \(URL)")
-        //print("session url \(sessionURL!)")
+        // print("requested url \(URL)")
+        // print("session url \(sessionURL!)")
         
         // check to see if the campus has changed from what was previously set in session
+
         if sessionURL!.lowercased().range(of: campus) == nil {
-            //print("campus changed")
             presentVisitableForSession(session, URL: URL, action: .Replace)
         }
         
     }
-    
     
     // generic visit controller
     func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
@@ -78,7 +81,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             pushViewController(visitable, animated: true)
         } else if action == .Replace {
             popViewController(animated: true)
-            //pushViewController(visitable, animated: false)
             setViewControllers([visitable], animated: false)
         }
         
@@ -88,7 +90,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     // show filter
     func presentFilter() {
-        let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(params)")!
+
+        let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
         presentVisitableForSession(session, URL: URL)
     }
     
@@ -96,7 +99,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     func submitFilter(){
         
         // set a new visitable URL that includes params
-        let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(params)")!
+        let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(location)&\(params)")!
         
         // get the previous URL and params from the session URL (presentFilter function)
         let sessionURL = session.webView.url?.absoluteString
@@ -181,18 +184,39 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // ask authorization only when in use by user
         self.locationManager.requestWhenInUseAuthorization()
         
+        
         if CLLocationManager.locationServicesEnabled() {
             
-            //print("location enabled.. send user lat/lng")
-
-            locationManager.delegate = self
-            locationManager.distanceFilter = 30 // meters
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
+            print("location enabled... send user location")
+            self.locationManager.delegate = self
+            // set distanceFilter to only send location update if position changed
+            self.locationManager.distanceFilter = 46 // 46 meters.. or 50.3 yards (half football field)
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            self.locationManager.startUpdatingLocation()
+            
+            if CMMotionActivityManager.isActivityAvailable() {
+                
+                print("motion enabled..")
+                
+                self.activityManager.startActivityUpdates(to: OperationQueue.main) { data in
+                    if let data = data {
+                        DispatchQueue.main.async() {
+                            
+                            if (data.automotive == true) {
+                                
+                                print("user traveling in automobile")
+                                self.locationManager.stopUpdatingLocation()
+                                
+                            }
+                        }
+                    }
+                }
+            }
             
         }
         else {
-            print("location disabled.. will use default locations instead")
+            print("location disabled.. will use campus default locations instead")
+            // locationManager.stopMonitoringSignificantLocationChanges()
         }
         
     }
@@ -203,15 +227,24 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         
-        //print("position to send = \(locValue.latitude) \(locValue.longitude)")
+        //print("user position = \(locValue.latitude) \(locValue.longitude)")
         
         // send the lat/lng to the geolocation function on web
         // session.webView.evaluateJavaScript("$.event.trigger(Geolocation.location_updating)", completionHandler: nil)
-        session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
-        session.webView.evaluateJavaScript("Geolocation.send_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
+        // session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
+        // session.webView.evaluateJavaScript("Geolocation.send_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
+        
+        // update user location variable and reload the URL
+        
+        location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
+        print("user location.. \(location)")
+        self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        
+        
         
     }
     
+
     private func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         //print("Error while updating location: " + error.localizedDescription)
         session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
@@ -237,6 +270,8 @@ extension ApplicationController: SessionDelegate {
     func sessionDidStartRequest(_ session: Session) {
         application.isNetworkActivityIndicatorVisible = true
         
+        // send user's location once webview has finished loading
+        // setUserLocation()
        
     }
     
@@ -244,7 +279,7 @@ extension ApplicationController: SessionDelegate {
         application.isNetworkActivityIndicatorVisible = false
         
         // send user's location once webview has finished loading
-        setUserLocation()
+        // setUserLocation()
     }
     
 }
