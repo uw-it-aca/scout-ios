@@ -20,6 +20,7 @@
 		8572A33A1D38169300D80248 /* TechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A3391D38169300D80248 /* TechViewController.swift */; };
 		8572A33C1D382F0500D80248 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A33B1D382F0500D80248 /* DiscoverViewController.swift */; };
 		85929A8A1DDC1EAF0020F311 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85929A891DDC1EAF0020F311 /* Launch Screen.storyboard */; };
+		892320401EDE31E5001BBBC0 /* GoogleAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8923203F1EDE31E5001BBBC0 /* GoogleAnalytics.framework */; };
 		8989FE211DCA5707006D02E9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8989FE201DCA5707006D02E9 /* CoreLocation.framework */; };
 		89A082151DC171E100C25FE6 /* scoutConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89A082141DC171E100C25FE6 /* scoutConfig.plist */; };
 		89E8493D1EC6565D00F8944A /* Turbolinks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89E8493C1EC6565D00F8944A /* Turbolinks.framework */; };
@@ -75,6 +76,7 @@
 		8572A3391D38169300D80248 /* TechViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TechViewController.swift; sourceTree = "<group>"; };
 		8572A33B1D382F0500D80248 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		85929A891DDC1EAF0020F311 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		8923203F1EDE31E5001BBBC0 /* GoogleAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAnalytics.framework; path = Carthage/Build/iOS/GoogleAnalytics.framework; sourceTree = "<group>"; };
 		8989FE201DCA5707006D02E9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		89A082141DC171E100C25FE6 /* scoutConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = scoutConfig.plist; sourceTree = "<group>"; };
 		89E8493C1EC6565D00F8944A /* Turbolinks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Turbolinks.framework; path = Carthage/Build/iOS/Turbolinks.framework; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			files = (
 				8989FE211DCA5707006D02E9 /* CoreLocation.framework in Frameworks */,
 				89E8493D1EC6565D00F8944A /* Turbolinks.framework in Frameworks */,
+				892320401EDE31E5001BBBC0 /* GoogleAnalytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +172,7 @@
 		8989FE1F1DCA5706006D02E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8923203F1EDE31E5001BBBC0 /* GoogleAnalytics.framework */,
 				89E8493C1EC6565D00F8944A /* Turbolinks.framework */,
 				8989FE201DCA5707006D02E9 /* CoreLocation.framework */,
 			);
@@ -366,6 +370,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Turbolinks.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/GoogleAnalytics.framework",
 			);
 			outputPaths = (
 			);
