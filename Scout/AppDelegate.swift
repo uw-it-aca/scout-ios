@@ -10,6 +10,8 @@ import UIKit
 import WebKit
 import Turbolinks
 
+import GoogleAnalytics
+
 var host = ""
 var campus = ""
 var app_type = ""
@@ -29,6 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             campus = config["default_campus"] as! String
         }
 
+        guard let gai = GAI.sharedInstance() else {
+            assert(false, "Google Analytics not configured correctly")
+        }
+        gai.tracker(withTrackingId: "to be filled in")
+        gai.trackUncaughtExceptions = true
+        
+        // Verbose logging - Remove before app release
+        gai.logger.logLevel = .verbose;
+        
         UINavigationBar.appearance().barTintColor = hexStringToUIColor("#514DA3")
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = hexStringToUIColor("#ffffff")
