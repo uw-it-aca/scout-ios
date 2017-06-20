@@ -50,7 +50,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         print("app controller call...")
-        setUserLocation()
+        
+        // disabled user location feature for now
+        // setUserLocation()
         presentVisitableForSession(session, URL: URL)
     }
 
@@ -71,9 +73,10 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
     }
     
-    // generic visit controller
+    // generic visit controller... can be overridden by each view controller
     func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
+   
         let visitable = VisitableViewController(url: URL)
                 
         // handle actions
@@ -190,10 +193,11 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             print("location enabled... send user location")
             self.locationManager.delegate = self
             // set distanceFilter to only send location update if position changed
-            self.locationManager.distanceFilter = 46 // 46 meters.. or 50.3 yards (half football field)
+            self.locationManager.distanceFilter = 600 // 46 meters.. or 50.3 yards (half football field)
             self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             self.locationManager.startUpdatingLocation()
             
+            // detect motion
             if CMMotionActivityManager.isActivityAvailable() {
                 
                 print("motion enabled..")
@@ -202,6 +206,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
                     if let data = data {
                         DispatchQueue.main.async() {
                             
+                            // if the user is traveling in a car... stop updating their location so it won't keep reloading
                             if (data.automotive == true) {
                                 
                                 print("user traveling in automobile")
@@ -216,8 +221,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         }
         else {
             print("location disabled.. will use campus default locations instead")
-            // locationManager.stopMonitoringSignificantLocationChanges()
         }
+        
+        
         
     }
     
@@ -227,20 +233,15 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         
-        //print("user position = \(locValue.latitude) \(locValue.longitude)")
-        
         // send the lat/lng to the geolocation function on web
         // session.webView.evaluateJavaScript("$.event.trigger(Geolocation.location_updating)", completionHandler: nil)
         // session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
         // session.webView.evaluateJavaScript("Geolocation.send_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
         
         // update user location variable and reload the URL
-        
         location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
         print("user location.. \(location)")
         self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
-        
-        
         
     }
     
@@ -269,17 +270,10 @@ extension ApplicationController: SessionDelegate {
     
     func sessionDidStartRequest(_ session: Session) {
         application.isNetworkActivityIndicatorVisible = true
-        
-        // send user's location once webview has finished loading
-        // setUserLocation()
-       
     }
     
     func sessionDidFinishRequest(_ session: Session) {
         application.isNetworkActivityIndicatorVisible = false
-        
-        // send user's location once webview has finished loading
-        // setUserLocation()
     }
     
 }
