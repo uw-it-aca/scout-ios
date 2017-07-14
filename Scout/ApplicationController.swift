@@ -187,7 +187,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     func setUserLocation() {
         
         // ask authorization only when in use by user
-        self.locationManager.requestWhenInUseAuthorization()
+        //self.locationManager.requestWhenInUseAuthorization()
         
         
         if CLLocationManager.locationServicesEnabled() {
