@@ -49,7 +49,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("app controller call...")
         
         // disabled user location feature for now
         // setUserLocation()
@@ -61,12 +60,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         let sessionURL = session.webView.url?.absoluteString
         
-        // print the 2 urls the app has for comparison
-        // print("requested url \(URL)")
-        // print("session url \(sessionURL!)")
-        
         // check to see if the campus has changed from what was previously set in session
-
         if sessionURL!.lowercased().range(of: campus) == nil {
             presentVisitableForSession(session, URL: URL, action: .Replace)
         }
@@ -109,17 +103,12 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // remove the filter/ string from the URL
         let previousURL = sessionURL?.replacingOccurrences(of: "filter/", with: "")
         
-        print(previousURL!)
-        print(visitURL.absoluteString)
-        
         // check to see if the new visit URL matches what the user previously visited
         if (visitURL.absoluteString == previousURL!) {
             // if URLs match... no need to reload, just pop
-            print("params are same")
             popViewController(animated: true);
         } else {
             // if they are different, force a reload by using the Replace action
-            print("params are different")
             presentVisitableForSession(session, URL: visitURL, action: .Replace)
         }
         
@@ -139,21 +128,18 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // 2
         let seattleAction = UIAlertAction(title: "Seattle", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-            //print("Seattle was selected")
             campus = "seattle"
             UserDefaults.standard.set(campus, forKey: "usercampus")
             self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
         let bothellAction = UIAlertAction(title: "Bothell", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-            //print("Bothell was selected")
             campus = "bothell"
             UserDefaults.standard.set(campus, forKey: "usercampus")
             self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
         let tacomaAction = UIAlertAction(title: "Tacoma", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-            //print("Tacoma was selected")
             campus = "tacoma"
             UserDefaults.standard.set(campus, forKey: "usercampus")
             self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
@@ -162,7 +148,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         //
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
-            //print("Cancelled")
         })
         
         
@@ -192,7 +177,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         if CLLocationManager.locationServicesEnabled() {
             
-            print("location enabled... send user location")
+            //print("location enabled... send user location")
             self.locationManager.delegate = self
             // set distanceFilter to only send location update if position changed
             self.locationManager.distanceFilter = 600 // 46 meters.. or 50.3 yards (half football field)
@@ -202,7 +187,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             // detect motion
             if CMMotionActivityManager.isActivityAvailable() {
                 
-                print("motion enabled..")
+                //print("motion enabled..")
                 
                 self.activityManager.startActivityUpdates(to: OperationQueue.main) { data in
                     if let data = data {
@@ -211,7 +196,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
                             // if the user is traveling in a car... stop updating their location so it won't keep reloading
                             if (data.automotive == true) {
                                 
-                                print("user traveling in automobile")
+                                //print("user traveling in automobile")
                                 self.locationManager.stopUpdatingLocation()
                                 
                             }
@@ -222,7 +207,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             
         }
         else {
-            print("location disabled.. will use campus default locations instead")
+            //print("location disabled.. will use campus default locations instead")
         }
         
         
@@ -242,7 +227,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // update user location variable and reload the URL
         location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
-        print("user location.. \(location)")
+        //print("user location.. \(location)")
         self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
     }

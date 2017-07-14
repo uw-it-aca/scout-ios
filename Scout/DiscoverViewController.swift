@@ -28,9 +28,6 @@ class DiscoverViewController: ApplicationController {
     // discover visit controller
     override func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
-        print("discover call...")
-        print(URL)
-
         let visitable = VisitableViewController(url: URL)
         
         // discover home
