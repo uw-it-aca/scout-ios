@@ -26,7 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // read in config
         if let path = Bundle.main.path(forResource: "scoutConfig", ofType: "plist"), let config = NSDictionary(contentsOfFile: path) as? [String: AnyObject] {
             host = config["scout_host"] as! String
-            campus = config["default_campus"] as! String
+            let usercampus = UserDefaults.standard.object(forKey: "usercampus")
+            // if UserDefault for usercampus is not nil
+            if usercampus != nil {
+                campus = usercampus as! String
+            } else {
+            // else
+                campus = config["default_campus"] as! String
+            }
         }
 
         UINavigationBar.appearance().barTintColor = hexStringToUIColor("#514DA3")

@@ -141,19 +141,21 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             (alert: UIAlertAction!) -> Void in
             //print("Seattle was selected")
             campus = "seattle"
+            UserDefaults.standard.set(campus, forKey: "usercampus")
             self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
         let bothellAction = UIAlertAction(title: "Bothell", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             //print("Bothell was selected")
             campus = "bothell"
-            print(self.URL)
+            UserDefaults.standard.set(campus, forKey: "usercampus")
             self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
         let tacomaAction = UIAlertAction(title: "Tacoma", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             //print("Tacoma was selected")
             campus = "tacoma"
+            UserDefaults.standard.set(campus, forKey: "usercampus")
             self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
         
