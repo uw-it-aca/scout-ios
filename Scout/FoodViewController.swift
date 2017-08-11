@@ -72,6 +72,7 @@ class FoodViewController: ApplicationController {
         
         // set app_type to food
         app_type = "food"
+        params = food_params
         
     }
     
