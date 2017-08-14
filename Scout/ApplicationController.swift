@@ -39,6 +39,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     fileprivate lazy var session: Session = {
         let session = Session(webViewConfiguration: self.webViewConfiguration)
+        session.webView.allowsLinkPreview = false
         session.delegate = self
         return session
     }()
