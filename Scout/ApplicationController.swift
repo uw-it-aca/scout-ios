@@ -13,7 +13,7 @@ import CoreLocation
 import CoreMotion
 
 class ApplicationController: UINavigationController,  CLLocationManagerDelegate {
-    
+
     let locationManager = CLLocationManager()
     let activityManager = CMMotionActivityManager()
     
@@ -88,14 +88,13 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     // show filter
     func presentFilter() {
-
         let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
+        
         presentVisitableForSession(session, URL: URL)
     }
     
     // submit filter function when user clickes on the filter back button
     func submitFilter(){
-        
         // set a new visitable URL that includes params
         let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(location)&\(params)")!
         
@@ -268,11 +267,16 @@ extension ApplicationController: SessionDelegate {
 
 extension ApplicationController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        
         // set the params from the js bridge message
         if let message = message.body as? String {
-            //print(message)
             params = message
+            if (app_type == "food") {
+                food_params = params
+            } else if (app_type == "study") {
+                study_params = params
+            } else if (app_type == "tech") {
+                tech_params = params
+            }
         }
         
     }

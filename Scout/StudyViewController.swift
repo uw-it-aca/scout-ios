@@ -67,6 +67,7 @@ class StudyViewController: ApplicationController {
         
         // set app_type to study
         app_type = "study"
+        params = study_params
         
     }
     

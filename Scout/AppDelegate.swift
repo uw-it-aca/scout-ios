@@ -16,6 +16,11 @@ var app_type = ""
 var params = ""
 var location = ""
 
+// ONLY TO BE USED BY viewDidAppear
+var food_params = ""
+var study_params = ""
+var tech_params = ""
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

@@ -68,6 +68,7 @@ class TechViewController: ApplicationController {
         
         // set app_type to tech
         app_type = "tech"
+        params = tech_params
         
     }
     
