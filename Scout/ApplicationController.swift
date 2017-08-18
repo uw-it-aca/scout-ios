@@ -182,7 +182,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             //print("location enabled... send user location")
             self.locationManager.delegate = self
             // set distanceFilter to only send location update if position changed
-            self.locationManager.distanceFilter = 600 // 46 meters.. or 50.3 yards (half football field)
+            self.locationManager.distanceFilter = 1000 // 1000 meters.. or 1096 yards (half football field * 10)
             self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             self.locationManager.startUpdatingLocation()
             
