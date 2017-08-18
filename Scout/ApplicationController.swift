@@ -52,7 +52,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         super.viewDidLoad()
         
         // disabled user location feature for now
-        // setUserLocation()
+        setUserLocation()
         presentVisitableForSession(session, URL: URL)
     }
 
@@ -61,8 +61,10 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         let sessionURL = session.webView.url?.absoluteString
         
-        // check to see if the campus has changed from what was previously set in session
-        if sessionURL!.lowercased().range(of: campus) == nil {
+        // check to see if the campus or location has changed from what was previously set in session
+        if (sessionURL!.lowercased().range(of: campus) == nil) {
+            presentVisitableForSession(session, URL: URL, action: .Replace)
+        } else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
             presentVisitableForSession(session, URL: URL, action: .Replace)
         }
         
@@ -172,7 +174,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     func setUserLocation() {
         
         // ask authorization only when in use by user
-        //self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
         
         
         if CLLocationManager.locationServicesEnabled() {
@@ -207,7 +209,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             
         }
         else {
-            //print("location disabled.. will use campus default locations instead")
+            print("location disabled.. will use campus default locations instead")
         }
         
         
@@ -228,7 +230,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // update user location variable and reload the URL
         location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
         //print("user location.. \(location)")
-        self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        //self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
     }
     
