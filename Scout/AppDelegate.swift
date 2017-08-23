@@ -48,6 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // globally set tint color
         self.window!.tintColor = hexStringToUIColor("#514DA3")
+        
+        // globally set background to white
+        self.window!.backgroundColor = hexStringToUIColor("#ffffff")
                 
         // Override point for customization after application launch.
         return true
