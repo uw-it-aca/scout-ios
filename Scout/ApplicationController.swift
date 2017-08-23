@@ -52,9 +52,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // disabled user location feature for now
         setUserLocation()
-        //if (!CLLocationManager.locationServicesEnabled()) {
+        if (!CLLocationManager.locationServicesEnabled()) {
             self.presentVisitableForSession(session, URL: URL)
-        //}
+        }
     }
 
     override func viewDidAppear(_ animated:Bool) {
@@ -217,7 +217,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
         //print("Error while updating location: " + error.localizedDescription)
         //session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
         print("error")
