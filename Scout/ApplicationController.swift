@@ -15,7 +15,6 @@ import CoreMotion
 class ApplicationController: UINavigationController,  CLLocationManagerDelegate {
 
     let locationManager = CLLocationManager()
-    let activityManager = CMMotionActivityManager()
     
     var URL: Foundation.URL {
         return Foundation.URL(string: "\(host)/\(campus)/\(location)")!
@@ -53,7 +52,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // disabled user location feature for now
         setUserLocation()
-        presentVisitableForSession(session, URL: URL)
+        //if (!CLLocationManager.locationServicesEnabled()) {
+            self.presentVisitableForSession(session, URL: URL)
+        //}
     }
 
     override func viewDidAppear(_ animated:Bool) {
@@ -61,11 +62,15 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         let sessionURL = session.webView.url?.absoluteString
         
-        // check to see if the campus or location has changed from what was previously set in session
-        if (sessionURL!.lowercased().range(of: campus) == nil) {
-            presentVisitableForSession(session, URL: URL, action: .Replace)
-        } else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
-            presentVisitableForSession(session, URL: URL, action: .Replace)
+        if (sessionURL == nil) {
+            print ("looking for location")
+        } else {
+            // check to see if the campus or location has changed from what was previously set in session
+            if (sessionURL!.lowercased().range(of: campus) == nil) {
+                presentVisitableForSession(session, URL: URL, action: .Replace)
+            } else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
+                presentVisitableForSession(session, URL: URL, action: .Replace)
+            }
         }
         
     }
@@ -184,31 +189,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             // set distanceFilter to only send location update if position changed
             self.locationManager.distanceFilter = 1000 // 1000 meters.. or 1096 yards (half football field * 10)
             self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            self.locationManager.startUpdatingLocation()
+            self.locationManager.requestLocation()
             
-            // detect motion
-            if CMMotionActivityManager.isActivityAvailable() {
-                
-                //print("motion enabled..")
-                
-                self.activityManager.startActivityUpdates(to: OperationQueue.main) { data in
-                    if let data = data {
-                        DispatchQueue.main.async() {
-                            
-                            // if the user is traveling in a car... stop updating their location so it won't keep reloading
-                            if (data.automotive == true) {
-                                
-                                //print("user traveling in automobile")
-                                self.locationManager.stopUpdatingLocation()
-                                
-                            }
-                        }
-                    }
-                }
-            }
-            
-        }
-        else {
+        } else {
             print("location disabled.. will use campus default locations instead")
         }
         
@@ -230,17 +213,18 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // update user location variable and reload the URL
         location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
         //print("user location.. \(location)")
-        //self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
     }
     
-
-    private func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         //print("Error while updating location: " + error.localizedDescription)
-        session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
+        //session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
+        print("error")
     }
     
 }
+
 
 extension ApplicationController: SessionDelegate {
     func session(_ session: Session, didProposeVisitToURL URL: Foundation.URL, withAction action: Action) {
