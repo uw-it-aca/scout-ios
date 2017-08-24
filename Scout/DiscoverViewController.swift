@@ -54,7 +54,6 @@ class DiscoverViewController: ApplicationController {
             //pushViewController(visitable, animated: false)
             setViewControllers([visitable], animated: false)
         }
-
         session.visit(visitable)
     }
 }

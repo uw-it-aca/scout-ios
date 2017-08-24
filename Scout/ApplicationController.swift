@@ -50,11 +50,21 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // disabled user location feature for now
-        setUserLocation()
-        if (!CLLocationManager.locationServicesEnabled()) {
+        // ask authorization for location sharing.
+        self.locationManager.requestWhenInUseAuthorization()
+
+        // If location services are enabled but not set yet, wait for location
+        if (CLLocationManager.locationServicesEnabled() && location == "") {
+            print("waiting for location")
+            setUserLocation()
+        } else {
+            print("not enabled or using stored location")
+            // Otherwise use the already set or default location
             self.presentVisitableForSession(session, URL: URL)
         }
+        
+        // re-request location when the application comes back to foreground from background.
+        NotificationCenter.default.addObserver(self, selector: #selector(self.setUserLocation), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
 
     override func viewDidAppear(_ animated:Bool) {
@@ -176,40 +186,22 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     }
     
     
+    // This function is called to set the location when user has authorized location
+    // sharing.
     func setUserLocation() {
-        
-        // ask authorization only when in use by user
-        self.locationManager.requestWhenInUseAuthorization()
-        
-        
-        if CLLocationManager.locationServicesEnabled() {
-            
-            //print("location enabled... send user location")
+        if (CLLocationManager.locationServicesEnabled()) {
             self.locationManager.delegate = self
             // set distanceFilter to only send location update if position changed
-            self.locationManager.distanceFilter = 1000 // 1000 meters.. or 1096 yards (half football field * 10)
+            // self.locationManager.distanceFilter = 1000 // 1000 meters.. or 1096 yards (half football field * 10)
             self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             self.locationManager.requestLocation()
-            
-        } else {
-            print("location disabled.. will use campus default locations instead")
         }
-        
-        
-        
     }
     
     // locationManager delegate functions
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-        
-        // send the lat/lng to the geolocation function on web
-        // session.webView.evaluateJavaScript("$.event.trigger(Geolocation.location_updating)", completionHandler: nil)
-        // session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
-        // session.webView.evaluateJavaScript("Geolocation.send_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
-        
         // update user location variable and reload the URL
         location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
         //print("user location.. \(location)")
@@ -222,6 +214,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         //session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
         print("error")
     }
+    
+    
     
 }
 
