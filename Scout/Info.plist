@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>6</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -30,7 +30,9 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>&quot;We use your location to help you discover nearby spaces and resources on campus.&quot;</string>
+	<string>"We use your location to help you discover nearby spaces and resources on campus."</string>
+	<key>NSMotionUsageDescription</key>
+	<string>"We use motion to detect if you are traveling in an automobile."</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -51,7 +53,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSMotionUsageDescription</key>
-	<string>&quot;We use motion to detect if you are traveling in an automobile.&quot;</string>
 </dict>
 </plist>
