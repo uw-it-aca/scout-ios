@@ -1,9 +1,8 @@
 //
 //  ScoutUITests.swift
-//  ScoutUITests
+//  UW Scout UITests
 //
-//  Created by Charlon Palacay on 4/6/16.
-//  Copyright © 2016 Charlon Palacay. All rights reserved.
+//  Copyright © 2017 UW-IT AXDD. All rights reserved.
 //
 
 import XCTest

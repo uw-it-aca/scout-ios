@@ -1,9 +1,8 @@
 //
 //  ApplicationViewController.swift
-//  Scout
+//  UW Scout
 //
-//  Created by Charlon Palacay on 8/11/16.
-//  Copyright © 2016 Charlon Palacay. All rights reserved.
+//  Copyright © 2017 UW-IT AXDD. All rights reserved.
 //
 
 import UIKit
@@ -14,10 +13,19 @@ import CoreMotion
 
 class ApplicationController: UINavigationController,  CLLocationManagerDelegate {
 
-    let locationManager = CLLocationManager()
+    // Location manager for the app
+    // let locationManager = CLLocationManager()
     
     var URL: Foundation.URL {
-        return Foundation.URL(string: "\(host)/\(campus)/\(location)")!
+        // location specific feature
+        /*if CLLocationManager.locationServicesEnabled() {
+            return Foundation.URL(string: "\(host)/\(campus)/?\(location)")!
+            
+        } else {
+            return Foundation.URL(string: "\(host)/\(campus)/")!
+        }*/
+        
+        return Foundation.URL(string: "\(host)/\(campus)/")!
     }
             
     fileprivate let webViewProcessPool = WKProcessPool()
@@ -50,11 +58,12 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // disabled user location feature for now
-        setUserLocation()
+        // user location feature
+        /* self.setUserLocation()
         if (!CLLocationManager.locationServicesEnabled()) {
             self.presentVisitableForSession(session, URL: URL)
-        }
+        } */
+        self.presentVisitableForSession(session, URL: URL)
     }
 
     override func viewDidAppear(_ animated:Bool) {
@@ -62,17 +71,21 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         let sessionURL = session.webView.url?.absoluteString
         
-        if (sessionURL == nil) {
+        // location specific feature
+        /*if (sessionURL == nil) {
             print ("looking for location")
         } else {
             // check to see if the campus or location has changed from what was previously set in session
             if (sessionURL!.lowercased().range(of: campus) == nil) {
-                presentVisitableForSession(session, URL: URL, action: .Replace)
+                self.presentVisitableForSession(session, URL: URL, action: .Replace)
             } else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
                 presentVisitableForSession(session, URL: URL, action: .Replace)
             }
-        }
+        }*/
         
+        if (sessionURL!.lowercased().range(of: campus) == nil) {
+            self.presentVisitableForSession(session, URL: URL, action: .Replace)
+        }
     }
     
     // generic visit controller... can be overridden by each view controller
@@ -95,15 +108,21 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     // show filter
     func presentFilter() {
-        let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
+        // location specific URL
+        // let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
         
+        // URL without location
+        let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(params)")!
         presentVisitableForSession(session, URL: URL)
     }
     
     // submit filter function when user clickes on the filter back button
     func submitFilter(){
-        // set a new visitable URL that includes params
-        let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(location)&\(params)")!
+        // set a new visitable URL that includes params and location
+        // let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(location)&\(params)")!
+        
+        // set a new visitable URL with only params
+        let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(params)")!
         
         // get the previous URL and params from the session URL (presentFilter function)
         let sessionURL = session.webView.url?.absoluteString
@@ -152,7 +171,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         })
         
-        //
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
         })
@@ -176,6 +194,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     }
     
     
+    /* HANDLE LOCATION SERVICES FOR THE APP
+     
+     
     func setUserLocation() {
         
         // ask authorization only when in use by user
@@ -188,7 +209,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             self.locationManager.delegate = self
             // set distanceFilter to only send location update if position changed
             self.locationManager.distanceFilter = 1000 // 1000 meters.. or 1096 yards (half football field * 10)
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            //self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            self.locationManager.desiredAccuracy = KCLLocationAccuracyThreeKilometers
             self.locationManager.requestLocation()
             
         } else {
@@ -221,7 +243,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         //print("Error while updating location: " + error.localizedDescription)
         //session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
         print("error")
-    }
+    }*/
     
 }
 
