@@ -128,7 +128,7 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
         let sessionURL = session.webView.url?.absoluteString
         // remove the filter/ string from the URL
         let previousURL = sessionURL?.replacingOccurrences(of: "filter/", with: "")
-        
+
         // check to see if the new visit URL matches what the user previously visited
         if (visitURL.absoluteString == previousURL!) {
             // if URLs match... no need to reload, just pop
@@ -154,21 +154,36 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
         // 2
         let seattleAction = UIAlertAction(title: "Seattle", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-            campus = "seattle"
-            UserDefaults.standard.set(campus, forKey: "usercampus")
-            self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+            if campus != "seattle" {
+                campus = "seattle"
+                food_params = ""
+                study_params = ""
+                tech_params = ""
+                UserDefaults.standard.set(campus, forKey: "usercampus")
+                self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+            }
         })
         let bothellAction = UIAlertAction(title: "Bothell", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-            campus = "bothell"
-            UserDefaults.standard.set(campus, forKey: "usercampus")
-            self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+            if campus != "bothell" {
+                campus = "bothell"
+                food_params = ""
+                study_params = ""
+                tech_params = ""
+                UserDefaults.standard.set(campus, forKey: "usercampus")
+                self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+            }
         })
         let tacomaAction = UIAlertAction(title: "Tacoma", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-            campus = "tacoma"
-            UserDefaults.standard.set(campus, forKey: "usercampus")
-            self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+            if campus != "tacoma" {
+                campus = "tacoma"
+                food_params = ""
+                study_params = ""
+                tech_params = ""
+                UserDefaults.standard.set(campus, forKey: "usercampus")
+                self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+            }
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
