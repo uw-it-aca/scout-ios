@@ -59,11 +59,11 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         super.viewDidLoad()
         
         // user location feature
-        /* self.setUserLocation()
+        /* setUserLocation()
         if (!CLLocationManager.locationServicesEnabled()) {
-            self.presentVisitableForSession(session, URL: URL)
+            presentVisitableForSession(session, URL: URL)
         } */
-        self.presentVisitableForSession(session, URL: URL)
+        presentVisitableForSession(session, URL: URL)
     }
 
     override func viewDidAppear(_ animated:Bool) {
@@ -77,14 +77,14 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         } else {
             // check to see if the campus or location has changed from what was previously set in session
             if (sessionURL!.lowercased().range(of: campus) == nil) {
-                self.presentVisitableForSession(session, URL: URL, action: .Replace)
+                presentVisitableForSession(session, URL: URL, action: .Replace)
             } else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
                 presentVisitableForSession(session, URL: URL, action: .Replace)
             }
         }*/
         
         if (sessionURL!.lowercased().range(of: campus) == nil) {
-            self.presentVisitableForSession(session, URL: URL, action: .Replace)
+            presentVisitableForSession(session, URL: URL, action: .Replace)
         }
     }
     
