@@ -202,13 +202,7 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
         self.present(optionMenu, animated: true, completion: nil)
         
     }
-    
-    func openSettings() {
-        // no longer supported in ios10.. sucks!
-        // UIApplication.sharedApplication().openURL(NSURL(string:"prefs:root=Scout")!)
-    }
-    
-    
+        
     /* HANDLE LOCATION SERVICES FOR THE APP
      
      
@@ -270,11 +264,13 @@ extension ApplicationController: SessionDelegate {
     
     func session(_ session: Session, didFailRequestForVisitable visitable: Visitable, withError error: NSError) {
         let alert = UIAlertController(title: "Error Requesting Data", message: "This data is temporarily unavailable. Please try again later.", preferredStyle: .alert)
-        //alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
+        /*
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
             self.popToRootViewController(animated: true)
         }))
+ */
         present(alert, animated: true, completion: nil)
     }
     
