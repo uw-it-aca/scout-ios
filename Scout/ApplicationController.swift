@@ -303,7 +303,7 @@ extension ApplicationController: SessionDelegate {
             let statusCode = error.userInfo["statusCode"] as! Int
             switch statusCode {
             case 401:
-                print("hello 401")
+                print("future work to handle authentication")
             case 404:
                 presentError(.HTTPNotFoundError)
             default:
