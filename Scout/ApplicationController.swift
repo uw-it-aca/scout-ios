@@ -254,6 +254,34 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
         print("error")
     }*/
     
+    /*** error handling ***/
+    lazy var errorView: ErrorView = {
+        let view = Bundle.main.loadNibNamed("ErrorView", owner: self, options: nil)!.first as! ErrorView
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.retryButton.addTarget(self, action: #selector(retry(_:)), for: .touchUpInside)
+        return view
+    }()
+    
+    func presentError(_ error: Error) {
+        errorView.error = error
+        view.addSubview(errorView)
+        installErrorViewConstraints()
+    }
+    
+    func installErrorViewConstraints() {
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options: [], metrics: nil, views: [ "view": errorView ]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options: [], metrics: nil, views: [ "view": errorView ]))
+    }
+    
+    func retry(_ sender: AnyObject) {
+        errorView.removeFromSuperview()
+        
+        let visitable = VisitableViewController(url: URL)
+        
+        visitable.reloadVisitable()
+        //super.reloadVisitable()
+    }
+    
 }
 
 
@@ -263,15 +291,24 @@ extension ApplicationController: SessionDelegate {
     }
     
     func session(_ session: Session, didFailRequestForVisitable visitable: Visitable, withError error: NSError) {
-        let alert = UIAlertController(title: "Error Requesting Data", message: "This data is temporarily unavailable. Please try again later.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
-        /*
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-            self.popToRootViewController(animated: true)
-        }))
- */
-        present(alert, animated: true, completion: nil)
+        NSLog("ERROR: %@", error)
+        guard let errorCode = ErrorCode(rawValue: error.code) else { return }
+        
+        switch errorCode {
+        case .httpFailure:
+            let statusCode = error.userInfo["statusCode"] as! Int
+            switch statusCode {
+            case 401:
+                print("hello 401")
+            case 404:
+                presentError(.HTTPNotFoundError)
+            default:
+                presentError(Error(HTTPStatusCode: statusCode))
+            }
+        case .networkFailure:
+            presentError(.NetworkError)
+        }
     }
     
     func sessionDidStartRequest(_ session: Session) {
