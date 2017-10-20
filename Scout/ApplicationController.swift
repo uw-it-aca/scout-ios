@@ -135,7 +135,7 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
 
         // check to see if the new visit URL matches what the user previously visited
         if (visitURL.absoluteString == previousURL!) {
-            // if URLs match... no need to reload, just pop
+            // if URLs match... no need to reload, just pop back to beginning of stack
             popViewController(animated: true);
         } else {
             // if they are different, force a reload by using the Replace action
@@ -280,9 +280,13 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
     
     func retry(_ sender: AnyObject) {
         errorView.removeFromSuperview()
-        print("handle reload")
+        print("have user reload the app if they become disconnected")
+        
         // force reload of the current URL
-        presentVisitableForSession(session, URL: URL, action: .Replace)
+        //presentVisitableForSession(session, URL: URL, action: .Replace)
+        
+        // much cleaner way to reload session
+        session.reload()
     }
     
 }
