@@ -72,7 +72,8 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
         let sessionURL = session.webView.url?.absoluteString
         
         // location specific feature
-        /*if (sessionURL == nil) {
+        /**
+        if (sessionURL == nil) {
             print ("looking for location")
         } else {
             // check to see if the campus or location has changed from what was previously set in session
@@ -81,10 +82,13 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
             } else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
                 presentVisitableForSession(session, URL: URL, action: .Replace)
             }
-        }*/
+        }
+         **/
         
-        if (sessionURL!.lowercased().range(of: campus) == nil) {
-            presentVisitableForSession(session, URL: URL, action: .Replace)
+        if (sessionURL != nil) {
+            if (sessionURL!.lowercased().range(of: campus) == nil) {
+                presentVisitableForSession(session, URL: URL, action: .Replace)
+            }
         }
     }
     
@@ -276,9 +280,10 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
     func retry(_ sender: AnyObject) {
         errorView.removeFromSuperview()
         
-        let visitable = VisitableViewController(url: URL)
+        print("need to handle reload")
+        //let visitable = VisitableViewController(url: URL)
+        //visitable.reloadVisitable()
         
-        visitable.reloadVisitable()
         //super.reloadVisitable()
     }
     
