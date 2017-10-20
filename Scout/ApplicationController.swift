@@ -258,7 +258,8 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
         print("error")
     }*/
     
-    /*** error handling ***/
+    /*** INTERNET CONNECTION ERROR HANDLING SCOUT-710 & SCOUT-722 ***/
+    
     lazy var errorView: ErrorView = {
         let view = Bundle.main.loadNibNamed("ErrorView", owner: self, options: nil)!.first as! ErrorView
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -279,12 +280,9 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
     
     func retry(_ sender: AnyObject) {
         errorView.removeFromSuperview()
-        
-        print("need to handle reload")
-        //let visitable = VisitableViewController(url: URL)
-        //visitable.reloadVisitable()
-        
-        //super.reloadVisitable()
+        print("handle reload")
+        // force reload of the current URL
+        presentVisitableForSession(session, URL: URL, action: .Replace)
     }
     
 }
