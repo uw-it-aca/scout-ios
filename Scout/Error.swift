@@ -8,7 +8,7 @@
 
 struct Error {
     static let HTTPNotFoundError = Error(title: "Page Not Found", message: "There doesn’t seem to be anything here.", button: "Retry")
-    static let NetworkError = Error(title: "No Connection", message: "You don't seem to be connected to the internet.", button: "Try again to connect")
+    static let NetworkError = Error(title: "No Connection", message: "You don't seem to be connected to the internet.", button: "Connect to a network and try again.")
     static let UnknownError = Error(title: "Unknown Error", message: "An unknown error occurred.", button: "Retry")
     
     let title: String
