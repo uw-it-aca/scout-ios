@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = hexStringToUIColor("#514DA3")
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = hexStringToUIColor("#ffffff")
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : hexStringToUIColor("#ffffff")]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : hexStringToUIColor("#ffffff")]
         
         // globally set tint color
         self.window!.tintColor = hexStringToUIColor("#514DA3")
@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             cString = (cString as NSString).substring(from: 1)
         }
         
-        if (cString.characters.count != 6) {
+        if (cString.count != 6) {
             return UIColor.gray
         }
         
