@@ -278,7 +278,7 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options: [], metrics: nil, views: [ "view": errorView ]))
     }
     
-    func retry(_ sender: AnyObject) {
+    @objc func retry(_ sender: AnyObject) {
         errorView.removeFromSuperview()
         print("have user reload the app if they become disconnected")
         
