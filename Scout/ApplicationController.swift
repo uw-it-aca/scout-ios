@@ -314,6 +314,7 @@ extension ApplicationController: SessionDelegate {
                 presentError(Error(HTTPStatusCode: statusCode))
             }
         case .networkFailure:
+            print("no internet connection error happened")
             presentError(.NetworkError)
         }
     }
