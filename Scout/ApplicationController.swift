@@ -8,10 +8,10 @@
 import UIKit
 import WebKit
 import Turbolinks
-//import CoreLocation
-//import CoreMotion
+import CoreLocation
+import CoreMotion
 
-class ApplicationController: UINavigationController {  // CLLocationManagerDelegate removed 8/29/17
+class ApplicationController: UINavigationController,  CLLocationManagerDelegate {
 
     // Location manager for the app
     // let locationManager = CLLocationManager()
