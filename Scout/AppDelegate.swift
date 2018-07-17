@@ -1,8 +1,9 @@
 //
 //  AppDelegate.swift
-//  UW Scout
+//  Scout
 //
-//  Copyright © 2017 UW-IT AXDD. All rights reserved.
+//  Created by Charlon Palacay on 4/6/16.
+//  Copyright © 2016 Charlon Palacay. All rights reserved.
 //
 
 import UIKit
