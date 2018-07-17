@@ -1,8 +1,9 @@
 //
 //  FoodViewController.swift
-//  UW Scout
+//  Scout
 //
-//  Copyright © 2017 UW-IT AXDD. All rights reserved.
+//  Created by Charlon Palacay on 4/6/16.
+//  Copyright © 2016 Charlon Palacay. All rights reserved.
 //
 
 import UIKit
@@ -13,15 +14,14 @@ import CoreLocation
 class FoodViewController: ApplicationController {
     
     override var URL: Foundation.URL {
-        // location specific feature
-        /*if CLLocationManager.locationServicesEnabled() {
+        
+        if CLLocationManager.locationServicesEnabled() {
             return Foundation.URL(string: "\(host)/\(campus)/food/?\(location)")!
             
         } else {
             return Foundation.URL(string: "\(host)/\(campus)/food/")!
-        }*/
+        }
         
-        return Foundation.URL(string: "\(host)/\(campus)/food/")!
     }
     
     // food view controller

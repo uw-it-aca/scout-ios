@@ -1,10 +1,10 @@
 //
 //  Error.swift
-//  UW Scout
+//  Scout
 //
-//  Copyright © 2017 UW-IT AXDD. All rights reserved.
+//  Created by Charlon Palacay on 4/6/16.
+//  Copyright © 2016 Charlon Palacay. All rights reserved.
 //
-
 
 struct Error {
     static let HTTPNotFoundError = Error(title: "Page Not Found", message: "There doesn’t seem to be anything here.", button: "Retry")

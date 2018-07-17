@@ -1,8 +1,9 @@
 //
 //  ApplicationViewController.swift
-//  UW Scout
+//  Scout
 //
-//  Copyright © 2017 UW-IT AXDD. All rights reserved.
+//  Created by Charlon Palacay on 8/11/16.
+//  Copyright © 2016 Charlon Palacay. All rights reserved.
 //
 
 import UIKit
@@ -13,19 +14,10 @@ import CoreMotion
 
 class ApplicationController: UINavigationController,  CLLocationManagerDelegate {
 
-    // Location manager for the app
-    // let locationManager = CLLocationManager()
+    let locationManager = CLLocationManager()
     
     var URL: Foundation.URL {
-        // location specific feature
-        /*if CLLocationManager.locationServicesEnabled() {
-            return Foundation.URL(string: "\(host)/\(campus)/?\(location)")!
-            
-        } else {
-            return Foundation.URL(string: "\(host)/\(campus)/")!
-        }*/
-        
-        return Foundation.URL(string: "\(host)/\(campus)/")!
+        return Foundation.URL(string: "\(host)/\(campus)/\(location)")!
     }
             
     fileprivate let webViewProcessPool = WKProcessPool()
@@ -90,6 +82,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
                 presentVisitableForSession(session, URL: URL, action: .Replace)
             }
         }
+        
     }
     
     // generic visit controller... can be overridden by each view controller
@@ -114,9 +107,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     @objc func presentFilter() {
         // location specific URL
         // let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
+
         
-        // URL without location
-        let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(params)")!
         presentVisitableForSession(session, URL: URL)
     }
     
@@ -127,6 +119,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // set a new visitable URL with only params
         let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(params)")!
+
         
         // get the previous URL and params from the session URL (presentFilter function)
         let sessionURL = session.webView.url?.absoluteString
@@ -190,6 +183,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             }
         })
         
+        //
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
         })
@@ -206,10 +200,14 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         self.present(optionMenu, animated: true, completion: nil)
         
     }
-        
-    /* HANDLE LOCATION SERVICES FOR THE APP
-     
-     
+
+    
+    func openSettings() {
+        // no longer supported in ios10.. sucks!
+        // UIApplication.sharedApplication().openURL(NSURL(string:"prefs:root=Scout")!)
+    }
+    
+    
     func setUserLocation() {
         
         // ask authorization only when in use by user
@@ -222,8 +220,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             self.locationManager.delegate = self
             // set distanceFilter to only send location update if position changed
             self.locationManager.distanceFilter = 1000 // 1000 meters.. or 1096 yards (half football field * 10)
-            //self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            self.locationManager.desiredAccuracy = KCLLocationAccuracyThreeKilometers
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             self.locationManager.requestLocation()
             
         } else {
@@ -256,7 +253,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         //print("Error while updating location: " + error.localizedDescription)
         //session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
         print("error")
-    }*/
+    }
     
     /*** INTERNET CONNECTION ERROR HANDLING SCOUT-710 & SCOUT-722 ***/
     
