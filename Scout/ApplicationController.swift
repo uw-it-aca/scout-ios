@@ -51,10 +51,10 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         super.viewDidLoad()
         
         // user location feature
-        /* setUserLocation()
+        setUserLocation()
         if (!CLLocationManager.locationServicesEnabled()) {
             presentVisitableForSession(session, URL: URL)
-        } */
+        }
         presentVisitableForSession(session, URL: URL)
     }
 
