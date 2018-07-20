@@ -34,7 +34,7 @@ class DiscoverViewController: ApplicationController {
         if URL.path == "/h/\(campus)" {
             
             // create top/right button to handle campus switching
-            let campusButton : UIBarButtonItem = UIBarButtonItem(title: (campus).capitalized, style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.chooseCampus))
+            let campusButton : UIBarButtonItem = UIBarButtonItem(title: (campus).capitalized, style: .plain, target: self, action: #selector(ApplicationController.chooseCampus))
             visitable.navigationItem.rightBarButtonItem = campusButton
             visitable.navigationItem.setRightBarButtonItems([campusButton], animated: true)
             
