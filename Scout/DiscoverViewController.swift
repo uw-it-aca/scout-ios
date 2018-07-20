@@ -32,16 +32,10 @@ class DiscoverViewController: ApplicationController {
         // discover home
         if URL.path == "/h/\(campus)" {
             
+            // create top/right button to handle campus switching
             let campusButton : UIBarButtonItem = UIBarButtonItem(title: (campus).capitalized, style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.chooseCampus))
-            //let settingsButton : UIBarButtonItem = UIBarButtonItem(title: " ", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.openSettings))
-            
-            //let buttonIcon = UIImage(named: "ic_settings")
-            //settingsButton.image = buttonIcon
-            
             visitable.navigationItem.rightBarButtonItem = campusButton
-            //visitable.navigationItem.rightBarButtonItem = settingsButton
-            
-            visitable.navigationItem.setRightBarButtonItems([/*settingsButton,*/ campusButton], animated: true)
+            visitable.navigationItem.setRightBarButtonItems([campusButton], animated: true)
             
         }
         

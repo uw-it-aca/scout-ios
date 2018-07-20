@@ -107,7 +107,7 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
     }
     
     // show filter
-    func presentFilter() {
+    @objc func presentFilter() {
         // location specific URL
         // let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
         
@@ -117,7 +117,7 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
     }
     
     // submit filter function when user clickes on the filter back button
-    func submitFilter(){
+    @objc func submitFilter(){
         // set a new visitable URL that includes params and location
         // let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(location)&\(params)")!
         
@@ -140,13 +140,13 @@ class ApplicationController: UINavigationController {  // CLLocationManagerDeleg
         
     }
     
-    func clearFilter(){
+    @objc func clearFilter() {
         // evaluate js by submitting click event
         session.webView.evaluateJavaScript("document.getElementById('filter_clear').click()", completionHandler: nil)
     }
     
     // custom controller for campus selection
-    func chooseCampus() {
+    @objc func chooseCampus() {
         
         // 1
         let optionMenu = UIAlertController(title: nil, message: "Choose Campus", preferredStyle: .actionSheet)
