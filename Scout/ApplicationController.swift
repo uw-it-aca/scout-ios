@@ -137,7 +137,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
     }
     
-    @objc func clearFilter(){
+    @objc func clearFilter() {
         // evaluate js by submitting click event
         session.webView.evaluateJavaScript("document.getElementById('filter_clear').click()", completionHandler: nil)
     }
