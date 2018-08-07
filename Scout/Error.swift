@@ -1,14 +1,14 @@
 //
 //  Error.swift
-//  UW Scout
+//  Scout
 //
-//  Copyright © 2017 UW-IT AXDD. All rights reserved.
+//  Created by Charlon Palacay on 4/6/16.
+//  Copyright © 2016 Charlon Palacay. All rights reserved.
 //
-
 
 struct Error {
     static let HTTPNotFoundError = Error(title: "Page Not Found", message: "There doesn’t seem to be anything here.")
-    static let NetworkError = Error(title: "Can’t Connect", message: "UW Scout can’t connect to the server.")
+    static let NetworkError = Error(title: "Can’t Connect", message: "TurbolinksDemo can’t connect to the server. Did you remember to start it?\nSee README.md for more instructions.")
     static let UnknownError = Error(title: "Unknown Error", message: "An unknown error occurred.")
     
     let title: String
