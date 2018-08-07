@@ -1,8 +1,9 @@
 //
 //  StudyViewController.swift
-//  UW Scout
+//  Scout
 //
-//  Copyright © 2017 UW-IT AXDD. All rights reserved.
+//  Created by Charlon Palacay on 4/6/16.
+//  Copyright © 2016 Charlon Palacay. All rights reserved.
 //
 
 import UIKit
@@ -13,15 +14,13 @@ import CoreLocation
 class StudyViewController: ApplicationController {
     
     override var URL: Foundation.URL {
-        // location specific feature
-        /*if CLLocationManager.locationServicesEnabled() {
+        
+        if CLLocationManager.locationServicesEnabled() {
             return Foundation.URL(string: "\(host)/\(campus)/study/?\(location)")!
             
         } else {
             return Foundation.URL(string: "\(host)/\(campus)/study/")!
-        }*/
-        
-        return Foundation.URL(string: "\(host)/\(campus)/study/")!
+        }
     }
     
     // study view controller
