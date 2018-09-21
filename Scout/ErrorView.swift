@@ -16,6 +16,7 @@ class ErrorView: UIView {
         didSet {
             titleLabel.text = error?.title
             messageLabel.text = error?.message
+            retryButton.setTitle(error?.button, for: .normal)
         }
     }
 }

@@ -19,6 +19,7 @@
 		854034881CB5B1A100C0C7FD /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034871CB5B1A100C0C7FD /* ErrorView.swift */; };
 		8572A33A1D38169300D80248 /* TechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A3391D38169300D80248 /* TechViewController.swift */; };
 		8572A33C1D382F0500D80248 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A33B1D382F0500D80248 /* DiscoverViewController.swift */; };
+		8579BB551F9A662D00404436 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8579BB571F9A662D00404436 /* ErrorView.xib */; };
 		85929A8A1DDC1EAF0020F311 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85929A891DDC1EAF0020F311 /* Launch Screen.storyboard */; };
 		8989FE211DCA5707006D02E9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8989FE201DCA5707006D02E9 /* CoreLocation.framework */; };
 		89A082151DC171E100C25FE6 /* scoutConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89A082141DC171E100C25FE6 /* scoutConfig.plist */; };
@@ -74,6 +75,7 @@
 		854034871CB5B1A100C0C7FD /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		8572A3391D38169300D80248 /* TechViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TechViewController.swift; sourceTree = "<group>"; };
 		8572A33B1D382F0500D80248 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		8579BB561F9A662D00404436 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ErrorView.xib; sourceTree = "<group>"; };
 		85929A891DDC1EAF0020F311 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		8989FE201DCA5707006D02E9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		89A082141DC171E100C25FE6 /* scoutConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = scoutConfig.plist; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				854034871CB5B1A100C0C7FD /* ErrorView.swift */,
 				89A082141DC171E100C25FE6 /* scoutConfig.plist */,
 				85929A891DDC1EAF0020F311 /* Launch Screen.storyboard */,
+				8579BB571F9A662D00404436 /* ErrorView.xib */,
 			);
 			path = Scout;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				8540345A1CB5AE5100C0C7FD /* Main.storyboard in Resources */,
 				85929A8A1DDC1EAF0020F311 /* Launch Screen.storyboard in Resources */,
 				89A082151DC171E100C25FE6 /* scoutConfig.plist in Resources */,
+				8579BB551F9A662D00404436 /* ErrorView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,6 +464,14 @@
 				854034591CB5AE5100C0C7FD /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8579BB571F9A662D00404436 /* ErrorView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8579BB561F9A662D00404436 /* Base */,
+			);
+			name = ErrorView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
