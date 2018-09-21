@@ -64,7 +64,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         let sessionURL = session.webView.url?.absoluteString
         
         // location specific feature
-        /**
         if (sessionURL == nil) {
             print ("looking for location")
         } else {
@@ -75,7 +74,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
                 presentVisitableForSession(session, URL: URL, action: .Replace)
             }
         }
-         **/
         
         if (sessionURL != nil) {
             if (sessionURL!.lowercased().range(of: campus) == nil) {
