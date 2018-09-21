@@ -1,8 +1,9 @@
 //
 //  DiscoverViewController.swift
-//  UW Scout
+//  Scout
 //
-//  Copyright © 2017 UW-IT AXDD. All rights reserved.
+//  Created by Charlon Palacay on 7/14/16.
+//  Copyright © 2016 Charlon Palacay. All rights reserved.
 //
 
 import UIKit
@@ -13,15 +14,15 @@ import CoreLocation
 class DiscoverViewController: ApplicationController {
     
     override var URL: Foundation.URL {
-        // location specific feature
-        /*if CLLocationManager.locationServicesEnabled() {
+
+        if CLLocationManager.locationServicesEnabled() {
             return Foundation.URL(string: "\(host)/\(campus)/?\(location)")!
             
         } else {
             return Foundation.URL(string: "\(host)/\(campus)/")!
-        }*/
+        }
         
-        return Foundation.URL(string: "\(host)/\(campus)/")!
+
     }
     
     // discover visit controller
@@ -32,16 +33,10 @@ class DiscoverViewController: ApplicationController {
         // discover home
         if URL.path == "/h/\(campus)" {
             
-            let campusButton : UIBarButtonItem = UIBarButtonItem(title: (campus).capitalized, style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.chooseCampus))
-            //let settingsButton : UIBarButtonItem = UIBarButtonItem(title: " ", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ApplicationController.openSettings))
-            
-            //let buttonIcon = UIImage(named: "ic_settings")
-            //settingsButton.image = buttonIcon
-            
+            // create top/right button to handle campus switching
+            let campusButton : UIBarButtonItem = UIBarButtonItem(title: (campus).capitalized, style: .plain, target: self, action: #selector(ApplicationController.chooseCampus))
             visitable.navigationItem.rightBarButtonItem = campusButton
-            //visitable.navigationItem.rightBarButtonItem = settingsButton
-            
-            visitable.navigationItem.setRightBarButtonItems([/*settingsButton,*/ campusButton], animated: true)
+            visitable.navigationItem.setRightBarButtonItems([campusButton], animated: true)
             
         }
         
