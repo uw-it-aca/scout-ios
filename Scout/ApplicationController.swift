@@ -104,7 +104,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     // show filter
     @objc func presentFilter() {
         // location specific URL
-        // let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
+        let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
 
         
         presentVisitableForSession(session, URL: URL)
