@@ -196,12 +196,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     }
 
     
-    func openSettings() {
-        // no longer supported in ios10.. sucks!
-        // UIApplication.sharedApplication().openURL(NSURL(string:"prefs:root=Scout")!)
-    }
-    
-    
     func setUserLocation() {
         
         // ask authorization only when in use by user
@@ -232,22 +226,16 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         guard let locValue = manager.location?.coordinate else {
             return
         }
-        // send the lat/lng to the geolocation function on web
-        // session.webView.evaluateJavaScript("$.event.trigger(Geolocation.location_updating)", completionHandler: nil)
-        // session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
-        // session.webView.evaluateJavaScript("Geolocation.send_client_location(\(locValue.latitude),\(locValue.longitude))", completionHandler: nil)
-        
+
         // update user location variable and reload the URL
         location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
-        //print("user location.. \(location)")
+
         presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
-        //print("Error while updating location: " + error.localizedDescription)
-        //session.webView.evaluateJavaScript("Geolocation.set_is_using_location(false)", completionHandler: nil)
-        print("error")
+        print("Error while updating location: " + error.localizedDescription)
     }
     
     /*** INTERNET CONNECTION ERROR HANDLING SCOUT-710 & SCOUT-722 ***/
@@ -272,11 +260,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     @objc func retry(_ sender: AnyObject) {
         errorView.removeFromSuperview()
-        print("have user reload the app if they become disconnected")
-        
-        // force reload of the current URL
-        //presentVisitableForSession(session, URL: URL, action: .Replace)
-        
         // much cleaner way to reload session
         session.reload()
     }
