@@ -235,8 +235,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-        
+        guard let locValue = manager.location?.coordinate else {
+            return
+        }
         // send the lat/lng to the geolocation function on web
         // session.webView.evaluateJavaScript("$.event.trigger(Geolocation.location_updating)", completionHandler: nil)
         // session.webView.evaluateJavaScript("Geolocation.set_is_using_location(true)", completionHandler: nil)
