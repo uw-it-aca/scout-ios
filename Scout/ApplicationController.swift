@@ -113,11 +113,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     // submit filter function when user clickes on the filter back button
     @objc func submitFilter(){
         // set a new visitable URL that includes params and location
-        // let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(location)&\(params)")!
-        
-        // set a new visitable URL with only params
-        let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(params)")!
-
+        let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(location)&\(params)")!
         
         // get the previous URL and params from the session URL (presentFilter function)
         let sessionURL = session.webView.url?.absoluteString
