@@ -62,7 +62,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
     }
     
-    /*******
+ 
     override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
         
@@ -75,9 +75,11 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             // check to see if the campus or location has changed from what was previously set in session
             if (sessionURL!.lowercased().range(of: campus) == nil) {
                 presentVisitableForSession(session, URL: URL, action: .Replace)
-            } else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
-                presentVisitableForSession(session, URL: URL, action: .Replace)
             }
+            
+            /*else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
+                presentVisitableForSession(session, URL: URL, action: .Replace)
+            }*/
         }
         
         if (sessionURL != nil) {
@@ -87,8 +89,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         }
         
     }
- *******/
-    
+ 
     // generic visit controller... can be overridden by each view controller
     func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
@@ -110,8 +111,18 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         print("app moved to foreground...")
         // only set user location if services are enabled
         if CLLocationManager.locationServicesEnabled() {
+            print("location sharing enabled...")
             setUserLocation()
         }
+        else {
+            print("location sharing disabled...")
+            // clear the user location
+            location = ""
+            // turbolinks visit with location
+            presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        }
+        
+        
     }
     
     // show filter
