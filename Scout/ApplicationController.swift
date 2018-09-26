@@ -201,7 +201,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         self.locationManager.requestWhenInUseAuthorization()
         
         // set distanceFilter to only send location update if position changed from previous
-        self.locationManager.distanceFilter = 1000 // 1000 meters.. or 1096 yards (half football field * 10)
+        self.locationManager.distanceFilter = 200 // 200 meters
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         
         // start updating location
