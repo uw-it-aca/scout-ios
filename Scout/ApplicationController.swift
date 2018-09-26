@@ -55,8 +55,12 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // turbolinks visit
         presentVisitableForSession(session, URL: URL)
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
+        
     }
-
+    
     override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
         
@@ -98,6 +102,11 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         session.visit(visitable)
         
+    }
+    
+    @objc func appMovedToForeground() {
+        print("App moved to ForeGround!")
+        setUserLocation()
     }
     
     // show filter
@@ -201,7 +210,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         self.locationManager.requestWhenInUseAuthorization()
         
         // set distanceFilter to only send location update if position changed from previous
-        self.locationManager.distanceFilter = 200 // 200 meters
+        //self.locationManager.distanceFilter = 200 // 200 meters
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         
         // start updating location
