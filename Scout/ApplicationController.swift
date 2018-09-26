@@ -50,14 +50,19 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // user location feature
+        // user location feature (async)
         setUserLocation()
-        if (!CLLocationManager.locationServicesEnabled()) {
-            presentVisitableForSession(session, URL: URL)
-        }
+    
+        // initial turbolinks visit
         presentVisitableForSession(session, URL: URL)
+     
+        // notification handler for detecting app foreground state
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
+        
     }
-
+    
+ 
     override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
         
@@ -65,14 +70,16 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // location specific feature
         if (sessionURL == nil) {
-            print ("looking for location")
+            print ("no session url provided yet...")
         } else {
             // check to see if the campus or location has changed from what was previously set in session
             if (sessionURL!.lowercased().range(of: campus) == nil) {
                 presentVisitableForSession(session, URL: URL, action: .Replace)
-            } else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
-                presentVisitableForSession(session, URL: URL, action: .Replace)
             }
+            
+            /*else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
+                presentVisitableForSession(session, URL: URL, action: .Replace)
+            }*/
         }
         
         if (sessionURL != nil) {
@@ -82,11 +89,10 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         }
         
     }
-    
+ 
     // generic visit controller... can be overridden by each view controller
     func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
-   
         let visitable = VisitableViewController(url: URL)
                 
         // handle actions
@@ -101,12 +107,28 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
     }
     
+    @objc func appMovedToForeground() {
+        print("app moved to foreground...")
+        // only set user location if services are enabled
+        if CLLocationManager.locationServicesEnabled() {
+            print("location sharing enabled...")
+            setUserLocation()
+        }
+        else {
+            print("location sharing disabled...")
+            // clear the user location
+            location = ""
+            // turbolinks visit with location
+            presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        }
+        
+        
+    }
+    
     // show filter
     @objc func presentFilter() {
         // location specific URL
         let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
-
-        
         presentVisitableForSession(session, URL: URL)
     }
     
@@ -198,25 +220,18 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     func setUserLocation() {
         
+        self.locationManager.delegate = self
+        
         // ask authorization only when in use by user
         self.locationManager.requestWhenInUseAuthorization()
         
+        // set distanceFilter to only send location update if position changed from previous
+        //self.locationManager.distanceFilter = 200 // 200 meters
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         
-        if CLLocationManager.locationServicesEnabled() {
-            
-            //print("location enabled... send user location")
-            self.locationManager.delegate = self
-            // set distanceFilter to only send location update if position changed
-            self.locationManager.distanceFilter = 1000 // 1000 meters.. or 1096 yards (half football field * 10)
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            self.locationManager.requestLocation()
-            
-        } else {
-            print("location disabled.. will use campus default locations instead")
-        }
-        
-        
-        
+        // start updating location
+        self.locationManager.startUpdatingLocation()
+  
     }
     
     // locationManager delegate functions
@@ -231,17 +246,25 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             // Location services are available, so query the user’s location.
             // update user location variable and reload the URL
             location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
+            print ("location found..." + location)
+            
         } else {
             // no location services... clear location
             location = ""
+            print ("location services disabled...")
         }
-
+        
+        // turbolinks visit with location
         presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        
+        print ("location was passed... now stop updating!")
+        self.locationManager.stopUpdatingLocation()
         
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
         print("Error while updating location: " + error.localizedDescription)
+        self.locationManager.stopUpdatingLocation()
     }
     
     /*** INTERNET CONNECTION ERROR HANDLING SCOUT-710 & SCOUT-722 ***/
