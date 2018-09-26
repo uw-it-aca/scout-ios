@@ -226,9 +226,15 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         guard let locValue = manager.location?.coordinate else {
             return
         }
-
-        // update user location variable and reload the URL
-        location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
+        
+        if CLLocationManager.locationServicesEnabled() {
+            // Location services are available, so query the user’s location.
+            // update user location variable and reload the URL
+            location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
+        } else {
+            // no location services... clear location
+            location = ""
+        }
 
         presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
