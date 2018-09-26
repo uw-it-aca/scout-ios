@@ -52,9 +52,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // user location feature
         setUserLocation()
-        if (!CLLocationManager.locationServicesEnabled()) {
-            presentVisitableForSession(session, URL: URL)
-        }
+        
+        // turbolinks visit
         presentVisitableForSession(session, URL: URL)
     }
 
@@ -65,7 +64,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // location specific feature
         if (sessionURL == nil) {
-            print ("looking for location")
+            print ("no session url provided yet...")
         } else {
             // check to see if the campus or location has changed from what was previously set in session
             if (sessionURL!.lowercased().range(of: campus) == nil) {
@@ -105,8 +104,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     @objc func presentFilter() {
         // location specific URL
         let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
-
-        
         presentVisitableForSession(session, URL: URL)
     }
     
@@ -198,25 +195,18 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     func setUserLocation() {
         
+        self.locationManager.delegate = self
+        
         // ask authorization only when in use by user
         self.locationManager.requestWhenInUseAuthorization()
         
+        // set distanceFilter to only send location update if position changed from previous
+        self.locationManager.distanceFilter = 1000 // 1000 meters.. or 1096 yards (half football field * 10)
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         
-        if CLLocationManager.locationServicesEnabled() {
-            
-            //print("location enabled... send user location")
-            self.locationManager.delegate = self
-            // set distanceFilter to only send location update if position changed
-            self.locationManager.distanceFilter = 1000 // 1000 meters.. or 1096 yards (half football field * 10)
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            self.locationManager.requestLocation()
-            
-        } else {
-            print("location disabled.. will use campus default locations instead")
-        }
-        
-        
-        
+        // start updating location
+        self.locationManager.startUpdatingLocation()
+  
     }
     
     // locationManager delegate functions
@@ -231,12 +221,19 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             // Location services are available, so query the user’s location.
             // update user location variable and reload the URL
             location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
+            print ("location found..." + location)
+            
         } else {
             // no location services... clear location
             location = ""
+            print ("location services disabled...")
         }
-
+        
+        // turbolinks visit with location
         presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        
+        print ("location was passed... now stop updating!")
+        self.locationManager.stopUpdatingLocation()
         
     }
     
