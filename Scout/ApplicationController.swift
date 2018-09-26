@@ -50,17 +50,19 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // user location feature
+        // user location feature (async)
         setUserLocation()
-        
-        // turbolinks visit
+    
+        // initial turbolinks visit
         presentVisitableForSession(session, URL: URL)
-        
+     
+        // notification handler for detecting app foreground state
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
         
     }
     
+    /*******
     override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
         
@@ -85,11 +87,11 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         }
         
     }
+ *******/
     
     // generic visit controller... can be overridden by each view controller
     func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
-   
         let visitable = VisitableViewController(url: URL)
                 
         // handle actions
@@ -105,8 +107,11 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     }
     
     @objc func appMovedToForeground() {
-        print("App moved to ForeGround!")
-        setUserLocation()
+        print("app moved to foreground...")
+        // only set user location if services are enabled
+        if CLLocationManager.locationServicesEnabled() {
+            setUserLocation()
+        }
     }
     
     // show filter
@@ -248,6 +253,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
         print("Error while updating location: " + error.localizedDescription)
+        self.locationManager.stopUpdatingLocation()
     }
     
     /*** INTERNET CONNECTION ERROR HANDLING SCOUT-710 & SCOUT-722 ***/
