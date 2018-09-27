@@ -82,11 +82,13 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             }
         }
         
+        /**
         if (sessionURL != nil) {
             if (sessionURL!.lowercased().range(of: campus) == nil) {
                 presentVisitableForSession(session, URL: URL, action: .Replace)
             }
         }
+        **/
         
     }
  
@@ -118,7 +120,10 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             print("location sharing disabled...")
             // clear the user location
             location = ""
-            // turbolinks visit with location
+            
+            // turbolinks visit with empty location
+            print("params are..." + params);
+            print(URL);
             presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         }
         
@@ -134,6 +139,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     // submit filter function when user clickes on the filter back button
     @objc func submitFilter(){
+        
         // set a new visitable URL that includes params and location
         let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(location)&\(params)")!
         
@@ -254,7 +260,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             print ("location services disabled...")
         }
         
-        // turbolinks visit with location
+        // turbolinks visit with user location
+        print("params are..." + params);
+        print(URL);
         presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
         print ("location was passed... now stop updating!")
