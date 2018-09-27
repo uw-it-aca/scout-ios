@@ -76,10 +76,10 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             if (sessionURL!.lowercased().range(of: campus) == nil) {
                 presentVisitableForSession(session, URL: URL, action: .Replace)
             }
-            
-            /*else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
+            // fixes network timework error message when coming back from background.. not sure why, but this code fixes it!
+            else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
                 presentVisitableForSession(session, URL: URL, action: .Replace)
-            }*/
+            }
         }
         
         if (sessionURL != nil) {
