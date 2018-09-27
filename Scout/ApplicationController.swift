@@ -154,6 +154,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             popViewController(animated: true);
         } else {
             // if they are different, force a reload by using the Replace action
+            print("filter visit will be made using url...")
+            print(visitURL)
             presentVisitableForSession(session, URL: visitURL, action: .Replace)
         }
         
@@ -262,10 +264,11 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // turbolinks visit with user location
         print("params are..." + params);
+        print("visit with user location will be made using following url...");
         print(URL);
         presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
-        print ("location was passed... now stop updating!")
+        //print ("location was passed... now stop updating!")
         self.locationManager.stopUpdatingLocation()
         
     }
