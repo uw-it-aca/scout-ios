@@ -14,12 +14,12 @@ import CoreLocation
 class StudyViewController: ApplicationController {
     
     override var URL: Foundation.URL {
-        
+        print("STUDY PARAMS... \(params)")
         if CLLocationManager.locationServicesEnabled() {
-            return Foundation.URL(string: "\(host)/\(campus)/study/?\(location)")!
+            return Foundation.URL(string: "\(host)/\(campus)/study/?\(location)&\(study_params)")!
             
         } else {
-            return Foundation.URL(string: "\(host)/\(campus)/study/")!
+            return Foundation.URL(string: "\(host)/\(campus)/study/?\(study_params)")!
         }
     }
     
@@ -64,7 +64,7 @@ class StudyViewController: ApplicationController {
     
     override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
-        
+        print("StudyViewDidAppear")
         // set app_type to study
         app_type = "study"
         params = study_params

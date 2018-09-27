@@ -76,17 +76,19 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             if (sessionURL!.lowercased().range(of: campus) == nil) {
                 presentVisitableForSession(session, URL: URL, action: .Replace)
             }
-            
-            /*else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
+            // fixes network timework error message when coming back from background.. not sure why, but this code fixes it!
+            else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
                 presentVisitableForSession(session, URL: URL, action: .Replace)
-            }*/
+            }
         }
         
+        /**
         if (sessionURL != nil) {
             if (sessionURL!.lowercased().range(of: campus) == nil) {
                 presentVisitableForSession(session, URL: URL, action: .Replace)
             }
         }
+        **/
         
     }
  
@@ -118,7 +120,10 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             print("location sharing disabled...")
             // clear the user location
             location = ""
-            // turbolinks visit with location
+            
+            // turbolinks visit with empty location
+            print("params are..." + params);
+            print(URL);
             presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         }
         
@@ -127,13 +132,14 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     // show filter
     @objc func presentFilter() {
-        // location specific URL
-        let URL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
-        presentVisitableForSession(session, URL: URL)
+        // filter specific url so we know what params were set
+        let filterURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
+        presentVisitableForSession(session, URL: filterURL)
     }
     
     // submit filter function when user clickes on the filter back button
     @objc func submitFilter(){
+        
         // set a new visitable URL that includes params and location
         let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(location)&\(params)")!
         
@@ -148,6 +154,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             popViewController(animated: true);
         } else {
             // if they are different, force a reload by using the Replace action
+            print("filter visit will be made using url...")
+            print(visitURL)
             presentVisitableForSession(session, URL: visitURL, action: .Replace)
         }
         
@@ -254,10 +262,13 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             print ("location services disabled...")
         }
         
-        // turbolinks visit with location
+        // turbolinks visit with user location
+        print("params are..." + params);
+        print("visit with user location will be made using following url...");
+        print(URL);
         presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
-        print ("location was passed... now stop updating!")
+        //print ("location was passed... now stop updating!")
         self.locationManager.stopUpdatingLocation()
         
     }
