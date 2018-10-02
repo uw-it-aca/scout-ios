@@ -26,7 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    var firstTabNavigationController : UINavigationController!
+    var secondTabNavigationControoller : UINavigationController!
+    var thirdTabNavigationController : UINavigationController!
+    var fourthTabNavigationControoller : UINavigationController!
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
         
         // read in config
         if let path = Bundle.main.path(forResource: "scoutConfig", ofType: "plist"), let config = NSDictionary(contentsOfFile: path) as? [String: AnyObject] {
@@ -40,7 +47,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 campus = config["default_campus"] as! String
             }
         }
-
+        
+        // tabbar setup
+        let tabBarController = UITabBarController()
+        
+        firstTabNavigationController = DiscoverViewController()
+        secondTabNavigationControoller = FoodViewController()
+        thirdTabNavigationController = StudyViewController()
+        fourthTabNavigationControoller = TechViewController()
+        
+        tabBarController.viewControllers = [firstTabNavigationController, secondTabNavigationControoller, thirdTabNavigationController, fourthTabNavigationControoller]
+        
+        let item1 = UITabBarItem(title: "Discover", image: UIImage(named: "ic_home"), tag: 0)
+        let item2 = UITabBarItem(title: "Food", image:  UIImage(named: "ic_restaurant"), tag: 1)
+        let item3 = UITabBarItem(title: "Study", image:  UIImage(named: "ic_local_library"), tag: 2)
+        let item4 = UITabBarItem(title: "Tech", image:  UIImage(named: "ic_computer"), tag: 3)
+        
+        firstTabNavigationController.tabBarItem = item1
+        secondTabNavigationControoller.tabBarItem = item2
+        thirdTabNavigationController.tabBarItem = item3
+        fourthTabNavigationControoller.tabBarItem = item4
+        
+        // Tabbaar setup
+        UITabBar.appearance().tintColor = hexStringToUIColor("#514DA3")
+        
+        self.window?.rootViewController = tabBarController
+        
+        // navbar setup
+        
         UINavigationBar.appearance().barTintColor = hexStringToUIColor("#514DA3")
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = hexStringToUIColor("#ffffff")
@@ -51,7 +85,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // globally set background to white
         self.window!.backgroundColor = hexStringToUIColor("#ffffff")
-                
+        
+        
+        window?.makeKeyAndVisible()
+        
         // Override point for customization after application launch.
         return true
     }

@@ -11,7 +11,6 @@
 		854034531CB5AE5100C0C7FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034521CB5AE5100C0C7FD /* AppDelegate.swift */; };
 		854034551CB5AE5100C0C7FD /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034541CB5AE5100C0C7FD /* FoodViewController.swift */; };
 		854034571CB5AE5100C0C7FD /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034561CB5AE5100C0C7FD /* StudyViewController.swift */; };
-		8540345A1CB5AE5100C0C7FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 854034581CB5AE5100C0C7FD /* Main.storyboard */; };
 		8540345C1CB5AE5100C0C7FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8540345B1CB5AE5100C0C7FD /* Assets.xcassets */; };
 		8540346A1CB5AE5100C0C7FD /* ScoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034691CB5AE5100C0C7FD /* ScoutTests.swift */; };
 		854034751CB5AE5100C0C7FD /* ScoutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854034741CB5AE5100C0C7FD /* ScoutUITests.swift */; };
@@ -62,7 +61,6 @@
 		854034521CB5AE5100C0C7FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		854034541CB5AE5100C0C7FD /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
 		854034561CB5AE5100C0C7FD /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
-		854034591CB5AE5100C0C7FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8540345B1CB5AE5100C0C7FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		854034601CB5AE5100C0C7FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		854034651CB5AE5100C0C7FD /* ScoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,7 +137,6 @@
 				854034541CB5AE5100C0C7FD /* FoodViewController.swift */,
 				854034561CB5AE5100C0C7FD /* StudyViewController.swift */,
 				8572A3391D38169300D80248 /* TechViewController.swift */,
-				854034581CB5AE5100C0C7FD /* Main.storyboard */,
 				8540345B1CB5AE5100C0C7FD /* Assets.xcassets */,
 				854034601CB5AE5100C0C7FD /* Info.plist */,
 				854034851CB5B17F00C0C7FD /* Error.swift */,
@@ -295,7 +292,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8540345C1CB5AE5100C0C7FD /* Assets.xcassets in Resources */,
-				8540345A1CB5AE5100C0C7FD /* Main.storyboard in Resources */,
 				85929A8A1DDC1EAF0020F311 /* Launch Screen.storyboard in Resources */,
 				89A082151DC171E100C25FE6 /* scoutConfig.plist in Resources */,
 				8579BB551F9A662D00404436 /* ErrorView.xib in Resources */,
@@ -458,14 +454,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		854034581CB5AE5100C0C7FD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				854034591CB5AE5100C0C7FD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8579BB571F9A662D00404436 /* ErrorView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
