@@ -62,28 +62,30 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
     }
     
- 
+
     override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
         
         let sessionURL = session.webView.url?.absoluteString
         
-        // location specific feature
-        if (sessionURL == nil) {
-            print ("no session url provided yet...")
-        } else {
-            // check to see if the campus or location has changed from what was previously set in session
+            // maintain turbolinks cache/session UNLESS the following things occur!
+        
+            // check to see if the campus has changed from what was previously set in session, if it has... force a reload of the entire application
             if (sessionURL!.lowercased().range(of: campus) == nil) {
                 presentVisitableForSession(session, URL: URL, action: .Replace)
             }
+                
+            /*** TODO: FIX LOGIC TO RELOAD WHEN LOCATION HAS CHANGED
             // fixes network timework error message when coming back from background.. not sure why, but this code fixes it!
             else if ((CLLocationManager.locationServicesEnabled()) && (sessionURL!.lowercased().range(of: location) == nil)) {
                 presentVisitableForSession(session, URL: URL, action: .Replace)
             }
-        }
+            ***/
+      
         
     }
- 
+
+    
     // generic visit controller... can be overridden by each view controller
     func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
