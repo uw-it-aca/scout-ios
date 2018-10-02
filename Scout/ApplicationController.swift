@@ -82,14 +82,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             }
         }
         
-        /**
-        if (sessionURL != nil) {
-            if (sessionURL!.lowercased().range(of: campus) == nil) {
-                presentVisitableForSession(session, URL: URL, action: .Replace)
-            }
-        }
-        **/
-        
     }
  
     // generic visit controller... can be overridden by each view controller
