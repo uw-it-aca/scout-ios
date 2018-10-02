@@ -67,6 +67,7 @@ class FoodViewController: ApplicationController {
         session.visit(visitable)
     }
     
+
     override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
         print("FoodViewDidAppear")
@@ -75,6 +76,6 @@ class FoodViewController: ApplicationController {
         params = food_params
         
     }
-    
+  
     
 }
