@@ -10,29 +10,33 @@ import UIKit
 import WebKit
 import Turbolinks
 
+// global variables
 var host = ""
 var campus = ""
 var app_type = ""
 var params = ""
 var location = ""
 
-// ONLY TO BE USED BY viewDidAppear
+// only to be used on viewDidAppear for each view controller
 var food_params = ""
 var study_params = ""
 var tech_params = ""
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
+    // window controller
     var window: UIWindow?
     
-    var firstTabNavigationController : UINavigationController!
-    var secondTabNavigationControoller : UINavigationController!
-    var thirdTabNavigationController : UINavigationController!
-    var fourthTabNavigationControoller : UINavigationController!
+    // tab navigation controllers
+    var discoverTabController : UINavigationController!
+    var foodTabControoller : UINavigationController!
+    var studyTabController : UINavigationController!
+    var techTabControoller : UINavigationController!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        // set window controller to be the main screen
         window = UIWindow(frame: UIScreen.main.bounds)
         
         // read in config
@@ -48,48 +52,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        // tabbar setup
+        // tabbar controller setup
         let tabBarController = UITabBarController()
         
-        firstTabNavigationController = DiscoverViewController()
-        secondTabNavigationControoller = FoodViewController()
-        thirdTabNavigationController = StudyViewController()
-        fourthTabNavigationControoller = TechViewController()
+        // assign each view controller to a tab controller
+        discoverTabController = DiscoverViewController()
+        foodTabControoller = FoodViewController()
+        studyTabController = StudyViewController()
+        techTabControoller = TechViewController()
         
-        tabBarController.viewControllers = [firstTabNavigationController, secondTabNavigationControoller, thirdTabNavigationController, fourthTabNavigationControoller]
+        // build the tabbar array of tab controllers
+        tabBarController.viewControllers = [discoverTabController, foodTabControoller, studyTabController, techTabControoller]
         
+        // customize each tabbar item
         let item1 = UITabBarItem(title: "Discover", image: UIImage(named: "ic_home"), tag: 0)
         let item2 = UITabBarItem(title: "Food", image:  UIImage(named: "ic_restaurant"), tag: 1)
         let item3 = UITabBarItem(title: "Study", image:  UIImage(named: "ic_local_library"), tag: 2)
         let item4 = UITabBarItem(title: "Tech", image:  UIImage(named: "ic_computer"), tag: 3)
         
-        firstTabNavigationController.tabBarItem = item1
-        secondTabNavigationControoller.tabBarItem = item2
-        thirdTabNavigationController.tabBarItem = item3
-        fourthTabNavigationControoller.tabBarItem = item4
+        discoverTabController.tabBarItem = item1
+        foodTabControoller.tabBarItem = item2
+        studyTabController.tabBarItem = item3
+        techTabControoller.tabBarItem = item4
         
-        // Tabbaar setup
+        // tabbar text/icon color setup
         UITabBar.appearance().tintColor = hexStringToUIColor("#514DA3")
         
+        // display active view controller (root) based on the tabbar controller being selected
         self.window?.rootViewController = tabBarController
         
-        // navbar setup
+        // customize the navbar appearance
+        
+        /***
+        if #available(iOS 11.0, *) {
+            UINavigationBar.appearance().prefersLargeTitles = true
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        }
+        ***/
         
         UINavigationBar.appearance().barTintColor = hexStringToUIColor("#514DA3")
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = hexStringToUIColor("#ffffff")
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : hexStringToUIColor("#ffffff")]
         
-        // globally set tint color
+        // globally set tint (text) color for native controllers (e.g modal)
         self.window!.tintColor = hexStringToUIColor("#514DA3")
         
         // globally set background to white
         self.window!.backgroundColor = hexStringToUIColor("#ffffff")
         
-        
+        // finalize window setup... 
         window?.makeKeyAndVisible()
-        
-        // Override point for customization after application launch.
         return true
     }
     
@@ -118,7 +131,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // custom hex color function
     func hexStringToUIColor (_ hex:String) -> UIColor {
         
-        //var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercased()
         var cString:String = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
         
         if (cString.hasPrefix("#")) {
@@ -137,7 +149,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Scanner(string: rString).scanHexInt32(&r)
         Scanner(string: gString).scanHexInt32(&g)
         Scanner(string: bString).scanHexInt32(&b)
-        
         
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
     }
