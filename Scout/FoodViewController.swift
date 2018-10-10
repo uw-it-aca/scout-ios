@@ -40,6 +40,7 @@ class FoodViewController: ApplicationController {
             
         } else if URL.path == "/h/\(campus)/food/filter" {
             
+            /**
             let backButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.submitFilter))
             let backButtonText : UIBarButtonItem = UIBarButtonItem(title: "Food", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.submitFilter))
             
@@ -50,8 +51,13 @@ class FoodViewController: ApplicationController {
             visitable.navigationItem.leftBarButtonItem = backButtonText
             
             visitable.navigationItem.setLeftBarButtonItems([backButton, backButtonText], animated: true)
-
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.clearFilter))
+            ***/
+            
+            visitable.navigationItem.hidesBackButton = true
+            
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Update", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.submitFilter))
+            
+            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.clearFilter))
             
         }
         
