@@ -35,18 +35,14 @@ class StudyViewController: ApplicationController {
             
         } else if URL.path == "/h/\(campus)/study/filter" {
             
-            let backButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.submitFilter))
-            let backButtonText : UIBarButtonItem = UIBarButtonItem(title: "Study", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.submitFilter))
+            // hide the default back button
+            visitable.navigationItem.hidesBackButton = true
             
-            // fix spacing between back arrow and text
-            backButton.imageInsets = UIEdgeInsetsMake(0, -7.0, 0, -30.0)
+            // left button to clear filters
+            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.clearFilter))
             
-            visitable.navigationItem.leftBarButtonItem = backButton
-            visitable.navigationItem.leftBarButtonItem = backButtonText
-            
-            visitable.navigationItem.setLeftBarButtonItems([backButton,backButtonText], animated: true)
-            
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.clearFilter))
+            // right button to update filters
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Update", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.submitFilter))
             
         }
         

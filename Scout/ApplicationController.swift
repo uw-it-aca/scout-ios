@@ -13,9 +13,11 @@ import CoreLocation
 //import CoreMotion
 
 class ApplicationController: UINavigationController,  CLLocationManagerDelegate {
-
+    
+    // initialize location manager
     let locationManager = CLLocationManager()
     
+    // initial URL contstruction
     var URL: Foundation.URL {
         return Foundation.URL(string: "\(host)/\(campus)/\(location)")!
     }
