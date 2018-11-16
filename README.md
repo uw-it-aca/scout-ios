@@ -1,6 +1,6 @@
 ## Installing Scout iOS
 
-Xcode 8 and Swift 2.3
+Xcode 10 and Swift 4.1
 
 Install Carthage
 ```
@@ -19,4 +19,4 @@ $ cd scout-ios
 $ carthage bootstrap
 ```
 
-Open the 'Scout.xcodeproj' in Xcode.
+Open the 'UW Scout.xcodeproj' in Xcode.
