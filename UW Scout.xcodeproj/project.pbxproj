@@ -246,7 +246,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 1000;
-				ORGANIZATIONNAME = "UW-IT AXDD";
+				ORGANIZATIONNAME = "University of Washington";
 				TargetAttributes = {
 					8540344E1CB5AE5100C0C7FD = {
 						CreatedOnToolsVersion = 7.3;
