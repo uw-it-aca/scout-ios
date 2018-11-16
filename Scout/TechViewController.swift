@@ -14,7 +14,6 @@ import CoreLocation
 class TechViewController: ApplicationController {
     
     override var URL: Foundation.URL {
-        print("TECH PARAMS... \(params)")
         if CLLocationManager.locationServicesEnabled() {
             return Foundation.URL(string: "\(host)/\(campus)/tech/?\(location)&\(tech_params)")!
             

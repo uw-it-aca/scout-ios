@@ -14,7 +14,6 @@ import CoreLocation
 class FoodViewController: ApplicationController {
     
     override var URL: Foundation.URL {
-        print("FOOD PARAMS... \(params)")
         if CLLocationManager.locationServicesEnabled() {
             return Foundation.URL(string: "\(host)/\(campus)/food/?\(location)&\(food_params)")!
             
@@ -66,7 +65,6 @@ class FoodViewController: ApplicationController {
 
     override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
-        print("FoodViewDidAppear")
         // set app_type to food
         app_type = "food"
         params = food_params

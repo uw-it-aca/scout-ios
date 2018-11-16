@@ -97,20 +97,15 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     }
     
     @objc func appMovedToForeground() {
-        print("app moved to foreground...")
         // only set user location if services are enabled
         if CLLocationManager.locationServicesEnabled() {
-            print("location sharing enabled...")
             setUserLocation()
         }
         else {
-            print("location sharing disabled...")
             // clear the user location
             location = ""
             
             // turbolinks visit with empty location
-            print("params are..." + params);
-            print(URL);
             presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         }
     }
@@ -139,8 +134,6 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             popViewController(animated: true);
         } else {
             // if they are different, force a reload by using the Replace action
-            print("filter visit will be made using url...")
-            print(visitURL)
             presentVisitableForSession(session, URL: visitURL, action: .Replace)
         }
         
@@ -239,27 +232,21 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             // Location services are available, so query the user’s location.
             // update user location variable and reload the URL
             location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
-            print ("location found..." + location)
             
         } else {
             // no location services... clear location
             location = ""
-            print ("location services disabled...")
         }
         
         // turbolinks visit with user location
-        print("params are..." + params);
-        print("visit with user location will be made using following url...");
-        print(URL);
         presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
-        //print ("location was passed... now stop updating!")
         self.locationManager.stopUpdatingLocation()
         
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
-        print("Error while updating location: " + error.localizedDescription)
+        NSLog("Error while updating location: %@", error.localizedDescription)
         self.locationManager.stopUpdatingLocation()
     }
     
@@ -314,7 +301,7 @@ extension ApplicationController: SessionDelegate {
                 presentError(Error(HTTPStatusCode: statusCode))
             }
         case .networkFailure:
-            print("no internet connection error happened")
+            NSLog("no internet connection error happened")
             presentError(.NetworkError)
         }
     }
