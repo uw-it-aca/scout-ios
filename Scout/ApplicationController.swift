@@ -104,8 +104,12 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // INVESTIGATE... for index.html head... use the 'no-preview' directive to opt out of snapshot previews?
         
         /* [Snapshotting] Snapshotting a view (0x1038ca800, Turbolinks.WebView) that is not in a visible window requires afterScreenUpdates:YES. */
-        session.reload()
-   
+        //session.reload()
+        
+        let sessionURL = session.webView.url?.absoluteString
+        print(sessionURL as Any)
+        
+        /*
         // only set user location if services are enabled
         if CLLocationManager.locationServicesEnabled() {
             print("moved to forground w/ location")
@@ -113,12 +117,14 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         }
         else {
             
+            // if the user turns off location sharing while the app is in the background... make sure to clear location value
             // clear the user location
             location = ""
             
             // turbolinks visit with empty location
             presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         }
+ */
 
     }
     
