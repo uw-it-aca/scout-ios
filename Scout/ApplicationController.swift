@@ -224,7 +224,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         self.locationManager.requestWhenInUseAuthorization()
         
         // set distanceFilter to only send location update if position changed from previous
-        //self.locationManager.distanceFilter = 200 // 200 meters
+        self.locationManager.distanceFilter = 100 // 100 meters
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         
         // start updating location
@@ -253,8 +253,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // turbolinks visit with user location
         // presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
-        print(locValue.latitude, " ", locValue.longitude)
-        session.webView.evaluateJavaScript("Geolocation.hybrid_display_location()", completionHandler: nil)
+        print(locValue.latitude, ", ", locValue.longitude)
+        session.webView.evaluateJavaScript("Geolocation.hybrid_display_location(\(locValue.latitude), \(locValue.longitude))", completionHandler: nil)
         
         //self.locationManager.stopUpdatingLocation()
         
