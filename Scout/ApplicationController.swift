@@ -104,7 +104,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // INVESTIGATE... for index.html head... use the 'no-preview' directive to opt out of snapshot previews?
         
         /* [Snapshotting] Snapshotting a view (0x1038ca800, Turbolinks.WebView) that is not in a visible window requires afterScreenUpdates:YES. */
-        //session.reload()
+        session.reload()
    
         // only set user location if services are enabled
         if CLLocationManager.locationServicesEnabled() {
@@ -251,9 +251,12 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         }
         
         // turbolinks visit with user location
-        presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        // presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
-        self.locationManager.stopUpdatingLocation()
+        print(locValue.latitude, " ", locValue.longitude)
+        session.webView.evaluateJavaScript("Geolocation.hybrid_display_location()", completionHandler: nil)
+        
+        //self.locationManager.stopUpdatingLocation()
         
     }
     
