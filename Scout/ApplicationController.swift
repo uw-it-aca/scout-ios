@@ -59,8 +59,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         presentVisitableForSession(session, URL: URL)
      
         // notification handler for detecting app foreground state
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
+        //let notificationCenter = NotificationCenter.default
+        //notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
         
     }
     
@@ -104,7 +104,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // INVESTIGATE... for index.html head... use the 'no-preview' directive to opt out of snapshot previews?
         
         /* [Snapshotting] Snapshotting a view (0x1038ca800, Turbolinks.WebView) that is not in a visible window requires afterScreenUpdates:YES. */
-        session.reload()
+        //session.reload()
    
         // only set user location if services are enabled
         if CLLocationManager.locationServicesEnabled() {
