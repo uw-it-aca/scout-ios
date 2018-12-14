@@ -103,9 +103,11 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // workaround to to reload the session - forcing the entire app to basically refresh everything!
         // INVESTIGATE... for index.html head... use the 'no-preview' directive to opt out of snapshot previews?
         
+
+        
         /* [Snapshotting] Snapshotting a view (0x1038ca800, Turbolinks.WebView) that is not in a visible window requires afterScreenUpdates:YES. */
         session.reload()
-   
+
         // only set user location if services are enabled
         if CLLocationManager.locationServicesEnabled() {
             print("moved to forground w/ location")
@@ -119,6 +121,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             // turbolinks visit with empty location
             presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         }
+            
 
     }
     
@@ -251,7 +254,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         }
         
         // turbolinks visit with user location
-        presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        // presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
         self.locationManager.stopUpdatingLocation()
         
