@@ -234,8 +234,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         self.locationManager.activityType = .fitness
         //self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.allowsBackgroundLocationUpdates = true
-        self.locationManager.pausesLocationUpdatesAutomatically = true
+        
+        //self.locationManager.allowsBackgroundLocationUpdates = true
+        //self.locationManager.pausesLocationUpdatesAutomatically = true
         
         // start updating location
         self.locationManager.startUpdatingLocation()
@@ -266,7 +267,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         print(locValue.latitude, ", ", locValue.longitude)
         session.webView.evaluateJavaScript("Geolocation.hybrid_display_location(\(locValue.latitude), \(locValue.longitude))", completionHandler: nil)
         
-        //self.locationManager.stopUpdatingLocation()
+        self.locationManager.stopUpdatingLocation()
         
     }
     
