@@ -33,6 +33,10 @@
 	<string>"We use your location to help you discover nearby spaces and resources on campus."</string>
 	<key>NSMotionUsageDescription</key>
 	<string>"We use motion to detect if you are traveling in an automobile."</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Launch Screen</string>
 	<key>UIRequiredDeviceCapabilities</key>

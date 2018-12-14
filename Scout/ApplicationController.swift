@@ -221,11 +221,21 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         self.locationManager.delegate = self
         
         // ask authorization only when in use by user
-        self.locationManager.requestWhenInUseAuthorization()
+        //self.locationManager.requestWhenInUseAuthorization()
         
         // set distanceFilter to only send location update if position changed from previous
-        self.locationManager.distanceFilter = 100 // 100 meters
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        //self.locationManager.distanceFilter = 100 // 100 meters
+        //self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        
+        
+        // new geolocation settings
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        self.locationManager.distanceFilter = 200
+        self.locationManager.activityType = .fitness
+        //self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.allowsBackgroundLocationUpdates = true
+        self.locationManager.pausesLocationUpdatesAutomatically = true
         
         // start updating location
         self.locationManager.startUpdatingLocation()
