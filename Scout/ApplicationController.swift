@@ -106,7 +106,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
 
         
         /* [Snapshotting] Snapshotting a view (0x1038ca800, Turbolinks.WebView) that is not in a visible window requires afterScreenUpdates:YES. */
-        session.reload()
+        //session.reload()
 
         // only set user location if services are enabled
         if CLLocationManager.locationServicesEnabled() {
