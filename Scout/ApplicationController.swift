@@ -328,6 +328,8 @@ extension ApplicationController: SessionDelegate {
     func sessionDidFinishRequest(_ session: Session) {
         application.isNetworkActivityIndicatorVisible = false
         
+        print("sessionDidFinishRequest")
+        // TODO: set the user location via evaljs... then trigger the spots to load!
         session.webView.evaluateJavaScript("Geolocation.set_location_using_bridge(12345, 54321)", completionHandler: nil)
         
     }
