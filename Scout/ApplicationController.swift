@@ -327,6 +327,9 @@ extension ApplicationController: SessionDelegate {
     
     func sessionDidFinishRequest(_ session: Session) {
         application.isNetworkActivityIndicatorVisible = false
+        
+        session.webView.evaluateJavaScript("Geolocation.set_location_using_bridge(12345, 54321)", completionHandler: nil)
+        
     }
     
 }
