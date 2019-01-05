@@ -20,6 +20,7 @@
 		8572A33C1D382F0500D80248 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572A33B1D382F0500D80248 /* DiscoverViewController.swift */; };
 		8579BB551F9A662D00404436 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8579BB571F9A662D00404436 /* ErrorView.xib */; };
 		85929A8A1DDC1EAF0020F311 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85929A891DDC1EAF0020F311 /* Launch Screen.storyboard */; };
+		85BDA22A21E162DC004B8D63 /* TurbolinksVisitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BDA22921E162DC004B8D63 /* TurbolinksVisitController.swift */; };
 		8989FE211DCA5707006D02E9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8989FE201DCA5707006D02E9 /* CoreLocation.framework */; };
 		89A082151DC171E100C25FE6 /* scoutConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89A082141DC171E100C25FE6 /* scoutConfig.plist */; };
 		89E8493D1EC6565D00F8944A /* Turbolinks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89E8493C1EC6565D00F8944A /* Turbolinks.framework */; };
@@ -75,6 +76,7 @@
 		8572A33B1D382F0500D80248 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		8579BB561F9A662D00404436 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ErrorView.xib; sourceTree = "<group>"; };
 		85929A891DDC1EAF0020F311 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		85BDA22921E162DC004B8D63 /* TurbolinksVisitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurbolinksVisitController.swift; sourceTree = "<group>"; };
 		8989FE201DCA5707006D02E9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		89A082141DC171E100C25FE6 /* scoutConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = scoutConfig.plist; sourceTree = "<group>"; };
 		89E8493C1EC6565D00F8944A /* Turbolinks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Turbolinks.framework; path = Carthage/Build/iOS/Turbolinks.framework; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				854034541CB5AE5100C0C7FD /* FoodViewController.swift */,
 				854034561CB5AE5100C0C7FD /* StudyViewController.swift */,
 				8572A3391D38169300D80248 /* TechViewController.swift */,
+				85BDA22921E162DC004B8D63 /* TurbolinksVisitController.swift */,
 				8540345B1CB5AE5100C0C7FD /* Assets.xcassets */,
 				854034601CB5AE5100C0C7FD /* Info.plist */,
 				854034851CB5B17F00C0C7FD /* Error.swift */,
@@ -414,6 +417,7 @@
 				8572A33A1D38169300D80248 /* TechViewController.swift in Sources */,
 				854034571CB5AE5100C0C7FD /* StudyViewController.swift in Sources */,
 				851B190F1D5DA7AC0061B30D /* ApplicationController.swift in Sources */,
+				85BDA22A21E162DC004B8D63 /* TurbolinksVisitController.swift in Sources */,
 				8572A33C1D382F0500D80248 /* DiscoverViewController.swift in Sources */,
 				854034881CB5B1A100C0C7FD /* ErrorView.swift in Sources */,
 				854034531CB5AE5100C0C7FD /* AppDelegate.swift in Sources */,

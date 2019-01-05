@@ -25,7 +25,7 @@ class StudyViewController: ApplicationController {
     // study view controller
     override func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
-        let visitable = VisitableViewController(url: URL)
+        let visitable = TurbolinksVisitController(url: URL)
         
         // study home
         if URL.path == "/h/\(campus)/study" {

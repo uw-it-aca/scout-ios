@@ -12,7 +12,7 @@ import Turbolinks
 import CoreLocation
 //import CoreMotion
 
-class ApplicationController: UINavigationController,  CLLocationManagerDelegate {
+class ApplicationController: UINavigationController, CLLocationManagerDelegate {
     
     // initialize location manager
     let locationManager = CLLocationManager()
@@ -79,12 +79,11 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         }
         
     }
-
     
     // generic visit controller... can be overridden by each view controller
     func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
-        let visitable = VisitableViewController(url: URL)
+        let visitable = TurbolinksVisitController(url: URL)
                 
         // handle actions
         if action == .Advance {
@@ -313,7 +312,8 @@ extension ApplicationController: SessionDelegate {
     func session(_ session: Session, didFailRequestForVisitable visitable: Visitable, withError error: NSError) {
         
         NSLog("ERROR: %@", error)
-        guard let errorCode = ErrorCode(rawValue: error.code) else { return }
+        //guard let errorCode = ErrorCode(rawValue: error.code) else { return }
+        guard let turbolinksVisitController = visitable as? TurbolinksVisitController, let errorCode = ErrorCode(rawValue: error.code) else { return }
         
         switch errorCode {
         case .httpFailure:
@@ -322,13 +322,13 @@ extension ApplicationController: SessionDelegate {
             case 401:
                 print("future work to handle authentication")
             case 404:
-                presentError(.HTTPNotFoundError)
+                turbolinksVisitController.presentError(.HTTPNotFoundError)
             default:
-                presentError(Error(HTTPStatusCode: statusCode))
+                turbolinksVisitController.presentError(Error(HTTPStatusCode: statusCode))
             }
         case .networkFailure:
             NSLog("no internet connection error happened")
-            presentError(.NetworkError)
+            turbolinksVisitController.presentError(.NetworkError)
         }
     }
     
@@ -338,15 +338,6 @@ extension ApplicationController: SessionDelegate {
     
     func sessionDidFinishRequest(_ session: Session) {
         application.isNetworkActivityIndicatorVisible = false
-        
-        print("sessionDidFinishRequest")
-        
-        print("evaluateJavaScript: pass global location to hybrid")
-        
-        // pass global saved location using js evaluation
-        session.webView.evaluateJavaScript("Geolocation.set_location_using_bridge(\(user_lat), \(user_lng))", completionHandler: nil)
-        // default campus location
-        // session.webView.evaluateJavaScript("Geolocation.set_location_using_bridge(47.653811, -122.307815)", completionHandler: nil)
     }
     
 }

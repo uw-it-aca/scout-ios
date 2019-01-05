@@ -28,9 +28,9 @@ class DiscoverViewController: ApplicationController {
     // discover visit controller
     override func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
-        print("presentVisitableForSession")
+        print("presentVisitableForSession discover")
         
-        let visitable = VisitableViewController(url: URL)
+        let visitable = TurbolinksVisitController(url: URL)
         
         // discover home
         if URL.path == "/h/\(campus)" {
@@ -50,7 +50,9 @@ class DiscoverViewController: ApplicationController {
             //pushViewController(visitable, animated: false)
             setViewControllers([visitable], animated: false)
         }
-
+        
         session.visit(visitable)
+                
     }
+    
 }

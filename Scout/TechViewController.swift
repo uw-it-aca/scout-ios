@@ -25,7 +25,7 @@ class TechViewController: ApplicationController {
     // tech view controller
     override func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
                 
-        let visitable = VisitableViewController(url: URL)
+        let visitable = TurbolinksVisitController(url: URL)
         
         // tech home
         if URL.path == "/h/\(campus)/tech" {
