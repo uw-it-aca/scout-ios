@@ -52,6 +52,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("viewDidLoad")
+        
         // user location feature (async)
         setUserLocation()
     
@@ -221,6 +223,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     func setUserLocation() {
         
+        print("setUserLocation")
+        
         self.locationManager.delegate = self
         
         // ask authorization only when in use by user
@@ -255,6 +259,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // turbolinks visit with user location
         // presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        
+        print("locationManager")
         
         self.locationManager.stopUpdatingLocation()
         
@@ -329,6 +335,8 @@ extension ApplicationController: SessionDelegate {
         application.isNetworkActivityIndicatorVisible = false
         
         print("sessionDidFinishRequest")
+        
+        print("evaluateJavaScript")
         // TODO: set the user location via evaljs... then trigger the spots to load!
         session.webView.evaluateJavaScript("Geolocation.set_location_using_bridge(12345, 54321)", completionHandler: nil)
         
