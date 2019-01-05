@@ -248,23 +248,26 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
             return
         }
         
+        print("locationManager: save location info to global")
+        
         if CLLocationManager.locationServicesEnabled() {
             // Location services are available, so query the user’s location.
             // update user location variable and reload the URL
+            location_enabled = true
             location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
+            user_lat = locValue.latitude.description
+            user_lng = locValue.longitude.description
             
         } else {
             // no location services... clear location
+            location_enabled = false
             location = ""
+            user_lat = ""
+            user_lng = ""
         }
         
         // turbolinks visit with user location
         // presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
-        
-        print("locationManager: save location to global")
-        
-        user_lat = locValue.latitude.description
-        user_lng = locValue.longitude.description
         
         self.locationManager.stopUpdatingLocation()
         
@@ -276,7 +279,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
     }
     
     /*** INTERNET CONNECTION ERROR HANDLING SCOUT-710 & SCOUT-722 ***/
-    
+    /**
     lazy var errorView: ErrorView = {
         let view = Bundle.main.loadNibNamed("ErrorView", owner: self, options: nil)!.first as! ErrorView
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -300,6 +303,8 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
         // much cleaner way to reload session
         session.reload()
     }
+ 
+ **/
     
 }
 
