@@ -35,12 +35,16 @@ class TurbolinksVisitController: Turbolinks.VisitableViewController {
     
     override func visitableDidRender() {
         print("visitableDidRender")
-        print("evaluateJavaScript: pass global location to hybrid")
         
+        // set the appbar title to the webview's title
+        title = visitableView.webView!.title
+        
+        print("evaluateJavaScript: pass global location to hybrid")
         // pass global saved location using js evaluation
         visitableView.webView!.evaluateJavaScript("Geolocation.set_location_using_bridge(\(user_lat), \(user_lng))", completionHandler: nil)
         // default campus location
         // session.webView.evaluateJavaScript("Geolocation.set_location_using_bridge(47.653811, -122.307815)", completionHandler: nil)
+        
         
     }
     
