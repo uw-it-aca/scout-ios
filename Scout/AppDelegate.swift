@@ -16,6 +16,8 @@ var campus = ""
 var app_type = ""
 var params = ""
 var location = ""
+var user_lat = ""
+var user_lng = ""
 
 // only to be used on viewDidAppear for each view controller
 var food_params = ""

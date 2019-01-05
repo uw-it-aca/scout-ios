@@ -119,8 +119,10 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             
             // clear the user location
             location = ""
+            user_lat = ""
+            user_lng = ""
             
-            // turbolinks visit with empty location
+            // turbolinks visit with empty location and force reload
             presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         }
             
@@ -260,7 +262,10 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // turbolinks visit with user location
         // presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
-        print("locationManager")
+        print("locationManager: save location to global")
+        
+        user_lat = locValue.latitude.description
+        user_lng = locValue.longitude.description
         
         self.locationManager.stopUpdatingLocation()
         
@@ -336,10 +341,12 @@ extension ApplicationController: SessionDelegate {
         
         print("sessionDidFinishRequest")
         
-        print("evaluateJavaScript")
-        // TODO: set the user location via evaljs... then trigger the spots to load!
-        session.webView.evaluateJavaScript("Geolocation.set_location_using_bridge(12345, 54321)", completionHandler: nil)
+        print("evaluateJavaScript: pass global location to hybrid")
         
+        // pass global saved location using js evaluation
+        session.webView.evaluateJavaScript("Geolocation.set_location_using_bridge(\(user_lat), \(user_lng))", completionHandler: nil)
+        // default campus location
+        // session.webView.evaluateJavaScript("Geolocation.set_location_using_bridge(47.653811, -122.307815)", completionHandler: nil)
     }
     
 }
