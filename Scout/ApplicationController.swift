@@ -346,11 +346,11 @@ extension ApplicationController: SessionDelegate {
     
     func sessionDidLoadWebView(_ session: Session) {
         print("sessionDidLoadWebView")
-        print("evaluateJavaScript: pass global location info to webview")
+        print("evaluateJavaScript: pass global location info to webview loader")
         // pass global saved location using js evaluation
         
         if (location_enabled == true) {
-            session.webView.evaluateJavaScript("Geolocation.set_location_using_bridge(\(user_lat), \(user_lng))", completionHandler: nil)
+            session.webView.evaluateJavaScript("WebView.load_app_with_location(\(user_lat), \(user_lng))", completionHandler: nil)
         }
     }
 
