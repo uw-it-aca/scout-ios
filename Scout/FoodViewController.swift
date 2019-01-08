@@ -72,7 +72,3 @@ class FoodViewController: ApplicationController {
     }
     
 }
-
-extension SessionDelegate {
-
-}
