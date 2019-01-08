@@ -177,6 +177,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
                 study_params = ""
                 tech_params = ""
                 UserDefaults.standard.set(campus, forKey: "usercampus")
+                self.session.reload()
                 self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
             }
         })
@@ -188,6 +189,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
                 study_params = ""
                 tech_params = ""
                 UserDefaults.standard.set(campus, forKey: "usercampus")
+                self.session.reload()
                 self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
             }
         })
@@ -199,6 +201,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
                 study_params = ""
                 tech_params = ""
                 UserDefaults.standard.set(campus, forKey: "usercampus")
+                self.session.reload()
                 self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
             }
         })
@@ -256,14 +259,14 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
             // Location services are available, so query the user’s location.
             // update user location variable and reload the URL
             location_enabled = true
-            location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
+            //location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
             user_lat = locValue.latitude.description
             user_lng = locValue.longitude.description
             
         } else {
             // no location services... clear location info
             location_enabled = false
-            location = ""
+            //location = ""
             user_lat = ""
             user_lng = ""
         }
