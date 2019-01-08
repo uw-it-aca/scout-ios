@@ -83,7 +83,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
     // generic visit controller... can be overridden by each view controller
     func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
-        let visitable = TurbolinksVisitController(url: URL)
+        let visitable = VisitableViewController(url: URL)
                 
         // handle actions
         if action == .Advance {
@@ -248,6 +248,8 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
             return
         }
         
+        
+        // TODO: check if location is empyt. check if location coords have changed.
         print("locationManager: save location info to global")
         
         if CLLocationManager.locationServicesEnabled() {
@@ -259,7 +261,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
             user_lng = locValue.longitude.description
             
         } else {
-            // no location services... clear location
+            // no location services... clear location info
             location_enabled = false
             location = ""
             user_lat = ""
@@ -279,7 +281,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
     }
     
     /*** INTERNET CONNECTION ERROR HANDLING SCOUT-710 & SCOUT-722 ***/
-    /**
+ 
     lazy var errorView: ErrorView = {
         let view = Bundle.main.loadNibNamed("ErrorView", owner: self, options: nil)!.first as! ErrorView
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -304,8 +306,6 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
         session.reload()
     }
  
- **/
-    
 }
 
 
@@ -317,8 +317,7 @@ extension ApplicationController: SessionDelegate {
     func session(_ session: Session, didFailRequestForVisitable visitable: Visitable, withError error: NSError) {
         
         NSLog("ERROR: %@", error)
-        //guard let errorCode = ErrorCode(rawValue: error.code) else { return }
-        guard let turbolinksVisitController = visitable as? TurbolinksVisitController, let errorCode = ErrorCode(rawValue: error.code) else { return }
+        guard let errorCode = ErrorCode(rawValue: error.code) else { return }
         
         switch errorCode {
         case .httpFailure:
@@ -327,13 +326,13 @@ extension ApplicationController: SessionDelegate {
             case 401:
                 print("future work to handle authentication")
             case 404:
-                turbolinksVisitController.presentError(.HTTPNotFoundError)
+                presentError(.HTTPNotFoundError)
             default:
-                turbolinksVisitController.presentError(Error(HTTPStatusCode: statusCode))
+                presentError(Error(HTTPStatusCode: statusCode))
             }
         case .networkFailure:
             NSLog("no internet connection error happened")
-            turbolinksVisitController.presentError(.NetworkError)
+            presentError(.NetworkError)
         }
     }
     
@@ -345,6 +344,16 @@ extension ApplicationController: SessionDelegate {
         application.isNetworkActivityIndicatorVisible = false
     }
     
+    func sessionDidLoadWebView(_ session: Session) {
+        print("sessionDidLoadWebView")
+        print("evaluateJavaScript: pass global location info to webview")
+        // pass global saved location using js evaluation
+        
+        if (location_enabled == true) {
+            session.webView.evaluateJavaScript("Geolocation.set_location_using_bridge(\(user_lat), \(user_lng))", completionHandler: nil)
+        }
+    }
+
 }
 
 extension ApplicationController: WKScriptMessageHandler {

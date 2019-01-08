@@ -26,7 +26,7 @@ class FoodViewController: ApplicationController {
     // food view controller
     override func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
                 
-        let visitable = TurbolinksVisitController(url: URL)
+        let visitable = VisitableViewController(url: URL)
         
         // food home
         if URL.path == "/h/\(campus)/food" {
@@ -70,6 +70,9 @@ class FoodViewController: ApplicationController {
         params = food_params
         
     }
-  
     
+}
+
+extension SessionDelegate {
+
 }

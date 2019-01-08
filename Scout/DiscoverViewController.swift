@@ -30,7 +30,7 @@ class DiscoverViewController: ApplicationController {
         
         print("presentVisitableForSession discover")
         
-        let visitable = TurbolinksVisitController(url: URL)
+        let visitable = VisitableViewController(url: URL)
         
         // discover home
         if URL.path == "/h/\(campus)" {
