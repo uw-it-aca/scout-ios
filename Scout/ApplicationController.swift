@@ -349,11 +349,14 @@ extension ApplicationController: SessionDelegate {
     
     func sessionDidLoadWebView(_ session: Session) {
         print("sessionDidLoadWebView")
-        print("evaluateJavaScript: pass global location info to webview loader")
+        
         // pass global saved location using js evaluation
         
         if (location_enabled == true) {
-            session.webView.evaluateJavaScript("WebView.load_app_with_location(\(user_lat), \(user_lng))", completionHandler: nil)
+            // pass location and store it as a persistent cookie on the webview server end
+            print("evaluateJavaScript: setting location as cookie")
+            //session.webView.evaluateJavaScript("WebView.load_app_with_location(\(user_lat), \(user_lng))", completionHandler: nil)
+            session.webView.evaluateJavaScript("WebView.store_location(\(user_lat), \(user_lng))", completionHandler: nil)
         }
     }
 
