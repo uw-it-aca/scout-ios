@@ -250,25 +250,37 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
         guard let locValue = manager.location?.coordinate else {
             return
         }
-        
-        
-        // TODO: check if location is empyt. check if location coords have changed.
-        print("locationManager: save location info to global")
-        
+    
         if CLLocationManager.locationServicesEnabled() {
             // Location services are available, so query the user’s location.
             // update user location variable and reload the URL
-            location_enabled = true
+            
             //location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
-            user_lat = locValue.latitude.description
-            user_lng = locValue.longitude.description
+            
+            if !((locValue.latitude.description == user_lat) && (locValue.longitude.description == user_lng)) {
+                
+                print("locationManager: save new location info to global")
+                location_enabled = true
+                location_changed = true
+                user_lat = locValue.latitude.description
+                user_lng = locValue.longitude.description
+                
+            }
+            else {
+                
+                print("same location")
+                location_changed = false
+                
+            }
             
         } else {
+            
             // no location services... clear location info
             location_enabled = false
             //location = ""
             user_lat = ""
             user_lng = ""
+            
         }
         
         // turbolinks visit with user location
@@ -348,15 +360,17 @@ extension ApplicationController: SessionDelegate {
     }
     
     func sessionDidLoadWebView(_ session: Session) {
+        
         print("sessionDidLoadWebView")
         
-        // pass global saved location using js evaluation
-        
-        if (location_enabled == true) {
+        // check if location enabled AND location has changed
+        if ((location_enabled == true) && (location_changed == true)) {
             // pass location and store it as a persistent cookie on the webview server end
             print("evaluateJavaScript: setting location as cookie")
             //session.webView.evaluateJavaScript("WebView.load_app_with_location(\(user_lat), \(user_lng))", completionHandler: nil)
             session.webView.evaluateJavaScript("WebView.store_location(\(user_lat), \(user_lng))", completionHandler: nil)
+        } else {
+          print("location is same... don't need to update store")
         }
     }
 
