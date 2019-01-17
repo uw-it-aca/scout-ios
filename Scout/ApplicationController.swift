@@ -354,14 +354,19 @@ extension ApplicationController: SessionDelegate {
         if ((location_enabled == true) && (location_changed == true)) {
             
             // pass location and store it as a persistent cookie on the webview server end
-            print("evaluateJavaScript: setting location as cookie")
+            print("evaluateJavaScript: setting user location as cookie")
             // set the location cookie on initial page load of the webview...
             // on the webview end, first thing is to check and make sure cookie has been set
             // before loading any content via ajax request
-            session.webView.evaluateJavaScript("WebView.store_location(\(user_lat), \(user_lng))", completionHandler: nil)
+            session.webView.evaluateJavaScript("WebView.user_location(\(user_lat), \(user_lng))", completionHandler: nil)
             
         } else {
             print("location is same... don't need to update store")
+        }
+        
+        if (location_enabled == false) {
+            print("evaluateJavaScript: setting default location as cookie")
+            session.webView.evaluateJavaScript("WebView.default_location()", completionHandler: nil)
         }
     }
 
