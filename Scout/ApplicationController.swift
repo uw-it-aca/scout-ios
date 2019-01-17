@@ -101,7 +101,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
         
         // only set user location if services are enabled
         if CLLocationManager.locationServicesEnabled() {
-            print("moved to forground w/ location")
+            print("moved to foreground w/ location")
             // update user location
             getUserLocation()
             
