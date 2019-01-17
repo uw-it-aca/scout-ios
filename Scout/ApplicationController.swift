@@ -55,7 +55,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
         print("viewDidLoad")
         
         // user location feature (async)
-        setUserLocation()
+        getUserLocation()
     
         // initial turbolinks visit
         presentVisitableForSession(session, URL: URL)
@@ -99,20 +99,14 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
     
     @objc func appMovedToForeground() {
         
-        // FIX FOR NETWORK CONNECTION ERROR: reload the user's session when coming back to foreground.
-        // For some reason, cached page (screenshot) is lost when coming back to foreground - causing the network error to display. The
-        // workaround to to reload the session - forcing the entire app to basically refresh everything!
-        // INVESTIGATE... for index.html head... use the 'no-preview' directive to opt out of snapshot previews?
-        
-
-        
-        /* [Snapshotting] Snapshotting a view (0x1038ca800, Turbolinks.WebView) that is not in a visible window requires afterScreenUpdates:YES. */
-        //session.reload()
-
         // only set user location if services are enabled
         if CLLocationManager.locationServicesEnabled() {
             print("moved to forground w/ location")
-            setUserLocation()
+            // update user location
+            getUserLocation()
+            
+            // display message to user for pull-to-refresh
+            session.webView.evaluateJavaScript("WebView.new_location_message()", completionHandler: nil)
         }
         else {
             
@@ -123,6 +117,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
             
             // turbolinks visit with empty location and force reload
             presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        
         }
             
 
@@ -225,9 +220,9 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
     }
 
     
-    func setUserLocation() {
+    func getUserLocation() {
         
-        print("setUserLocation")
+        print("getUserLocation")
         
         self.locationManager.delegate = self
         
@@ -252,27 +247,20 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
         }
     
         if CLLocationManager.locationServicesEnabled() {
-            // Location services are available, so query the user’s location.
-            // update user location variable and reload the URL
             
-            //location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
             
             if !((locValue.latitude.description == user_lat) && (locValue.longitude.description == user_lng)) {
                 
-                print("locationManager: save new location info to global")
+                print("locationManager: save new location info to app delegate")
                 location_enabled = true
                 location_changed = true
                 user_lat = locValue.latitude.description
                 user_lng = locValue.longitude.description
                 
-               
-                
             }
             else {
-                
                 print("same location")
                 location_changed = false
-                
             }
             
         } else {
@@ -284,9 +272,6 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
             user_lng = ""
             
         }
-        
-        // turbolinks visit with user location
-        // presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
         self.locationManager.stopUpdatingLocation()
         
@@ -367,14 +352,16 @@ extension ApplicationController: SessionDelegate {
         
         // check if location enabled AND location has changed
         if ((location_enabled == true) && (location_changed == true)) {
+            
             // pass location and store it as a persistent cookie on the webview server end
             print("evaluateJavaScript: setting location as cookie")
             // set the location cookie on initial page load of the webview...
             // on the webview end, first thing is to check and make sure cookie has been set
             // before loading any content via ajax request
             session.webView.evaluateJavaScript("WebView.store_location(\(user_lat), \(user_lng))", completionHandler: nil)
+            
         } else {
-          print("location is same... don't need to update store")
+            print("location is same... don't need to update store")
         }
     }
 
