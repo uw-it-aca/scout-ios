@@ -55,14 +55,8 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // user location feature (async)
         setUserLocation()
         
-    
-        if CLLocationManager.locationServicesEnabled() {
-            print("location enabled")
-            presentVisitableForSession(session, URL: URL)
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // Change `2.0` to the desired number of seconds.
-            // TODO: WAIT FOR A LOCATION BEFORE CALLING THE VISITABLE
+        // ITERATION 1: WAIT FOR A LOCATION BEFORE CALLING THE VISITABLE
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             print("delay visitabled long enough for location to be set")
             self.presentVisitableForSession(self.session, URL: self.URL)
         }
@@ -72,22 +66,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
         
     }
-    
-    override func viewDidAppear(_ animated:Bool) {
-        super.viewDidAppear(animated)
         
-        //let sessionURL = session.webView.url?.absoluteString
-        
-        // maintain turbolinks cache/session UNLESS the following things occur!
-    
-        // check to see if the campus has changed from what was previously set in session, if it has... force a reload of the entire application
-        //if (sessionURL!.lowercased().range(of: campus) == nil) {
-        //    presentVisitableForSession(session, URL: URL, action: .Replace)
-        //}
-        
-    }
-
-    
     // generic visit controller... can be overridden by each view controller
     func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
