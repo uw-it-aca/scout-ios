@@ -66,7 +66,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
         
     }
-        
+    
     // generic visit controller... can be overridden by each view controller
     func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
         
@@ -86,25 +86,18 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     @objc func appMovedToForeground() {
         
-        // FIX FOR NETWORK CONNECTION ERROR: reload the user's session when coming back to foreground.
-        // For some reason, cached page (screenshot) is lost when coming back to foreground - causing the network error to display. The
-        // workaround to to reload the session - forcing the entire app to basically refresh everything!
-        // INVESTIGATE... for index.html head... use the 'no-preview' directive to opt out of snapshot previews?
+        // handle for when user brings the app back from the background
         
-        /* [Snapshotting] Snapshotting a view (0x1038ca800, Turbolinks.WebView) that is not in a visible window requires afterScreenUpdates:YES. */
-        session.reload()
-   
-        // only set user location if services are enabled
+        // update location if it's enabled
         if CLLocationManager.locationServicesEnabled() {
             print("moved to forground w/ location")
             setUserLocation()
         }
         else {
             
-            // clear the user location
+            // clear the user location if the user disabled location sharing
             location = ""
-            
-            // turbolinks visit with empty location
+            // force a turbolinks visit with empty location (reloads)
             presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         }
 
