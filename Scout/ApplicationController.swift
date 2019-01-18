@@ -54,13 +54,13 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // user location feature (async)
         setUserLocation()
-    
-        // initial turbolinks visit
-        presentVisitableForSession(session, URL: URL)
+        
+        //presentVisitableForSession(session, URL: URL)
+        
      
         // notification handler for detecting app foreground state
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
+        //let notificationCenter = NotificationCenter.default
+        //notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
         
     }
     
@@ -72,9 +72,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // maintain turbolinks cache/session UNLESS the following things occur!
     
         // check to see if the campus has changed from what was previously set in session, if it has... force a reload of the entire application
-        if (sessionURL!.lowercased().range(of: campus) == nil) {
-            presentVisitableForSession(session, URL: URL, action: .Replace)
-        }
+        //if (sessionURL!.lowercased().range(of: campus) == nil) {
+        //    presentVisitableForSession(session, URL: URL, action: .Replace)
+        //}
         
     }
 
@@ -243,7 +243,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         if CLLocationManager.locationServicesEnabled() {
             // Location services are available, so query the user’s location.
             // update user location variable and reload the URL
+            print("location set")
             location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
+            
             
         } else {
             // no location services... clear location
