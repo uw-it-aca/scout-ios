@@ -55,19 +55,28 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // user location feature (async)
         setUserLocation()
         
-        //presentVisitableForSession(session, URL: URL)
+    
+        if CLLocationManager.locationServicesEnabled() {
+            print("location enabled")
+            presentVisitableForSession(session, URL: URL)
+        }
         
-     
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // Change `2.0` to the desired number of seconds.
+            // TODO: WAIT FOR A LOCATION BEFORE CALLING THE VISITABLE
+            print("delay visitabled long enough for location to be set")
+            self.presentVisitableForSession(self.session, URL: self.URL)
+        }
+        
         // notification handler for detecting app foreground state
-        //let notificationCenter = NotificationCenter.default
-        //notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
         
     }
     
     override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
         
-        let sessionURL = session.webView.url?.absoluteString
+        //let sessionURL = session.webView.url?.absoluteString
         
         // maintain turbolinks cache/session UNLESS the following things occur!
     
@@ -243,9 +252,9 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         if CLLocationManager.locationServicesEnabled() {
             // Location services are available, so query the user’s location.
             // update user location variable and reload the URL
-            print("location set")
-            location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
             
+            location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
+            print("location set: " + location)
             
         } else {
             // no location services... clear location
@@ -253,7 +262,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         }
         
         // turbolinks visit with user location
-        presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        //presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
         self.locationManager.stopUpdatingLocation()
         
