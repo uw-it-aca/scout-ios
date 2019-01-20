@@ -102,11 +102,22 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
         // only set user location if services are enabled
         if CLLocationManager.locationServicesEnabled() {
             print("moved to forground w/ location")
-            // update user location
-            getUserLocation()
             
-            // display message to user for pull-to-refresh
-            session.webView.evaluateJavaScript("WebView.new_location_message()", completionHandler: nil)
+            print(session.webView.canGoBack)
+            
+            if (session.webView.canGoBack) {
+                // update user location
+                getUserLocation()
+                
+                // display message to user for pull-to-refresh
+                session.webView.evaluateJavaScript("WebView.new_location_message()", completionHandler: nil)
+            } else {
+                
+                session.reload();
+                presentVisitableForSession(session, URL: URL, action: .Replace)
+
+            }
+            
         }
         else {
             
