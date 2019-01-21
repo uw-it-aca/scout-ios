@@ -90,8 +90,27 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // update location if it's enabled
         if CLLocationManager.locationServicesEnabled() {
+            
             print("moved to forground w/ location")
             setUserLocation()
+            
+            let returnURL = session.webView.url?.path as! String
+            
+            if returnURL == "/h/\(campus)" || returnURL == "/h/\(campus)/food" {
+                
+                print(returnURL)
+                print("on discover or list.. reload")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.session.reload()
+                    self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+                }
+            } else {
+                print("on details... do nothing")
+            }
+            
+            
+            
         }
         else {
             
