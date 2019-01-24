@@ -369,7 +369,7 @@ extension ApplicationController: SessionDelegate {
             // set the location cookie on initial page load of the webview...
             // on the webview end, first thing is to check and make sure cookie has been set
             // before loading any content via ajax request
-            session.webView.evaluateJavaScript("WebView.store_location(\(user_lat), \(user_lng))", completionHandler: nil)
+            session.webView.evaluateJavaScript("WebView.user_location(\(user_lat), \(user_lng))", completionHandler: nil)
             
         } else {
             print("location is same... don't need to update store")
