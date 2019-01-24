@@ -103,19 +103,22 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
         if CLLocationManager.locationServicesEnabled() {
             print("moved to forground w/ location")
             
-            print(session.webView.canGoBack)
+            getUserLocation()
             
-            if (session.webView.canGoBack) {
-                // update user location
-                getUserLocation()
+            let returnURL = session.webView.url?.path as! String
+            
+            // check to see if coming back to main pages (force reload all tabs)
+            if returnURL == "/h/\(campus)" || returnURL == "/h/\(campus)/food" || returnURL == "/h/\(campus)/study" || returnURL == "/h/\(campus)/tech" {
                 
-                // display message to user for pull-to-refresh
-                session.webView.evaluateJavaScript("WebView.new_location_message()", completionHandler: nil)
+                // update user location
+                session.reload()
+                presentVisitableForSession(session, URL: URL, action: .Replace)
+            
             } else {
                 
+                // only reload session if returning to details page (stays on details page)
                 session.reload();
-                presentVisitableForSession(session, URL: URL, action: .Replace)
-
+                
             }
             
         }
