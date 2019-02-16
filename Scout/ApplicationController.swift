@@ -105,7 +105,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
             // NOTE! USER MUST PULL TO REFRESH TO GET UPDATED LIST!!!
             
             // reload session
-            //session.reload()
+            session.reload()
             
         }
         else {
@@ -348,10 +348,11 @@ extension ApplicationController: SessionDelegate {
         application.isNetworkActivityIndicatorVisible = false
     }
     
+    /**
     func sessionDidLoadWebView(_ session: Session) {
         
         print("sessionDidLoadWebView")
-        session.webView.evaluateJavaScript("Geolocation.getNativeLocation(\(user_lat), \(user_lng))", completionHandler: nil)
+        //session.webView.evaluateJavaScript("Geolocation.getNativeLocation(\(user_lat), \(user_lng))", completionHandler: nil)
         
         // check if location enabled AND location has changed
         if ((location_enabled == true) && (location_changed == true)) {
@@ -366,14 +367,19 @@ extension ApplicationController: SessionDelegate {
             print("location is same... don't need to update store")
         }
     }
+    **/
 
 }
 
 extension ApplicationController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        
         // set the params from the js bridge message
         if let message = message.body as? String {
             params = message
+            
+            print(params)
+            
             if (app_type == "food") {
                 food_params = params
             } else if (app_type == "study") {
@@ -381,6 +387,13 @@ extension ApplicationController: WKScriptMessageHandler {
             } else if (app_type == "tech") {
                 tech_params = params
             }
+            
+            if (params == "hello world") {
+                print("hello world from js bridge")
+                session.webView.evaluateJavaScript("Geolocation.getNativeLocation(\(user_lat), \(user_lng))", completionHandler: nil)
+            }
+            
+            
         }
         
     }
