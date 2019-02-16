@@ -33,7 +33,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
         
         // name of js script handler that this controller with be communicating with
         configuration.userContentController.add(self, name: "scoutBridge")
-        
+ 
         configuration.processPool = self.webViewProcessPool
         return configuration
     }()
@@ -101,9 +101,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
             
             // update user location when coming back from background
             getUserLocation()
-            
-            // NOTE! USER MUST PULL TO REFRESH TO GET UPDATED LIST!!!
-            
+                    
             // reload session
             session.reload()
             
@@ -376,21 +374,34 @@ extension ApplicationController: WKScriptMessageHandler {
         
         // set the params from the js bridge message
         if let message = message.body as? String {
-            params = message
             
-            print(params)
+            // display message for testing
+            print(message)
             
-            if (app_type == "food") {
-                food_params = params
-            } else if (app_type == "study") {
-                study_params = params
-            } else if (app_type == "tech") {
-                tech_params = params
-            }
-            
-            if (params == "hello world") {
+            // if the message is "hello world" pass the user location -- this is what triggers webview rendering!
+            if (message == "hello world") {
+                
                 print("hello world from js bridge")
+                
+                // if user_lat and user_lng
                 session.webView.evaluateJavaScript("Geolocation.getNativeLocation(\(user_lat), \(user_lng))", completionHandler: nil)
+                
+                // else send epmpty and let webview load defaults
+                //session.webView.evaluateJavaScript("Geolocation.getNativeLocation()", completionHandler: nil)
+            }
+            else {
+                
+                // treat all other messages as filters params and handle accordingly
+                params = message
+                
+                if (app_type == "food") {
+                    food_params = params
+                } else if (app_type == "study") {
+                    study_params = params
+                } else if (app_type == "tech") {
+                    tech_params = params
+                }
+                
             }
             
             
