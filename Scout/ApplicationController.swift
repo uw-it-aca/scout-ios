@@ -55,7 +55,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
         print("viewDidLoad")
         
         // user location feature (async)
-        //getUserLocation()
+        getUserLocation()
         
         // ITERATION 1: WAIT FOR A LOCATION BEFORE CALLING THE VISITABLE
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -94,29 +94,18 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
     @objc func appMovedToForeground() {
         
         print("app moved to forground")
-        
-        // reload session
-        session.reload()
-        
-        /***
+
         // only set user location if services are enabled
         if CLLocationManager.locationServicesEnabled() {
             print("moved to forground w/ location")
             
-            // update user location
+            // update user location when coming back from background
             getUserLocation()
             
+            // NOTE! USER MUST PULL TO REFRESH TO GET UPDATED LIST!!!
+            
             // reload session
-            session.reload()
-            
-            let returnURL = session.webView.url?.path as! String
-            
-            print(returnURL)
-            
-            // check to see if coming back to main pages.. if so, force reload visitables
-            if returnURL == "/h/\(campus)" || returnURL == "/h/\(campus)/food" || returnURL == "/h/\(campus)/study" || returnURL == "/h/\(campus)/tech" {
-                presentVisitableForSession(session, URL: URL, action: .Replace)
-            }
+            //session.reload()
             
         }
         else {
@@ -130,7 +119,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
             presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
         }
-        ***/
+       
      
     }
 
@@ -362,6 +351,7 @@ extension ApplicationController: SessionDelegate {
     func sessionDidLoadWebView(_ session: Session) {
         
         print("sessionDidLoadWebView")
+        session.webView.evaluateJavaScript("Geolocation.getNativeLocation(\(user_lat), \(user_lng))", completionHandler: nil)
         
         // check if location enabled AND location has changed
         if ((location_enabled == true) && (location_changed == true)) {
@@ -371,7 +361,6 @@ extension ApplicationController: SessionDelegate {
             // set the location cookie on initial page load of the webview...
             // on the webview end, first thing is to check and make sure cookie has been set
             // before loading any content via ajax request
-            //session.webView.evaluateJavaScript("WebView.user_location(\(user_lat), \(user_lng))", completionHandler: nil)
             
         } else {
             print("location is same... don't need to update store")
