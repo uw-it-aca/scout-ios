@@ -101,7 +101,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
             
             // update user location when coming back from background
             getUserLocation()
-                    
+            
             // reload session
             session.reload()
             
@@ -384,10 +384,10 @@ extension ApplicationController: WKScriptMessageHandler {
                 print("hello world from js bridge")
                 
                 // if user_lat and user_lng
-                session.webView.evaluateJavaScript("Geolocation.getNativeLocation(\(user_lat), \(user_lng))", completionHandler: nil)
+                //session.webView.evaluateJavaScript("Geolocation.getNativeLocation(\(user_lat), \(user_lng))", completionHandler: nil)
                 
                 // else send epmpty and let webview load defaults
-                //session.webView.evaluateJavaScript("Geolocation.getNativeLocation()", completionHandler: nil)
+                session.webView.evaluateJavaScript("Geolocation.getNativeLocation()", completionHandler: nil)
             }
             else {
                 
