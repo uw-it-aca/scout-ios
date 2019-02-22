@@ -57,6 +57,9 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
         // user location feature (async)
         getUserLocation()
         
+        
+        print(URL)
+        
         // ITERATION 1: WAIT FOR A LOCATION BEFORE CALLING THE VISITABLE
         //DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             //print("delay visitabled long enough for location to be set")
@@ -126,6 +129,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
     @objc func presentFilter() {
         // filter specific url so we know what params were set
         let filterURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
+        print(filterURL)
         presentVisitableForSession(session, URL: filterURL)
     }
     
@@ -248,19 +252,17 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
     
         if CLLocationManager.locationServicesEnabled() {
             
-            
-            if !((locValue.latitude.description == user_lat) && (locValue.longitude.description == user_lng)) {
+            // check to see if the location has changed... if so, save the new location
+            if !(((locValue.latitude.description == user_lat) && (locValue.longitude.description == user_lng))) {
                 
                 print("locationManager: save new location info to app delegate")
                 location_enabled = true
-                location_changed = true
                 user_lat = locValue.latitude.description
                 user_lng = locValue.longitude.description
                 
             }
             else {
                 print("same location")
-                location_changed = false
             }
             
         } else {
@@ -383,11 +385,14 @@ extension ApplicationController: WKScriptMessageHandler {
                 
                 print("message received from js bridge... sending back geolocation")
                 
-                // if user_lat and user_lng
-                session.webView.evaluateJavaScript("Geolocation.getNativeLocation(\(user_lat), \(user_lng))", completionHandler: nil)
-                
-                // else send epmpty and let webview load defaults
-                //session.webView.evaluateJavaScript("Geolocation.getNativeLocation()", completionHandler: nil)
+                if (location_enabled) {
+                    // if user_lat and user_lng
+                    session.webView.evaluateJavaScript("Geolocation.getNativeLocation(\(user_lat), \(user_lng))", completionHandler: nil)
+                } else {
+                    // else send epmpty and let webview load defaults
+                    session.webView.evaluateJavaScript("Geolocation.getNativeLocation()", completionHandler: nil)
+                }
+            
             }
             else {
                 
