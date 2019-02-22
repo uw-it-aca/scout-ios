@@ -57,15 +57,9 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
         // user location feature (async)
         getUserLocation()
         
-        
         print(URL)
-        
-        // ITERATION 1: WAIT FOR A LOCATION BEFORE CALLING THE VISITABLE
-        //DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            //print("delay visitabled long enough for location to be set")
-            self.presentVisitableForSession(self.session, URL: self.URL)
-        //}
-        
+        self.presentVisitableForSession(self.session, URL: self.URL)
+
         // notification handler for detecting app foreground state
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
