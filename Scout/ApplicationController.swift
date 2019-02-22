@@ -58,10 +58,10 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
         getUserLocation()
         
         // ITERATION 1: WAIT FOR A LOCATION BEFORE CALLING THE VISITABLE
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            print("delay visitabled long enough for location to be set")
+        //DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            //print("delay visitabled long enough for location to be set")
             self.presentVisitableForSession(self.session, URL: self.URL)
-        }
+        //}
         
         // notification handler for detecting app foreground state
         let notificationCenter = NotificationCenter.default
@@ -379,15 +379,15 @@ extension ApplicationController: WKScriptMessageHandler {
             print(message)
             
             // if the message is "hello world" pass the user location -- this is what triggers webview rendering!
-            if (message == "hello world") {
+            if (message == "renderWebview") {
                 
-                print("hello world from js bridge")
+                print("message received from js bridge... sending back geolocation")
                 
                 // if user_lat and user_lng
-                //session.webView.evaluateJavaScript("Geolocation.getNativeLocation(\(user_lat), \(user_lng))", completionHandler: nil)
+                session.webView.evaluateJavaScript("Geolocation.getNativeLocation(\(user_lat), \(user_lng))", completionHandler: nil)
                 
                 // else send epmpty and let webview load defaults
-                session.webView.evaluateJavaScript("Geolocation.getNativeLocation()", completionHandler: nil)
+                //session.webView.evaluateJavaScript("Geolocation.getNativeLocation()", completionHandler: nil)
             }
             else {
                 
