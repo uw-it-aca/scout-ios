@@ -12,7 +12,7 @@ import Turbolinks
 import CoreLocation
 //import CoreMotion
 
-class ApplicationController: UINavigationController,  CLLocationManagerDelegate {
+class ApplicationController: UINavigationController, CLLocationManagerDelegate {
     
     // initialize location manager
     let locationManager = CLLocationManager()
@@ -33,7 +33,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
         // name of js script handler that this controller with be communicating with
         configuration.userContentController.add(self, name: "scoutBridge")
-        
+ 
         configuration.processPool = self.webViewProcessPool
         return configuration
     }()
@@ -53,11 +53,10 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         super.viewDidLoad()
         
         // user location feature (async)
-        setUserLocation()
-    
-        // initial turbolinks visit
-        presentVisitableForSession(session, URL: URL)
-     
+        getUserLocation()
+        
+        self.presentVisitableForSession(self.session, URL: self.URL)
+
         // notification handler for detecting app foreground state
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
@@ -66,18 +65,17 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     
     override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
-        
+
         let sessionURL = session.webView.url?.absoluteString
-        
+
         // maintain turbolinks cache/session UNLESS the following things occur!
-    
+
         // check to see if the campus has changed from what was previously set in session, if it has... force a reload of the entire application
         if (sessionURL!.lowercased().range(of: campus) == nil) {
             presentVisitableForSession(session, URL: URL, action: .Replace)
         }
-        
-    }
 
+    }
     
     // generic visit controller... can be overridden by each view controller
     func presentVisitableForSession(_ session: Session, URL: Foundation.URL, action: Action = .Advance) {
@@ -96,31 +94,34 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         
     }
     
+   
     @objc func appMovedToForeground() {
         
-        // FIX FOR NETWORK CONNECTION ERROR: reload the user's session when coming back to foreground.
-        // For some reason, cached page (screenshot) is lost when coming back to foreground - causing the network error to display. The
-        // workaround to to reload the session - forcing the entire app to basically refresh everything!
-        // INVESTIGATE... for index.html head... use the 'no-preview' directive to opt out of snapshot previews?
-        
-        /* [Snapshotting] Snapshotting a view (0x1038ca800, Turbolinks.WebView) that is not in a visible window requires afterScreenUpdates:YES. */
-        session.reload()
-   
         // only set user location if services are enabled
         if CLLocationManager.locationServicesEnabled() {
-            print("moved to forground w/ location")
-            setUserLocation()
+            
+            // update user location when coming back from background
+            getUserLocation()
+            
+            // reload session
+            session.reload()
+            
         }
         else {
             
             // clear the user location
             location = ""
+            user_lat = ""
+            user_lng = ""
             
-            // turbolinks visit with empty location
+            // turbolinks visit with empty location and force reload
             presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
+        
         }
-
+       
+     
     }
+
     
     // show filter
     @objc func presentFilter() {
@@ -146,6 +147,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
             popViewController(animated: true);
         } else {
             // if they are different, force a reload by using the Replace action
+            session.reload()
             presentVisitableForSession(session, URL: visitURL, action: .Replace)
         }
         
@@ -171,6 +173,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
                 study_params = ""
                 tech_params = ""
                 UserDefaults.standard.set(campus, forKey: "usercampus")
+                self.session.reload()
                 self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
             }
         })
@@ -182,6 +185,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
                 study_params = ""
                 tech_params = ""
                 UserDefaults.standard.set(campus, forKey: "usercampus")
+                self.session.reload()
                 self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
             }
         })
@@ -193,6 +197,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
                 study_params = ""
                 tech_params = ""
                 UserDefaults.standard.set(campus, forKey: "usercampus")
+                self.session.reload()
                 self.presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
             }
         })
@@ -216,7 +221,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     }
 
     
-    func setUserLocation() {
+    func getUserLocation() {
         
         self.locationManager.delegate = self
         
@@ -239,19 +244,28 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         guard let locValue = manager.location?.coordinate else {
             return
         }
-        
+    
         if CLLocationManager.locationServicesEnabled() {
-            // Location services are available, so query the user’s location.
-            // update user location variable and reload the URL
-            location = "h_lat=\(locValue.latitude)&h_lng=\(locValue.longitude)"
+            
+            // check to see if the location has changed... if so, save the new location
+            if !(((locValue.latitude.description == user_lat) && (locValue.longitude.description == user_lng))) {
+                
+                // save new location info to app delegate
+                location_enabled = true
+                user_lat = locValue.latitude.description
+                user_lng = locValue.longitude.description
+                
+            }
             
         } else {
-            // no location services... clear location
-            location = ""
+            
+            // no location services... clear location info
+            location_enabled = false
+            //location = ""
+            user_lat = ""
+            user_lng = ""
+            
         }
-        
-        // turbolinks visit with user location
-        presentVisitableForSession(self.session, URL: self.URL, action: .Replace)
         
         self.locationManager.stopUpdatingLocation()
         
@@ -263,7 +277,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
     }
     
     /*** INTERNET CONNECTION ERROR HANDLING SCOUT-710 & SCOUT-722 ***/
-    
+ 
     lazy var errorView: ErrorView = {
         let view = Bundle.main.loadNibNamed("ErrorView", owner: self, options: nil)!.first as! ErrorView
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -287,7 +301,7 @@ class ApplicationController: UINavigationController,  CLLocationManagerDelegate 
         // much cleaner way to reload session
         session.reload()
     }
-    
+ 
 }
 
 
@@ -325,21 +339,43 @@ extension ApplicationController: SessionDelegate {
     func sessionDidFinishRequest(_ session: Session) {
         application.isNetworkActivityIndicatorVisible = false
     }
-    
+
 }
 
 extension ApplicationController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        
         // set the params from the js bridge message
         if let message = message.body as? String {
-            params = message
-            if (app_type == "food") {
-                food_params = params
-            } else if (app_type == "study") {
-                study_params = params
-            } else if (app_type == "tech") {
-                tech_params = params
+            
+            // if the message is "hello world" pass the user location -- this is what triggers webview rendering!
+            if (message == "renderWebview") {
+                
+                if (location_enabled) {
+                    // if user_lat and user_lng
+                    session.webView.evaluateJavaScript("Geolocation.getNativeLocation(\(user_lat), \(user_lng))", completionHandler: nil)
+                } else {
+                    // else send epmpty and let webview load defaults
+                    session.webView.evaluateJavaScript("Geolocation.getNativeLocation()", completionHandler: nil)
+                }
+            
             }
+            else {
+                
+                // treat all other messages as filters params and handle accordingly
+                params = message
+                
+                if (app_type == "food") {
+                    food_params = params
+                } else if (app_type == "study") {
+                    study_params = params
+                } else if (app_type == "tech") {
+                    tech_params = params
+                }
+                
+            }
+            
+            
         }
         
     }

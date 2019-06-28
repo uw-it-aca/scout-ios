@@ -70,6 +70,5 @@ class FoodViewController: ApplicationController {
         params = food_params
         
     }
-  
     
 }
