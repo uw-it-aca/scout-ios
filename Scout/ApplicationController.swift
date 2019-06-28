@@ -68,6 +68,16 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
     
     override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
+
+        let sessionURL = session.webView.url?.absoluteString
+
+        // maintain turbolinks cache/session UNLESS the following things occur!
+
+        // check to see if the campus has changed from what was previously set in session, if it has... force a reload of the entire application
+        if (sessionURL!.lowercased().range(of: campus) == nil) {
+            presentVisitableForSession(session, URL: URL, action: .Replace)
+        }
+
     }
     
     // generic visit controller... can be overridden by each view controller
