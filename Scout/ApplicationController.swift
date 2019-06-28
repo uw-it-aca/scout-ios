@@ -52,12 +52,9 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("viewDidLoad")
-        
         // user location feature (async)
         getUserLocation()
         
-        print(URL)
         self.presentVisitableForSession(self.session, URL: self.URL)
 
         // notification handler for detecting app foreground state
@@ -100,11 +97,8 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
    
     @objc func appMovedToForeground() {
         
-        print("app moved to forground")
-
         // only set user location if services are enabled
         if CLLocationManager.locationServicesEnabled() {
-            print("moved to forground w/ location")
             
             // update user location when coming back from background
             getUserLocation()
@@ -133,7 +127,6 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
     @objc func presentFilter() {
         // filter specific url so we know what params were set
         let filterURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/filter/?\(location)&\(params)")!
-        print(filterURL)
         presentVisitableForSession(session, URL: filterURL)
     }
     
@@ -230,8 +223,6 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
     
     func getUserLocation() {
         
-        print("getUserLocation")
-        
         self.locationManager.delegate = self
         
         // ask authorization only when in use by user
@@ -259,14 +250,11 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
             // check to see if the location has changed... if so, save the new location
             if !(((locValue.latitude.description == user_lat) && (locValue.longitude.description == user_lng))) {
                 
-                print("locationManager: save new location info to app delegate")
+                // save new location info to app delegate
                 location_enabled = true
                 user_lat = locValue.latitude.description
                 user_lng = locValue.longitude.description
                 
-            }
-            else {
-                print("same location")
             }
             
         } else {
@@ -351,27 +339,6 @@ extension ApplicationController: SessionDelegate {
     func sessionDidFinishRequest(_ session: Session) {
         application.isNetworkActivityIndicatorVisible = false
     }
-    
-    /**
-    func sessionDidLoadWebView(_ session: Session) {
-        
-        print("sessionDidLoadWebView")
-        //session.webView.evaluateJavaScript("Geolocation.getNativeLocation(\(user_lat), \(user_lng))", completionHandler: nil)
-        
-        // check if location enabled AND location has changed
-        if ((location_enabled == true) && (location_changed == true)) {
-            
-            // pass location and store it as a persistent cookie on the webview server end
-            // print("evaluateJavaScript: setting location as cookie")
-            // set the location cookie on initial page load of the webview...
-            // on the webview end, first thing is to check and make sure cookie has been set
-            // before loading any content via ajax request
-            
-        } else {
-            print("location is same... don't need to update store")
-        }
-    }
-    **/
 
 }
 
@@ -381,13 +348,8 @@ extension ApplicationController: WKScriptMessageHandler {
         // set the params from the js bridge message
         if let message = message.body as? String {
             
-            // display message for testing
-            print(message)
-            
             // if the message is "hello world" pass the user location -- this is what triggers webview rendering!
             if (message == "renderWebview") {
-                
-                print("message received from js bridge... sending back geolocation")
                 
                 if (location_enabled) {
                     // if user_lat and user_lng
