@@ -201,12 +201,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8540347C1CB5AE5100C0C7FD /* Build configuration list for PBXNativeTarget "UW ScoutTests" */;
 			buildPhases = (
-				8E0ED794F12359030A667A28 /* [CP] Check Pods Manifest.lock */,
 				854034611CB5AE5100C0C7FD /* Sources */,
 				854034621CB5AE5100C0C7FD /* Frameworks */,
 				854034631CB5AE5100C0C7FD /* Resources */,
-				291C6978F5FA83358F93CC59 /* [CP] Embed Pods Frameworks */,
-				0CDBB877C8D4915A07164AF2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -222,11 +219,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8540347F1CB5AE5100C0C7FD /* Build configuration list for PBXNativeTarget "UW ScoutUITests" */;
 			buildPhases = (
-				E47AE78E8EA4EBDC34A9428E /* [CP] Check Pods Manifest.lock */,
 				8540346C1CB5AE5100C0C7FD /* Sources */,
 				8540346D1CB5AE5100C0C7FD /* Frameworks */,
 				8540346E1CB5AE5100C0C7FD /* Resources */,
-				3046A3C170E626D116C7E3BB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -245,23 +240,23 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "University of Washington";
 				TargetAttributes = {
 					8540344E1CB5AE5100C0C7FD = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = THEWY9596Q;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 					854034641CB5AE5100C0C7FD = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1020;
 						TestTargetID = 8540344E1CB5AE5100C0C7FD;
 					};
 					8540346F1CB5AE5100C0C7FD = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1020;
 						TestTargetID = 8540344E1CB5AE5100C0C7FD;
 					};
 				};
@@ -271,6 +266,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -315,51 +311,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0CDBB877C8D4915A07164AF2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScoutTests/Pods-ScoutTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		291C6978F5FA83358F93CC59 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScoutTests/Pods-ScoutTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3046A3C170E626D116C7E3BB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScoutUITests/Pods-ScoutUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		89E8493E1EC6566F00F8944A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -373,36 +324,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		8E0ED794F12359030A667A28 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		E47AE78E8EA4EBDC34A9428E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -469,6 +390,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -524,6 +446,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -587,8 +510,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.SpaceScout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -611,8 +533,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.SpaceScout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -626,8 +547,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UWIT-ACA.ScoutTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UW Scout.app/UW Scout";
 			};
 			name = Debug;
@@ -641,8 +561,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UWIT-ACA.ScoutTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UW Scout.app/UW Scout";
 			};
 			name = Release;
@@ -655,8 +574,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UWIT-ACA.ScoutUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = Scout;
 			};
 			name = Debug;
@@ -669,8 +587,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UWIT-ACA.ScoutUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = Scout;
 			};
 			name = Release;

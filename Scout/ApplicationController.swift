@@ -59,7 +59,7 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
 
         // notification handler for detecting app foreground state
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         
     }
     

@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var studyTabController : UINavigationController!
     var techTabControoller : UINavigationController!
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // set window controller to be the main screen
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -96,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = hexStringToUIColor("#514DA3")
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = hexStringToUIColor("#ffffff")
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : hexStringToUIColor("#ffffff")]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : hexStringToUIColor("#ffffff")]
         
         // globally set tint (text) color for native controllers (e.g modal)
         self.window!.tintColor = hexStringToUIColor("#514DA3")

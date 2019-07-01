@@ -35,7 +35,7 @@ class FoodViewController: ApplicationController {
             // In any case... I made presentFilter pretty generic at the ApplicationController level and just accepting the global "app_type" variable. Each
             // context view controller (FoodViewController, StudyViewController, etc.) just overrides the value. Feel free to refactor!
             
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.presentFilter))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ApplicationController.presentFilter))
             
         } else if URL.path == "/h/\(campus)/food/filter" {
             
@@ -43,10 +43,10 @@ class FoodViewController: ApplicationController {
             visitable.navigationItem.hidesBackButton = true
             
             // left button to clear filters
-            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.clearFilter))
+            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ApplicationController.clearFilter))
 
             // right button to update filters
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Update", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.submitFilter))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Update", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ApplicationController.submitFilter))
             
         }
         
