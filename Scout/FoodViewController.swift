@@ -43,7 +43,7 @@ class FoodViewController: ApplicationController {
             visitable.navigationItem.hidesBackButton = true
             
             // left button to clear filters
-            visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ApplicationController.clearFilter))
+            //visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ApplicationController.clearFilter))
 
             // right button to update filters
             visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Update", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ApplicationController.submitFilter))

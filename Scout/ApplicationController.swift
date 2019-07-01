@@ -136,11 +136,16 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
         // set a new visitable URL that includes params and location
         let visitURL = Foundation.URL(string: "\(host)/\(campus)/\(app_type)/?\(location)&\(params)")!
         
+        // bust the turbolinks cache... force reload for every filter submit
+        session.reload()
+        presentVisitableForSession(session, URL: visitURL, action: .Replace)
+        
+        /**
         // get the previous URL and params from the session URL (presentFilter function)
         let sessionURL = session.webView.url?.absoluteString
         // remove the filter/ string from the URL
         let previousURL = sessionURL?.replacingOccurrences(of: "filter/", with: "")
-
+    
         // check to see if the new visit URL matches what the user previously visited
         if (visitURL.absoluteString == previousURL!) {
             // if URLs match... no need to reload, just pop back to beginning of stack
@@ -150,13 +155,16 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
             session.reload()
             presentVisitableForSession(session, URL: visitURL, action: .Replace)
         }
+        **/
         
     }
     
+    /**
     @objc func clearFilter() {
         // evaluate js by submitting click event
         session.webView.evaluateJavaScript("document.getElementById('filter_clear').click()", completionHandler: nil)
     }
+    **/
     
     // custom controller for campus selection
     @objc func chooseCampus() {
