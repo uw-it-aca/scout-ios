@@ -80,6 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // tabbar text/icon color setup
         UITabBar.appearance().tintColor = hexStringToUIColor("#514DA3")
+        UITabBar.appearance().barTintColor = hexStringToUIColor("#fdfdfd")
         
         // display active view controller (root) based on the tabbar controller being selected
         self.window?.rootViewController = tabBarController
@@ -132,6 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // custom hex color function
+    /*
     func hexStringToUIColor (_ hex:String) -> UIColor {
         
         var cString:String = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
@@ -154,6 +156,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Scanner(string: bString).scanHexInt32(&b)
         
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
+    }
+ */
+    
+    func hexStringToUIColor (_ hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+        
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
 
 }
