@@ -263,10 +263,9 @@
 			};
 			buildConfigurationList = 8540344A1CB5AE5100C0C7FD /* Build configuration list for PBXProject "UW Scout" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
