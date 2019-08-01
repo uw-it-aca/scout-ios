@@ -265,6 +265,9 @@ class ApplicationController: UINavigationController, CLLocationManagerDelegate {
                 
             }
             
+            // reload the session once the user has accepted location sharing
+            session.reload()
+            
         } else {
             
             // no location services... clear location info
