@@ -14,7 +14,6 @@ import CoreLocation
 class FoodViewController: ApplicationController {
     
     override var URL: Foundation.URL {
-        print("FOOD PARAMS... \(params)")
         if CLLocationManager.locationServicesEnabled() {
             return Foundation.URL(string: "\(host)/\(campus)/food/?\(location)&\(food_params)")!
             
@@ -36,22 +35,18 @@ class FoodViewController: ApplicationController {
             // In any case... I made presentFilter pretty generic at the ApplicationController level and just accepting the global "app_type" variable. Each
             // context view controller (FoodViewController, StudyViewController, etc.) just overrides the value. Feel free to refactor!
             
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.presentFilter))
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ApplicationController.presentFilter))
             
         } else if URL.path == "/h/\(campus)/food/filter" {
             
-            let backButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackButton"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.submitFilter))
-            let backButtonText : UIBarButtonItem = UIBarButtonItem(title: "Food", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.submitFilter))
+            // hide the default back button
+            visitable.navigationItem.hidesBackButton = true
             
-            // fix spacing between back arrow and text
-            backButton.imageInsets = UIEdgeInsetsMake(0, -7.0, 0, -30.0)
-            
-            visitable.navigationItem.leftBarButtonItem = backButton
-            visitable.navigationItem.leftBarButtonItem = backButtonText
-            
-            visitable.navigationItem.setLeftBarButtonItems([backButton, backButtonText], animated: true)
+            // left button to clear filters
+            //visitable.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ApplicationController.clearFilter))
 
-            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ApplicationController.clearFilter))
+            // right button to update filters
+            visitable.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Update", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ApplicationController.submitFilter))
             
         }
         
@@ -67,14 +62,13 @@ class FoodViewController: ApplicationController {
         session.visit(visitable)
     }
     
+
     override func viewDidAppear(_ animated:Bool) {
         super.viewDidAppear(animated)
-        print("FoodViewDidAppear")
         // set app_type to food
         app_type = "food"
         params = food_params
         
     }
-    
     
 }

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Scout
+@testable import UW_Scout
 
 class ScoutTests: XCTestCase {
     
