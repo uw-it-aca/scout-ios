@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "1340"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -27,6 +27,15 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8540344E1CB5AE5100C0C7FD"
+            BuildableName = "UW Scout.app"
+            BlueprintName = "UW Scout"
+            ReferencedContainer = "container:UW Scout.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -49,17 +58,6 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8540344E1CB5AE5100C0C7FD"
-            BuildableName = "UW Scout.app"
-            BlueprintName = "UW Scout"
-            ReferencedContainer = "container:UW Scout.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -81,8 +79,6 @@
             ReferencedContainer = "container:UW Scout.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
       <LocationScenarioReference
          identifier = "San Francisco, CA, USA"
          referenceType = "1">
