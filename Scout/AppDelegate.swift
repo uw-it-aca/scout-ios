@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // tabbar controller setup
         let tabBarController = UITabBarController()
+        tabBarController.tabBar.isTranslucent =  false
         
         // assign each view controller to a tab controller
         discoverTabController = DiscoverViewController()
@@ -94,10 +95,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         ***/
         
+        if #available(iOS 15.0, *) {
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithDefaultBackground()
+            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+            UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        }
+        
+        /** old UI
         UINavigationBar.appearance().barTintColor = hexStringToUIColor("#514DA3")
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = hexStringToUIColor("#ffffff")
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : hexStringToUIColor("#ffffff")]
+         */
         
         // globally set tint (text) color for native controllers (e.g modal)
         self.window!.tintColor = hexStringToUIColor("#514DA3")
